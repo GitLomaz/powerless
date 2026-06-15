@@ -27,10 +27,18 @@ let battleScene = new Phaser.Class({
       right: Phaser.Input.Keyboard.KeyCodes.D
     });
 
+    this.enemies = [];
+    for (let i = 0; i < 125; i++) {
+      this.enemies.push(new Enemy());
+    }
+
     this.player = new Player();
   },
 
   update: function (time, delta) {
     this.player.tick(delta);
+    for (const enemy of this.enemies) {
+      enemy.tick(delta);
+    }
   },
 });
