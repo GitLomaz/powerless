@@ -30,7 +30,7 @@ let battleScene = new Phaser.Class({
     this.player = new Player();
   },
 
-  update: function (time) {
-    this.player.tick(time);
+  update: function (time, delta) {
+    this.player.tick(delta);
   },
 });

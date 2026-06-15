@@ -14,9 +14,10 @@ class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.speed = 2;
+    this.power = 15000;
   }
 
-  tick(time) {
+  tick(delta) {
     const cursors = scene.cursors;
     const wasd = scene.wasd;
     let dx = 0;
@@ -34,7 +35,9 @@ class Player extends Phaser.GameObjects.Container {
       dy /= len;
     }
 
-    this.x += dx * this.speed;
-    this.y += dy * this.speed;
+    const dt = delta / 1000;
+
+    this.x += dx * this.speed * dt;
+    this.y += dy * this.speed * dt;
   }
 }
