@@ -13,7 +13,7 @@ class Player extends Phaser.GameObjects.Container {
     scene.cameras.main.startFollow(this);
     scene.add.existing(this);
 
-    this.speed = 2;
+    this.speed = .25;
     this.power = 15000;
   }
 
@@ -35,9 +35,7 @@ class Player extends Phaser.GameObjects.Container {
       dy /= len;
     }
 
-    const dt = delta / 1000;
-
-    this.x += dx * this.speed * dt;
-    this.y += dy * this.speed * dt;
+    this.x += dx * this.speed * delta;
+    this.y += dy * this.speed * delta;
   }
 }
