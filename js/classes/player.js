@@ -58,10 +58,12 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   tick(delta) {
+
     this.legs.forEach((leg, i) => {
       const foot = this.feet[i];
       leg.setTo(this.x, this.y, foot.x, foot.y);
     });
+    
     const cursors = scene.cursors;
     const wasd = scene.wasd;
 
