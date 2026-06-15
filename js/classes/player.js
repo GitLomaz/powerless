@@ -8,6 +8,7 @@ class Player extends Phaser.GameObjects.Container {
     this.circle.setDepth(3);
 
     scene.cameras.main.startFollow(this);
+    scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
     scene.add.existing(this);
 
     this.speed = 0.25;
@@ -31,8 +32,6 @@ class Player extends Phaser.GameObjects.Container {
 
     this.stepGroup = 0;
     this.stepLocked = false;
-
-
   }
 
   createFoot(offsetX, offsetY) {
@@ -63,7 +62,7 @@ class Player extends Phaser.GameObjects.Container {
       const foot = this.feet[i];
       leg.setTo(this.x, this.y, foot.x, foot.y);
     });
-    
+
     const cursors = scene.cursors;
     const wasd = scene.wasd;
 
