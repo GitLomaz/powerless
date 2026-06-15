@@ -27,6 +27,14 @@ let battleScene = new Phaser.Class({
       right: Phaser.Input.Keyboard.KeyCodes.D
     });
 
+    this.bulletGroup = this.physics.add.group();
+    this.enemyGroup = this.physics.add.group();
+
+    this.physics.add.collider(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
+      bullet.destroy();
+      enemy.destroy();
+    });
+
     this.enemies = [];
     for (let i = 0; i < 125; i++) {
       this.enemies.push(new Enemy());

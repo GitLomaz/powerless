@@ -6,6 +6,8 @@ class Enemy extends Phaser.GameObjects.Container {
     scene.add.existing(this);
     this.speed = .02;
     this.mode = "wander";
+    scene.enemyGroup.add(this);
+    this.body.setCircle(12, -12, -12);
   }
 
   tick(delta) {

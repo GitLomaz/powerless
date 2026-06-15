@@ -37,5 +37,12 @@ class Player extends Phaser.GameObjects.Container {
 
     this.x += dx * this.speed * delta;
     this.y += dy * this.speed * delta;
+
+    if (scene.input.activePointer.isDown) {
+      if (!this.lastShot || Date.now() - this.lastShot > 200) {
+        new Bullet();
+        this.lastShot = Date.now();
+      }
+    }
   }
 }
