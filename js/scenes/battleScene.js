@@ -9,6 +9,7 @@ let battleScene = new Phaser.Class({
   preload: function () {
     scene = this;
     this.load.image("sheet", "images/sheet.png");
+    this.load.spritesheet("powerbar", "images/powerbar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON("map", "json/map.json");
   },
 
@@ -37,7 +38,7 @@ let battleScene = new Phaser.Class({
 
     this.enemies = [];
     for (let i = 0; i < 125; i++) {
-      this.enemies.push(new Enemy());
+      this.enemies.push(new Footman());
     }
 
     this.player = new Player();

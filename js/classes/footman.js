@@ -1,4 +1,4 @@
-class Enemy extends Phaser.GameObjects.Container {
+class Footman extends Phaser.GameObjects.Container {
   constructor() {
     super(scene, Random.between(0, scene.map.widthInPixels), Random.between(0, scene.map.heightInPixels));
     this.circle = scene.add.circle(0, 0, 12, 0xff0000);

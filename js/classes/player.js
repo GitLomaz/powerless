@@ -32,6 +32,9 @@ class Player extends Phaser.GameObjects.Container {
 
     this.stepGroup = 0;
     this.stepLocked = false;
+
+    this.energy = 15000
+    this.powerbar = new Powerbar(Math.floor(this.energy / 7500));
   }
 
   createFoot(offsetX, offsetY) {
@@ -57,6 +60,12 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   tick(delta) {
+
+    this.energy -= delta;
+    if (this.energy < 0) {
+      return;
+    }
+    this.powerbar.setPower(this.energy / 15000);
 
     this.legs.forEach((leg, i) => {
       const foot = this.feet[i];
