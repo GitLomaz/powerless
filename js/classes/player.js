@@ -2,11 +2,7 @@ class Player extends Phaser.GameObjects.Container {
   constructor() {
     super(scene, GAME_WIDTH * 1.5, GAME_HEIGHT * 1.5);
 
-    // Things that should be configurable
-    this.magnet = 200;
-    this.speed = 0.25;
-    this.energy = 15000
-    // segment
+    this.energy = gameState.upgrades.player.energy
 
     this.circle = scene.add.circle(0, 0, 16, 0xffff00);
     this.add(this.circle);
@@ -20,8 +16,6 @@ class Player extends Phaser.GameObjects.Container {
     scene.cameras.main.startFollow(this);
     scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
     scene.add.existing(this);
-
-
 
     this.dirX = 1;
     this.dirY = 0;
@@ -44,11 +38,11 @@ class Player extends Phaser.GameObjects.Container {
     this.stepLocked = false;
 
     
-    this.powerbar = new Powerbar(Math.floor(this.energy / 7500));
+    this.powerbar = new Powerbar(Math.floor(gameState.upgrades.player.energy / 7500));
   }
 
   gainCredits(amount) {
-    gamestate.credits += amount;
+    gameState.credits += amount;
   }
 
   createFoot(offsetX, offsetY) {
@@ -79,7 +73,7 @@ class Player extends Phaser.GameObjects.Container {
     if (this.energy < 0) {
       return;
     }
-    this.powerbar.setPower(this.energy / 15000);
+    this.powerbar.setPower(this.energy / gameState.upgrades.player.energy);
 
     this.legs.forEach((leg, i) => {
       const foot = this.feet[i];
@@ -106,8 +100,8 @@ class Player extends Phaser.GameObjects.Container {
       this.dirX = dx;
       this.dirY = dy;
 
-      this.x += dx * this.speed * delta;
-      this.y += dy * this.speed * delta;
+      this.x += dx * gameState.upgrades.player.speed * delta;
+      this.y += dy * gameState.upgrades.player.speed * delta;
 
       this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
       this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
@@ -116,7 +110,7 @@ class Player extends Phaser.GameObjects.Container {
     this.updateFeet(delta);
 
     if (scene.input.activePointer.isDown) {
-      if (!this.lastShot || Date.now() - this.lastShot > 200) {
+      if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.turretFireRate) {
         new Bullet();
         this.lastShot = Date.now();
       }

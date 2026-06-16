@@ -1,6 +1,6 @@
 class Footman extends Phaser.GameObjects.Container {
   constructor() {
-    super(scene, Random.between(0, scene.map.widthInPixels), Random.between(0, scene.map.heightInPixels));
+    super(scene, Random.between(GAME_WIDTH - 200, GAME_WIDTH * 2 + 200), Random.between(GAME_HEIGHT - 200, GAME_HEIGHT * 2 + 200));
     this.circle = scene.add.circle(0, 0, 12, 0xff0000);
     this.add(this.circle);
     scene.add.existing(this);

@@ -9,9 +9,9 @@ class Bullet extends Phaser.GameObjects.Container {
     this.body.setCircle(6, -6, -6);
     this.velocity = new Phaser.Math.Vector2(scene.input.activePointer.worldX - this.x, scene.input.activePointer.worldY - this.y).normalize().scale(this.speed);
     this.body.setVelocity(this.velocity.x, this.velocity.y);
-  }
 
-  tick(delta) {
-    
+    scene.time.delayedCall(gameState.upgrades.turretRange, () => {
+      this.destroy();
+    });
   }
 }

@@ -39,13 +39,21 @@ let battleScene = new Phaser.Class({
       enemy.die(bullet.x, bullet.y);
     });
 
+
+    this.physics.add.collider(this.player, this.enemyGroup, function (player, enemy) {
+      enemy.die(player.x, player.y);
+      if (!gameState.upgrades.player.stomp) {
+        player.energy -= 2000;
+      }
+    });
+
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
       credit.collect();
     });
 
     this.enemies = [];
     this.credits = [];
-    for (let i = 0; i < 125; i++) {
+    for (let i = 0; i < gameState.upgrades.spawns.footman; i++) {
       this.enemies.push(new Footman());
     }
 

@@ -12,18 +12,22 @@ class Credit extends Phaser.GameObjects.Container {
     this.velocity = new Phaser.Math.Vector2(impactX - this.x, impactY - this.y).normalize().scale(Random.between(this.speed * 0.5, this.speed * 2));
     this.body.setVelocity(this.velocity.x, this.velocity.y);
     this.body.setDrag(80);
+    this.life = 0
   }
 
   tick(delta) {
     if (!this.body) return;
-    let dist = Phaser.Math.Distance.Between(
-      scene.player.x,
-      scene.player.y,
-      this.x,
-      this.y
-    );
-    if (dist < scene.player.magnet) {
-      scene.physics.moveToObject(this, scene.player, 300);
+    this.life += delta;
+    if (this.life > 500) {
+      let dist = Phaser.Math.Distance.Between(
+        scene.player.x,
+        scene.player.y,
+        this.x,
+        this.y
+      );
+      if (dist < gameState.upgrades.player.magnet) {
+        scene.physics.moveToObject(this, scene.player, 300);
+      }
     }
   }
 
