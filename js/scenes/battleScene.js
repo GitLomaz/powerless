@@ -40,8 +40,7 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
-      credit.destroy();
-      player.energy += 7500;
+      credit.collect();
     });
 
     this.enemies = [];

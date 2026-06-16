@@ -47,6 +47,10 @@ class Player extends Phaser.GameObjects.Container {
     this.powerbar = new Powerbar(Math.floor(this.energy / 7500));
   }
 
+  gainCredits(amount) {
+    gamestate.credits += amount;
+  }
+
   createFoot(offsetX, offsetY) {
     const foot = scene.add.circle(
       this.x + offsetX,
