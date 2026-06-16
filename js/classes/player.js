@@ -2,16 +2,26 @@ class Player extends Phaser.GameObjects.Container {
   constructor() {
     super(scene, GAME_WIDTH * 1.5, GAME_HEIGHT * 1.5);
 
+    // Things that should be configurable
+    this.magnet = 200;
+    this.speed = 0.25;
+    this.energy = 15000
+    // segment
+
     this.circle = scene.add.circle(0, 0, 16, 0xffff00);
     this.add(this.circle);
     this.setDepth(3);
     this.circle.setDepth(3);
 
+    scene.physics.add.existing(this);
+    this.body.setCircle(32, -32, -32);
+
+
     scene.cameras.main.startFollow(this);
     scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
     scene.add.existing(this);
 
-    this.speed = 0.25;
+
 
     this.dirX = 1;
     this.dirY = 0;
@@ -33,7 +43,7 @@ class Player extends Phaser.GameObjects.Container {
     this.stepGroup = 0;
     this.stepLocked = false;
 
-    this.energy = 15000
+    
     this.powerbar = new Powerbar(Math.floor(this.energy / 7500));
   }
 

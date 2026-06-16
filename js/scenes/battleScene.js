@@ -30,24 +30,35 @@ let battleScene = new Phaser.Class({
 
     this.bulletGroup = this.physics.add.group();
     this.enemyGroup = this.physics.add.group();
+    this.creditGroup = this.physics.add.group();
+
+    this.player = new Player();
 
     this.physics.add.collider(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
       bullet.destroy();
-      enemy.destroy();
+      enemy.die(bullet.x, bullet.y);
+    });
+
+    this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
+      credit.destroy();
+      player.energy += 7500;
     });
 
     this.enemies = [];
+    this.credits = [];
     for (let i = 0; i < 125; i++) {
       this.enemies.push(new Footman());
     }
 
-    this.player = new Player();
   },
 
   update: function (time, delta) {
     this.player.tick(delta);
     for (const enemy of this.enemies) {
       enemy.tick(delta);
+    }
+    for (const credit of this.credits) {
+      credit.tick(delta);
     }
   },
 });

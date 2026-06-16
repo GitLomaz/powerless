@@ -26,4 +26,9 @@ class Footman extends Phaser.GameObjects.Container {
       }
     }
   }
+
+  die(impactX, impactY) {
+    new Credit(this.x, this.y, impactX, impactY);
+    this.destroy();
+  }
 }
