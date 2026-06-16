@@ -94,6 +94,9 @@ class Player extends Phaser.GameObjects.Container {
 
       this.x += dx * this.speed * delta;
       this.y += dy * this.speed * delta;
+
+      this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
+      this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
     }
 
     this.updateFeet(delta);
