@@ -76,6 +76,8 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   tick(delta) {
+    // Convert delta from milliseconds to seconds
+    const dt = delta / 1000;
 
     this.energy -= delta;
     if (this.energy < 0) {
@@ -108,8 +110,8 @@ class Player extends Phaser.GameObjects.Container {
       this.dirX = dx;
       this.dirY = dy;
 
-      this.x += dx * gameState.upgrades.player.speed * delta;
-      this.y += dy * gameState.upgrades.player.speed * delta;
+      this.x += dx * gameState.upgrades.player.speed * dt;
+      this.y += dy * gameState.upgrades.player.speed * dt;
 
       this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
       this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
@@ -126,8 +128,9 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   updateFeet(delta) {
+    const dt = delta / 1000;
     const STEP_DISTANCE = 40;
-    const STEP_SPEED = 0.01;
+    const STEP_SPEED = 10;
 
     const groupA = [0, 3];
     const groupB = [1, 2];
@@ -176,7 +179,7 @@ class Player extends Phaser.GameObjects.Container {
     for (const foot of this.feet) {
       if (!foot.stepping) continue;
 
-      foot.t += delta * STEP_SPEED;
+      foot.t += dt * STEP_SPEED;
       const t = Math.min(foot.t, 1);
 
       const lift = Math.sin(t * Math.PI) * 10;
@@ -213,7 +216,9 @@ class Player extends Phaser.GameObjects.Container {
     cx /= count;
     cy /= count;
 
-    this.x = Phaser.Math.Linear(this.x, cx, 0.1);
-    this.y = Phaser.Math.Linear(this.y, cy, 0.1);
+    // Make body interpolation frame-rate independent
+    const lerpFactor = 1 - Math.pow(0.01, dt);
+    this.x = Phaser.Math.Linear(this.x, cx, lerpFactor);
+    this.y = Phaser.Math.Linear(this.y, cy, lerpFactor);
   }
 }

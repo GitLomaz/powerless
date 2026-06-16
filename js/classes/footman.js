@@ -3,12 +3,13 @@ class Footman extends Enemy {
     super();
     this.circle = scene.add.circle(0, 0, 12, 0xff0000);
     this.add(this.circle);
-    this.speed = .02;
+    this.speed = 20;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
   }
 
   tick(delta) {
+    const dt = delta / 1000;
     if (this.mode === "wander") {
       if (!this.target) {
         this.target = new Phaser.Math.Vector2(Random.between(0, scene.map.widthInPixels), Random.between(0, scene.map.heightInPixels));
@@ -19,8 +20,8 @@ class Footman extends Enemy {
       if (len < 4) {
         this.target = null;
       } else {
-        this.x += (dx / len) * this.speed * delta;
-        this.y += (dy / len) * this.speed * delta;
+        this.x += (dx / len) * this.speed * dt;
+        this.y += (dy / len) * this.speed * dt;
       }
     }
   }

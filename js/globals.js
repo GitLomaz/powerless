@@ -15,7 +15,7 @@ const gameState = {
     },
     player: {
       magnet: 200,
-      speed: 0.15,
+      speed: 150,
       energy: 15000,
       stomp: false // Can kill enemies without taking damage
     },
