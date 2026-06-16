@@ -1,12 +1,10 @@
-class Footman extends Phaser.GameObjects.Container {
+class Footman extends Enemy {
   constructor() {
-    super(scene, Random.between(GAME_WIDTH - 200, GAME_WIDTH * 2 + 200), Random.between(GAME_HEIGHT - 200, GAME_HEIGHT * 2 + 200));
+    super();
     this.circle = scene.add.circle(0, 0, 12, 0xff0000);
     this.add(this.circle);
-    scene.add.existing(this);
     this.speed = .02;
     this.mode = "wander";
-    scene.enemyGroup.add(this);
     this.body.setCircle(12, -12, -12);
   }
 
@@ -25,10 +23,5 @@ class Footman extends Phaser.GameObjects.Container {
         this.y += (dy / len) * this.speed * delta;
       }
     }
-  }
-
-  die(impactX, impactY) {
-    new Credit(this.x, this.y, impactX, impactY);
-    this.destroy();
   }
 }

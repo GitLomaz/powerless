@@ -17,6 +17,12 @@ class Player extends Phaser.GameObjects.Container {
     scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
     scene.add.existing(this);
 
+    this.creditsGained = 0;
+    this.creditsGainedText = scene.add.text(20, 20, "Credits: 0", { font: "16px Arial", fill: "#2412c8" }).setOrigin(0).setDepth(4).setScrollFactor(0);
+
+    this.lastShot = 0;
+
+
     this.dirX = 1;
     this.dirY = 0;
 
@@ -43,6 +49,8 @@ class Player extends Phaser.GameObjects.Container {
 
   gainCredits(amount) {
     gameState.credits += amount;
+    this.creditsGained += amount;
+    this.creditsGainedText.setText(`Credits: ${this.creditsGained}`);
   }
 
   createFoot(offsetX, offsetY) {
