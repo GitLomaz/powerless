@@ -1,6 +1,4 @@
-// TO APPLY AN UPGRADE CALL UPGRADES[X].applyUpgrade(y)
-// Example: `UPGRADES[1].applyUpgrade(2)` -- sets upgrade ID 1 to level 3 (zero indexed)
-const LEVELS = [0, 0]
+// example: LEVELS[1] = 2; applyUpgrades();
 
 function applyUpgrades() {
   LEVELS.forEach((level, id) => {
@@ -9,6 +7,8 @@ function applyUpgrades() {
     }
   })
 }
+
+const LEVELS = [0, 0]
 
 const UPGRADES = [
   { 
