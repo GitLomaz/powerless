@@ -8,15 +8,15 @@ let battleScene = new Phaser.Class({
 
   preload: function () {
     scene = this;
-    this.load.image("sheet", "images/sheet.png");
+    this.load.image("sheet2", "images/sheet2.png");
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.tilemapTiledJSON("map", "json/map.json");
+    this.load.tilemapTiledJSON("map2", "json/map2.json");
   },
 
   create: function () {
     // this.scene.start("orbitScene");
-    this.map = this.make.tilemap({ key: "map", tileWidth: 48, tileHeight: 48 });
-    this.tileset = this.map.addTilesetImage("sheet", "sheet");
+    this.map = this.make.tilemap({ key: "map2", tileWidth: 128, tileHeight: 128 });
+    this.tileset = this.map.addTilesetImage("sheet2", "sheet2");
     this.layer = this.map.createLayer(0, this.tileset, 0, 0);
     this.map.createLayer(1, this.tileset, 0, 0);
 
