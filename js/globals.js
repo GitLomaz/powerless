@@ -11,6 +11,7 @@ const gameState = {
     // working
     turretFireRate: 1000,
     turretRange: 2000,
+    turretBulletSpeed: 400,
     spawns: {
       footman: 10,
       boss: 0
