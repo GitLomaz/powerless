@@ -3,8 +3,10 @@ const GAME_HEIGHT = 720;
 const DEBUG = false;
 let scene;
 
+
+
 const gameState = {
-  credits: 0,
+  credits: 1000000,
   upgrades: {
     // working
     turretFireRate: 1000,
