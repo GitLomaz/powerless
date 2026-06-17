@@ -125,6 +125,25 @@ class Player extends Phaser.GameObjects.Container {
         this.lastShot = Date.now();
       }
     }
+
+    if (gameState.upgrades.minigun.enabled) {
+      // Find nearest enemy within range
+      let nearestEnemy = null;
+      let nearestDist = Infinity;
+      for (const enemy of scene.enemies) {
+        const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
+        console.log(dist)
+        if (dist < nearestDist && dist < gameState.upgrades.minigun.range) {
+          nearestDist = dist;
+          nearestEnemy = enemy;
+        }
+      }
+      // console.log(nearestEnemy.x, nearestEnemy.y);
+      if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.minigun.fireRate) && nearestEnemy) {
+        new MiniBullet(nearestEnemy);
+        this.minigunLastShot = Date.now();
+      }
+    }
   }
 
   updateFeet(delta) {

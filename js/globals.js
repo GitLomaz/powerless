@@ -12,14 +12,20 @@ const gameState = {
     turretFireRate: 1000,
     turretRange: 2000,
     turretBulletSpeed: 400,
+    minigun: {
+      enabled: true,
+      damage: 1,
+      fireRate: 500,
+      range: 300,
+    },
     spawns: {
-      footman: 10,
+      footman: 2,
       boss: 0
     },
     player: {
       magnet: 200,
       speed: 150,
-      energy: 15000,
+      energy: 1500000,
       stomp: false // Can kill enemies without taking damage
     },
 

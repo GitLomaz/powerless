@@ -9,4 +9,12 @@ class Enemy extends Phaser.GameObjects.Container {
     new Credit(this.x, this.y, impactX, impactY);
     this.destroy();
   }
+
+  destroy() {
+    const index = scene.enemies.indexOf(this);
+    if (index > -1) {
+      scene.enemies.splice(index, 1);
+    }
+    super.destroy();
+  }
 }
