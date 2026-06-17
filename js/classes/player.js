@@ -4,14 +4,8 @@ class Player extends Phaser.GameObjects.Container {
 
     this.energy = gameState.upgrades.player.energy
 
-    this.circle = scene.add.circle(0, 0, 16, 0xffff00);
-    this.add(this.circle);
-    this.setDepth(3);
-    this.circle.setDepth(3);
-
     scene.physics.add.existing(this);
-    this.body.setCircle(32, -32, -32);
-
+    this.body.setCircle(48, -48, -48);
 
     scene.cameras.main.startFollow(this);
     scene.cameras.main.setBounds(0, 0, scene.map.widthInPixels, scene.map.heightInPixels);
@@ -27,18 +21,25 @@ class Player extends Phaser.GameObjects.Container {
     this.dirY = 0;
 
     this.feet = [
-      this.createFoot( 24, -24),
-      this.createFoot( 24,  24),
-      this.createFoot(-24, -24),
-      this.createFoot(-24,  24)
+      this.createFoot( 36, -36),
+      this.createFoot( 36,  36),
+      this.createFoot(-36, -36),
+      this.createFoot(-36,  36)
     ];
 
     this.legs = [
-      scene.add.line(0, 0, 0, 0, 0, 0, 0x000000).setOrigin(0).setDepth(1),
-      scene.add.line(0, 0, 0, 0, 0, 0, 0x000000).setOrigin(0).setDepth(1),
-      scene.add.line(0, 0, 0, 0, 0, 0, 0x000000).setOrigin(0).setDepth(1),
-      scene.add.line(0, 0, 0, 0, 0, 0, 0x000000).setOrigin(0).setDepth(1),
-    ]
+      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
+    ];
+
+    this.platform = scene.add.image(0, 0, "mech-body").setOrigin(0.5, 0.5);
+    this.add(this.platform);
+
+    this.barrel = scene.add.image(0, 0, "mech-barrel").setOrigin(0.5, 0.5).setDepth(4);
+    this.add(this.barrel);
+    this.setDepth(4);
 
     this.stepGroup = 0;
     this.stepLocked = false;
@@ -54,11 +55,10 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   createFoot(offsetX, offsetY) {
-    const foot = scene.add.circle(
+    const foot = scene.add.image(
       this.x + offsetX,
       this.y + offsetY,
-      6,
-      0xff0000
+      "mech-foot"
     );
 
     foot.setDepth(2);
@@ -87,7 +87,20 @@ class Player extends Phaser.GameObjects.Container {
 
     this.legs.forEach((leg, i) => {
       const foot = this.feet[i];
-      leg.setTo(this.x, this.y, foot.x, foot.y);
+
+      const dx = foot.x - this.x;
+      const dy = foot.y - this.y;
+
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Position at the start point
+      leg.setPosition(this.x, this.y);
+
+      // Rotate toward the foot
+      leg.rotation = Math.atan2(dy, dx);
+
+      // Stretch to match the distance
+      leg.displayWidth = distance;
     });
 
     const cursors = scene.cursors;
@@ -119,6 +132,7 @@ class Player extends Phaser.GameObjects.Container {
 
     this.updateFeet(delta);
 
+    this.barrel.rotation = Math.atan2(scene.input.activePointer.worldY - this.y, scene.input.activePointer.worldX - this.x);
     if (scene.input.activePointer.isDown) {
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.turretFireRate) {
         new Bullet();

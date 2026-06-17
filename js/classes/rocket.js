@@ -23,8 +23,8 @@ class Rocket extends Phaser.GameObjects.Container {
 
     // launch toward target
     this.velocity = new Phaser.Math.Vector2(
-      target.x - this.x,
-      target.y - this.y
+      scene.input.activePointer.worldX - this.x,
+      scene.input.activePointer.worldY - this.y
     )
       .normalize()
       .scale(this.speed);

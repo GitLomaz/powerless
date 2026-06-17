@@ -9,6 +9,10 @@ let battleScene = new Phaser.Class({
   preload: function () {
     scene = this;
     this.load.image("sheet2", "images/sheet2.png");
+    this.load.image("mech-foot", "images/mech/foot.png");
+    this.load.image("mech-body", "images/mech/body.png");
+    this.load.image("mech-leg", "images/mech/leg.png");
+    this.load.image("mech-barrel", "images/mech/barrel.png");
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.tilemapTiledJSON("map2", "json/map2.json");
   },
