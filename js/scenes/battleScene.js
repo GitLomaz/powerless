@@ -14,7 +14,7 @@ let battleScene = new Phaser.Class({
   },
 
   create: function () {
-   this.scene.start("orbitScene");
+    // this.scene.start("orbitScene");
     this.map = this.make.tilemap({ key: "map", tileWidth: 48, tileHeight: 48 });
     this.tileset = this.map.addTilesetImage("sheet", "sheet");
     this.layer = this.map.createLayer(0, this.tileset, 0, 0);

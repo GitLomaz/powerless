@@ -1,5 +1,3 @@
-
-
 let config = {
   type: Phaser.AUTO,
   width: GAME_WIDTH,
