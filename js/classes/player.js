@@ -132,7 +132,6 @@ class Player extends Phaser.GameObjects.Container {
       let nearestDist = Infinity;
       for (const enemy of scene.enemies) {
         const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        console.log(dist)
         if (dist < nearestDist && dist < gameState.upgrades.minigun.range) {
           nearestDist = dist;
           nearestEnemy = enemy;
@@ -142,6 +141,24 @@ class Player extends Phaser.GameObjects.Container {
       if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.minigun.fireRate) && nearestEnemy) {
         new MiniBullet(nearestEnemy);
         this.minigunLastShot = Date.now();
+      }
+    }
+
+    if (gameState.upgrades.rocket.enabled) {
+      // Find nearest enemy within range
+      let nearestEnemy = null;
+      let nearestDist = Infinity;
+      for (const enemy of scene.enemies) {
+        const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
+        if (dist < nearestDist && dist < gameState.upgrades.rocket.range) {
+          nearestDist = dist;
+          nearestEnemy = enemy;
+        }
+      }
+      // console.log(nearestEnemy.x, nearestEnemy.y);
+      if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.rocket.fireRate) && nearestEnemy) {
+        new Rocket(nearestEnemy);
+        this.rocketLastShot = Date.now();
       }
     }
   }

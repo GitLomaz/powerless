@@ -52,7 +52,9 @@ let battleScene = new Phaser.Class({
       credit.collect();
     });
 
-    this.enemies = [];    this.credits = [];
+    this.enemies = [];    
+    this.bullets = [];    
+    this.credits = [];
     for (let i = 0; i < gameState.upgrades.spawns.footman; i++) {
       this.enemies.push(new Footman());
     }
@@ -66,6 +68,9 @@ let battleScene = new Phaser.Class({
     }
     for (const credit of this.credits) {
       credit.tick(delta);
+    }
+    for (const bullet of this.bullets) {
+      bullet.tick(delta);
     }
   },
 });

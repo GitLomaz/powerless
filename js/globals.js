@@ -13,10 +13,16 @@ const gameState = {
     turretRange: 2000,
     turretBulletSpeed: 400,
     minigun: {
-      enabled: true,
+      enabled: false,
       damage: 1,
       fireRate: 500,
       range: 300,
+    },
+    rocket: {
+      enabled: true,
+      damage: 1,
+      fireRate: 3500,
+      range: 1300,
     },
     spawns: {
       footman: 2,
