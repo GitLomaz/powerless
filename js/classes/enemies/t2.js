@@ -3,9 +3,10 @@ class T2 extends Enemy {
     super();
     this.circle = scene.add.circle(0, 0, 12, 0x0000ff);
     this.add(this.circle);
-    this.speed = 20;
+    this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
+    this.fireCooldown = 0;
   }
 
   tick(delta) {
@@ -23,10 +24,27 @@ class T2 extends Enemy {
         this.x += (dx / len) * this.speed * dt;
         this.y += (dy / len) * this.speed * dt;
       }
+    } else if (this.mode === "chase") {
+      const dx = scene.player.x - this.x;
+      const dy = scene.player.y - this.y;
+      const len = Math.hypot(dx, dy);
+      if (len > 4) {
+        this.x += (dx / len) * this.speed * dt;
+        this.y += (dy / len) * this.speed * dt;
+      }
+    } else if (this.mode === "fire") {
+      this.fireCooldown -= delta;
+      if (this.fireCooldown <= 0) {
+        new Bullet(this, scene.player, false);
+        this.fireCooldown = 2000;
+      }
     }
-    if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 400) {
+    if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 300) {
       this.mode = "fire";
-      console.log('fire')
+    } else if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 800) {
+      this.mode = "chase";
+    } else {
+      this.mode = "wander";
     }
   }
 }

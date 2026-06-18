@@ -198,7 +198,7 @@ grid: {
 
 {
 id:9,
-name: Missiles,
+name: "Missiles",
 description: "Unlock the missile weapon.",
 prerequisite: 1,
 levels: [

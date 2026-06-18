@@ -142,7 +142,7 @@ class Player extends Phaser.GameObjects.Container {
     this.barrel.rotation = Math.atan2(worldPoint.y - this.y, worldPoint.x - this.x);
     if (scene.input.activePointer.isDown) {
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
-        new Bullet();
+        new Shell();
         this.lastShot = Date.now();
       }
     }
@@ -160,7 +160,7 @@ class Player extends Phaser.GameObjects.Container {
       }
       // console.log(nearestEnemy.x, nearestEnemy.y);
       if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.weapons.minigun.fireRate) && nearestEnemy) {
-        new MiniBullet(nearestEnemy);
+        new Bullet(nearestEnemy);
         this.minigunLastShot = Date.now();
       }
     }
