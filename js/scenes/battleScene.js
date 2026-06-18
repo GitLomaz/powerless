@@ -69,7 +69,10 @@ let battleScene = new Phaser.Class({
     this.bullets = [];    
     this.credits = [];
     for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
-      this.enemies.push(new Footman());
+      this.enemies.push(new T1());
+    }
+    for (let i = 0; i < gameState.upgrades.spawns.tier2.units; i++) {
+      this.enemies.push(new T2());
     }
 
   },

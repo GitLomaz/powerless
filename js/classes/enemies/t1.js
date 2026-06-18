@@ -1,4 +1,4 @@
-class Footman extends Enemy {
+class T1 extends Enemy {
   constructor() {
     super();
     this.circle = scene.add.circle(0, 0, 12, 0xff0000);
