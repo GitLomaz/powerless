@@ -21,10 +21,10 @@ class Player extends Phaser.GameObjects.Container {
     this.dirY = 0;
 
     this.feet = [
-      this.createFoot( 36, -36).setAngle(-45 + 180),
-      this.createFoot( 36,  36).setAngle(-45 - 90),
-      this.createFoot(-36, -36).setAngle(45),
-      this.createFoot(-36,  36).setAngle(-45)
+      this.createFoot( 28, -28).setAngle(-45 + 180),
+      this.createFoot( 28,  28).setAngle(-45 - 90),
+      this.createFoot(-28, -28).setAngle(45),
+      this.createFoot(-28,  28).setAngle(-45)
     ];
 
     this.legs = [
