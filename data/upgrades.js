@@ -40,7 +40,7 @@ const UPGRADES = [
       {cost: 40, effect: 700}
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.turretBulletSpeed = UPGRADES[1].levels[level].effect
+      gameState.upgrades.weapons.cannon.speed = UPGRADES[1].levels[level].effect
     },
     grid: {
       x: 10,

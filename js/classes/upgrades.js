@@ -35,11 +35,12 @@ class UPGRADES {
     return +((s.baseCost * Math.pow(s.scale, s.level - 1)).toFixed(0));
   }
 
+  // DEPRICATED?!
   // Push upgrade changes back into gameState so scenes read live values.
   _syncToGameState(name, level) {
     switch (name) {
       case 'fireRate':
-        gameState.upgrades.turretFireRate = Math.max(100, 1000 - (level - 1) * ~~this.get('fireRate'));
+        gameState.upgrades.weapons.cannon.fireRate = Math.max(100, 1000 - (level - 1) * ~~this.get('fireRate'));
         break;
       case 'speed':
         gameState.upgrades.player.speed = this.get('speed');
