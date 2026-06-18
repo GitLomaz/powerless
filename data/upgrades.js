@@ -2,7 +2,7 @@
 
 function applyUpgrades() {
   LEVELS.forEach((level, id) => {
-    if (UPGRADES[id] && UPGRADES[id].applyUpgrade) {
+    if (level > 0 && UPGRADES[id] && UPGRADES[id].applyUpgrade) {
       UPGRADES[id].applyUpgrade(level);
     }
   })
