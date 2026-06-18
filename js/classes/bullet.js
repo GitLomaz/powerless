@@ -1,8 +1,13 @@
 class Bullet extends Phaser.GameObjects.Container {
   constructor() {
-    super(scene, scene.player.x, scene.player.y);
-    this.circle = scene.add.circle(0, 0, 6, 0x000000);
-    this.add(this.circle);
+    const barrel = scene.player.barrel;
+    const barrelLength = 32;
+    const spawnX = scene.player.x + Math.cos(barrel.rotation) * barrelLength;
+    const spawnY = scene.player.y + Math.sin(barrel.rotation) * barrelLength;
+    super(scene, spawnX, spawnY);
+    this.image = scene.add.image(0, 0, "mech-shell");
+    this.image.setRotation(barrel.rotation);
+    this.add(this.image);
     scene.add.existing(this);
     this.speed = gameState.upgrades.turretBulletSpeed;
     scene.bulletGroup.add(this);
