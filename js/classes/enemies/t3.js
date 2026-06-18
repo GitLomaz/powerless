@@ -6,7 +6,7 @@ class T3 extends Enemy {
     this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
-    this.fireCooldown = 0;
+    this.fireCooldown = Random.between(0, 10000);
   }
 
   tick(delta) {
