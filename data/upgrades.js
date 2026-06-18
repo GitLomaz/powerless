@@ -270,6 +270,104 @@ levels: [
 applyUpgrade: (level) => {
   gameState.upgrades.weapons.missiles.splashDamage = UPGRADES[12].levels[level].effect
 }
-}
+},
+{
+id:13,
+name :"Battery Capacity",
+description: "Increase the battery capacity of your vehicle.",
+prerequisite: 0,
+levels: [
+  {cost: 5, effect: 30},
+  {cost: 15, effect: 60},
+  {cost: 40, effect: 90}
+],
+applyUpgrade: (level) => {
+  gameState.upgrades.battery.capacity = UPGRADES[13].levels[level].effect
+},
+grid: {
+  x: 0,
+  y: 1,
+  icon: "batteryCapacityIcon",
+  size: "medium"  
+  }
 
+
+},
+{id:14,
+
+name: "Movement Speed",
+description: "Increase the movement speed of your vehicle.",
+prerequisite: 13,
+levels: [
+  {cost: 5, effect: 1.1},
+  {cost: 15, effect: 1.2},
+  {cost: 40, effect: 1.3}
+],
+applyUpgrade: (level) => {
+  gameState.upgrades.movement.speed = UPGRADES[14].levels[level].effect
+},
+grid: {
+  x: -1,
+  y: 1,
+  icon: "movementSpeedIcon",
+  size: "medium"
+}
+},
+{id:15,
+name: "Battery Degradation",
+description: "Increase the energy efficiency of the vehicle.",
+prerequisite: 13,
+levels: [
+  {cost: 5, effect: 1},
+  {cost: 15, effect: 2},
+  {cost: 40, effect: 3}
+],
+applyUpgrade: (level) => {
+  gameState.upgrades.energy.regeneration = UPGRADES[15].levels[level].effect
+},
+grid: {
+  x: -2,
+  y: 1,
+  icon: "energyRegenerationIcon",
+  size: "medium"
+}
+},
+{id:16,
+  name: "Magnet Pickup Range",
+  description: "Increase the range at which you can pick up credits.",
+  prerequisite: 13,
+  levels: [
+    {cost: 5, effect: 50},
+    {cost: 15, effect: 100},
+    {cost: 40, effect: 150}
+  ],
+  applyUpgrade: (level) => {
+    gameState.upgrades.magnet.range = UPGRADES[16].levels[level].effect
+  },
+  grid: {
+    x: 0,
+    y: 2,
+    icon: "magnetRangeIcon",
+    size: "medium"
+  }
+},
+{id:17,
+  name: "Proximity Shield",
+  description:"Improved shield reduces energy consumption when blocking a hit.",
+  prerequisite: 13,
+  levels: [
+    {cost: 10, effect: 1},
+    {cost: 30, effect: 2},
+    {cost: 80, effect: 3}
+  ],
+  applyUpgrade: (level) => {
+    gameState.upgrades.shield.proximity = UPGRADES[17].levels[level].effect
+  },
+  grid: {
+    x: -1,
+    y: 2,
+    icon: "proximityShieldIcon",
+    size: "medium"
+  }
+}
 ]
