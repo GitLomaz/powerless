@@ -132,7 +132,14 @@ class Player extends Phaser.GameObjects.Container {
 
     this.updateFeet(delta);
 
-    this.barrel.rotation = Math.atan2(scene.input.activePointer.worldY - this.y, scene.input.activePointer.worldX - this.x);
+    const pointer = scene.input.activePointer;
+
+    const worldPoint = scene.cameras.main.getWorldPoint(
+        pointer.x,
+        pointer.y
+    );
+
+    this.barrel.rotation = Math.atan2(worldPoint.y - this.y, worldPoint.x - this.x);
     if (scene.input.activePointer.isDown) {
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.turretFireRate) {
         new Bullet();
