@@ -171,12 +171,11 @@ class Player extends Phaser.GameObjects.Container {
       let nearestDist = Infinity;
       for (const enemy of scene.enemies) {
         const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        if (dist < nearestDist && dist < gameState.upgrades.weapons.rocket.range) {
+        if (dist < nearestDist && dist < 1500) {
           nearestDist = dist;
           nearestEnemy = enemy;
         }
       }
-      // console.log(nearestEnemy.x, nearestEnemy.y);
       if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.weapons.rocket.fireRate) && nearestEnemy) {
         new Rocket(nearestEnemy);
         this.rocketLastShot = Date.now();

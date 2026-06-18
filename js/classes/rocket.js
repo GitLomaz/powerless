@@ -4,8 +4,9 @@ class Rocket extends Phaser.GameObjects.Container {
 
     this.target = target;
 
-    this.circle = scene.add.circle(0, 0, 4, 0xff6600);
-    this.add(this.circle);
+    this.sprite = scene.add.sprite(0, 0, "mech-rocket");
+    this.sprite.play("rocket");
+    this.add(this.sprite);
 
     scene.add.existing(this);
     scene.bulletGroup.add(this);
