@@ -21,10 +21,10 @@ class Player extends Phaser.GameObjects.Container {
     this.dirY = 0;
 
     this.feet = [
-      this.createFoot( 36, -36),
-      this.createFoot( 36,  36),
-      this.createFoot(-36, -36),
-      this.createFoot(-36,  36)
+      this.createFoot( 36, -36).setAngle(-45 + 180),
+      this.createFoot( 36,  36).setAngle(-45 - 90),
+      this.createFoot(-36, -36).setAngle(45),
+      this.createFoot(-36,  36).setAngle(-45)
     ];
 
     this.legs = [
@@ -191,7 +191,6 @@ class Player extends Phaser.GameObjects.Container {
     const anyStepping = this.feet.some(f => f.stepping);
 
     if (!anyStepping && !this.stepLocked) {
-
       let started = false;
 
       for (const i of activeGroup) {
@@ -206,6 +205,20 @@ class Player extends Phaser.GameObjects.Container {
         );
 
         if (dist > STEP_DISTANCE) {
+          const footprint = scene.add.image(
+            foot.x,
+            foot.y,
+            "mech-footprint"
+          )
+          footprint.setDepth(1)
+          footprint.setRotation(foot.rotation);
+          footprint.setAlpha(.3);
+          scene.tweens.add({
+            targets: footprint,
+            alpha: 0,
+            duration: 10000,
+            onComplete: () => footprint.destroy()
+          });
           foot.stepping = true;
           foot.t = 0;
 
