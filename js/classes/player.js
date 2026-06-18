@@ -141,43 +141,43 @@ class Player extends Phaser.GameObjects.Container {
 
     this.barrel.rotation = Math.atan2(worldPoint.y - this.y, worldPoint.x - this.x);
     if (scene.input.activePointer.isDown) {
-      if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.turretFireRate) {
+      if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
         new Bullet();
         this.lastShot = Date.now();
       }
     }
 
-    if (gameState.upgrades.minigun.enabled) {
+    if (gameState.upgrades.weapons.minigun.enabled) {
       // Find nearest enemy within range
       let nearestEnemy = null;
       let nearestDist = Infinity;
       for (const enemy of scene.enemies) {
         const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        if (dist < nearestDist && dist < gameState.upgrades.minigun.range) {
+        if (dist < nearestDist && dist < gameState.upgrades.weapons.minigun.range) {
           nearestDist = dist;
           nearestEnemy = enemy;
         }
       }
       // console.log(nearestEnemy.x, nearestEnemy.y);
-      if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.minigun.fireRate) && nearestEnemy) {
+      if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.weapons.minigun.fireRate) && nearestEnemy) {
         new MiniBullet(nearestEnemy);
         this.minigunLastShot = Date.now();
       }
     }
 
-    if (gameState.upgrades.rocket.enabled) {
+    if (gameState.upgrades.weapons.rocket.enabled) {
       // Find nearest enemy within range
       let nearestEnemy = null;
       let nearestDist = Infinity;
       for (const enemy of scene.enemies) {
         const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        if (dist < nearestDist && dist < gameState.upgrades.rocket.range) {
+        if (dist < nearestDist && dist < gameState.upgrades.weapons.rocket.range) {
           nearestDist = dist;
           nearestEnemy = enemy;
         }
       }
       // console.log(nearestEnemy.x, nearestEnemy.y);
-      if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.rocket.fireRate) && nearestEnemy) {
+      if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.weapons.rocket.fireRate) && nearestEnemy) {
         new Rocket(nearestEnemy);
         this.rocketLastShot = Date.now();
       }

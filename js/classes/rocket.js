@@ -13,7 +13,7 @@ class Rocket extends Phaser.GameObjects.Container {
 
     this.body.setCircle(4, -4, -4);
 
-    this.damage = gameState.upgrades.rocket.damage;
+    this.damage = gameState.upgrades.weapons.rocket.damage;
 
     // tuning
     this.speed = 150;
@@ -35,7 +35,7 @@ class Rocket extends Phaser.GameObjects.Container {
     );
 
     // scene.time.delayedCall(
-    //   gameState.upgrades.rocket.range,
+    //   gameState.upgrades.weapons.rocket.range,
     //   () => {
     //     if (this.active) this.destroy();
     //   }
