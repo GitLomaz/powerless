@@ -4,11 +4,14 @@ class Rocket extends Phaser.GameObjects.Container {
 
     this.target = target;
 
+    scene.add.existing(this);
+    scene.physics.add.existing(this);
+
     this.sprite = scene.add.sprite(0, 0, "mech-rocket");
     this.sprite.play("rocket");
+    this.sprite.setScale(1.5);
     this.add(this.sprite);
 
-    scene.add.existing(this);
     scene.bulletGroup.add(this);
     scene.bullets.push(this);
 
@@ -17,40 +20,33 @@ class Rocket extends Phaser.GameObjects.Container {
     this.damage = gameState.upgrades.weapons.rocket.damage;
 
     // tuning
-    this.speed = 150;
-    this.maxSpeed = 400;
-    this.acceleration = 250;
-    this.turnRate = 2.5; // radians/sec
+    this.speed = 250;
+    this.maxSpeed = 600;
+    this.acceleration = 350;
+    this.turnRate = 3.5; // radians/sec
 
-    // launch toward target
-    this.velocity = new Phaser.Math.Vector2(
-      scene.input.activePointer.worldX - this.x,
-      scene.input.activePointer.worldY - this.y
-    )
-      .normalize()
-      .scale(this.speed);
+    this.cooldown = 500;
+
+    const launchAngle = scene.player.barrel.rotation;
+
+    this.rotation = launchAngle;
 
     this.body.setVelocity(
-      this.velocity.x,
-      this.velocity.y
+      Math.cos(launchAngle) * this.speed,
+      Math.sin(launchAngle) * this.speed
     );
-
-    // scene.time.delayedCall(
-    //   gameState.upgrades.weapons.rocket.range,
-    //   () => {
-    //     if (this.active) this.destroy();
-    //   }
-    // );
   }
 
   tick(delta) {
-    const dt = delta / 1000;
+    if (!this.active) return;
+    if (!this.target || !this.target.active) return;
 
-    if (!this.target || !this.target.active) {
-      return;
-    }
+    const dt = Math.min(delta, 33) / 1000;
 
-    // direction to target
+    this.cooldown -= delta;
+
+    const currentAngle = this.body.velocity.angle();
+
     const desiredAngle = Phaser.Math.Angle.Between(
       this.x,
       this.y,
@@ -58,42 +54,35 @@ class Rocket extends Phaser.GameObjects.Container {
       this.target.y
     );
 
-    // current flight direction
-    const currentAngle = this.velocity.angle();
+    if (this.cooldown > 0) {
+      this.rotation = currentAngle;
+      return;
+    }
 
-    // rotate gradually toward target
-    const newAngle = Phaser.Math.Angle.RotateTo(
-      currentAngle,
-      desiredAngle,
-      this.turnRate * dt
-    );
+    let diff = Phaser.Math.Angle.Wrap(desiredAngle - currentAngle);
 
-    // accelerate
+    const maxTurn = this.turnRate * dt;
+    diff = Phaser.Math.Clamp(diff, -maxTurn, maxTurn);
+
+    const newAngle = currentAngle + diff;
+
     this.speed = Math.min(
       this.speed + this.acceleration * dt,
       this.maxSpeed
     );
 
-    // update velocity
-    this.velocity.setToPolar(
-      newAngle,
-      this.speed
-    );
-
     this.body.setVelocity(
-      this.velocity.x,
-      this.velocity.y
+      Math.cos(newAngle) * this.speed,
+      Math.sin(newAngle) * this.speed
     );
 
-    // point rocket where it's flying
     this.rotation = newAngle;
   }
 
   destroy() {
     const index = scene.bullets.indexOf(this);
-    if (index > -1) {
-      scene.bullets.splice(index, 1);
-    }
+    if (index > -1) scene.bullets.splice(index, 1);
+
     super.destroy();
   }
 }
