@@ -1,0 +1,7 @@
+class Tree {
+  constructor(scene) {
+
+
+    
+  }
+}
