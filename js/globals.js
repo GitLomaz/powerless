@@ -16,7 +16,7 @@ const gameState = {
         range: 300,
       },
       rocket: {
-        enabled: true,
+        enabled: false,
         double: false,
         damage: 1,
         fireRate: 3500,
@@ -32,12 +32,12 @@ const gameState = {
     },
     spawns: {
       tier1: {
-        units: 10,
+        units: 1,
         promotion: 0,
         doubleDrop: 0
       },
       tier2: {
-        units: 10,
+        units: 1,
         promotion: 0,
         doubleDrop: 0
       },

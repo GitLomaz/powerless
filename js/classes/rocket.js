@@ -1,6 +1,6 @@
 class Rocket extends Phaser.GameObjects.Container {
-  constructor(target) {
-    super(scene, scene.player.x, scene.player.y);
+  constructor(source, target, friendly = true) {
+    super(scene, source.x, source.y);
 
     this.target = target;
 
@@ -12,18 +12,24 @@ class Rocket extends Phaser.GameObjects.Container {
     this.sprite.setScale(1.5);
     this.add(this.sprite);
 
-    scene.bulletGroup.add(this);
+    if (friendly) {
+      scene.bulletGroup.add(this);
+      this.speed = 250;
+      this.maxSpeed = 600;
+      this.acceleration = 350;
+      this.turnRate = 3.5; // radians/sec
+    } else {
+      scene.enemyBulletGroup.add(this);
+      this.speed = 50;
+      this.maxSpeed = 120;
+      this.acceleration = 20;
+      this.turnRate = 2; // radians/sec
+    }
     scene.bullets.push(this);
 
     this.body.setCircle(4, -4, -4);
 
     this.damage = gameState.upgrades.weapons.rocket.damage;
-
-    // tuning
-    this.speed = 250;
-    this.maxSpeed = 600;
-    this.acceleration = 350;
-    this.turnRate = 3.5; // radians/sec
 
     this.cooldown = 500;
 

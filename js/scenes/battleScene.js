@@ -15,6 +15,7 @@ let battleScene = new Phaser.Class({
     this.load.image("mech-barrel", "images/mech/barrel.png");
     this.load.image("mech-footprint", "images/mech/footprint.png");
     this.load.image("mech-shell", "images/mech/shell.png");
+    this.load.image("bullet", "images/mech/bullet.png");
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("mech-rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.tilemapTiledJSON("map2", "json/map2.json");
@@ -43,6 +44,7 @@ let battleScene = new Phaser.Class({
     });
 
     this.bulletGroup = this.physics.add.group();
+    this.enemyBulletGroup = this.physics.add.group();
     this.enemyGroup = this.physics.add.group();
     this.creditGroup = this.physics.add.group();
 
@@ -53,12 +55,17 @@ let battleScene = new Phaser.Class({
       enemy.die(bullet.x, bullet.y);
     });
 
-
     this.physics.add.collider(this.player, this.enemyGroup, function (player, enemy) {
       enemy.die(player.x, player.y);
       if (!gameState.upgrades.player.stomp) {
         player.energy -= 2000;
       }
+    });
+
+    this.physics.add.collider(this.player, this.enemyBulletGroup, function (player, bullet) {
+      console.log("hit");
+      bullet.destroy();
+      player.energy -= 500;
     });
 
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
@@ -69,7 +76,13 @@ let battleScene = new Phaser.Class({
     this.bullets = [];    
     this.credits = [];
     for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
-      this.enemies.push(new Footman());
+      this.enemies.push(new T1());
+    }
+    for (let i = 0; i < gameState.upgrades.spawns.tier2.units; i++) {
+      this.enemies.push(new T2());
+    }
+    for (let i = 0; i < gameState.upgrades.spawns.tier3.units; i++) {
+      this.enemies.push(new T3());
     }
 
   },
