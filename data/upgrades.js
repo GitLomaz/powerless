@@ -31,7 +31,6 @@ const UPGRADES = [
   { 
     id: 1,
     name: "Main Cannon - Projectile Speed",
-    cost: 5,
     description: "Start the battle and deploy your turret.",
     prerequisite: 0,
     levels: [
