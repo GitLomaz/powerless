@@ -9,7 +9,6 @@ class Enemy extends Phaser.GameObjects.Container {
     this.healthBar.fillStyle(0xff0000, 1);
     this.healthBar.fillRect(-25, -40, 50, 5);
     this.add(this.healthBar);
-    scene.enemies.push(this);
   }
 
   takeDamage(amount, impactX, impactY) {

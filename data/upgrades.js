@@ -61,27 +61,25 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // REMOVED!
+  { // removed
     id: 3,
-    name: "Main Cannon:\r\nRange",
-    description: "Increase the range of the main cannon.",
-    // prerequisite: 0,
+    name: "Rocket Launcher:\r\nDouble Rockets",
+    description: "Fires two rockets at once instead of one.",
+    // prerequisite: 11,
     levels: [
-      { cost: 5, effect: 100 },
-      { cost: 15, effect: 150 },
-      { cost: 40, effect: 200 },
+      { cost: 5, effect: true },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.cannon.range =
+      gameState.upgrades.weapons.rocket.double =
         UPGRADES[3].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.cannon.range;
+      return gameState.upgrades.weapons.rocket.double;
     },
     grid: {
-      x: 300,
-      y: 0,
-      icon: "rangeIcon",
+      x: 3000,
+      y: -2,
+      icon: "rocketDouble",
       size: "medium",
     },
   },
@@ -241,19 +239,19 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: -1,
-      icon: "rocketdamage",
+      icon: "rocketDamage",
       size: "medium",
     },
   },
   {
     id: 11,
-    name: "Rocket Launcher:\r\nFire Rate",
-    description: "Increase the fire rate of rockets.",
+    name: "Rocket Launcher:\r\nReload Time",
+    description: "Decrease the reload time of rockets.",
     prerequisite: 10,
     levels: [
-      { cost: 5, effect: 0.5 },
-      { cost: 15, effect: 0.4 },
-      { cost: 40, effect: 0.3 },
+      { cost: 5, effect: 3000 },
+      { cost: 15, effect: 2500 },
+      { cost: 40, effect: 2000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.fireRate =
@@ -265,7 +263,7 @@ const UPGRADES = [
     grid: {
       x: 3,
       y: -1,
-      icon: "rocketFireRateIcon",
+      icon: "rocketReload",
       size: "medium",
     },
   },
@@ -1138,6 +1136,28 @@ const UPGRADES = [
       y: -6,
       icon: "spawnIncreaseIcon",
       size: "large",
+    },
+  },  
+  {
+    id: 51,
+    name: "Rocket Launcher:\r\nDouble Rockets",
+    description: "Fires two rockets at once instead of one.",
+    prerequisite: 11,
+    levels: [
+      { cost: 5, effect: true },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.weapons.rocket.double =
+        UPGRADES[51].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.rocket.double;
+    },
+    grid: {
+      x: 3,
+      y: -2,
+      icon: "rocketDouble",
+      size: "medium",
     },
   },
 ]
