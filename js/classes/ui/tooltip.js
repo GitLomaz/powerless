@@ -9,7 +9,7 @@ class Tooltip extends Phaser.GameObjects.Container {
     this.tints = tints;
     this.currentTint = tints;
     this.width = 220;
-    this.height = 160;
+    this.height = 200;
 
     this.r3 = scene.add.rectangle(
       0,
@@ -28,8 +28,16 @@ class Tooltip extends Phaser.GameObjects.Container {
     this.add(this.r1);
     this.setDepth(5);
 
-    this.title = scene.add.text(0, -40, upgrade.id + ' ' + upgrade.name, { fontFamily: 'Consolas', fontSize: "18px", fill: "#fff", wordWrap: { width: 200 }}).setOrigin(0.5);
-    this.description = scene.add.text(0, 20, upgrade.description, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5);
+    if (LEVELS[upgrade.id] !== upgrade.levels.length) {
+      const cost = upgrade.levels[LEVELS[upgrade.id]].cost;      
+      this.cost = scene.add.text(100, 90, cost + 'c', { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff" }).setOrigin(1);
+      this.add(this.cost);
+    }
+
+    const level = scene.add.text(-100, 90, 'Level ' + (LEVELS[upgrade.id]) + '/' + upgrade.levels.length, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff" }).setOrigin(0, 1);
+    this.add(level);
+    this.title = scene.add.text(0, -70, upgrade.name, { align: 'center', fontFamily: 'Consolas', fontSize: "18px", fill: "#fff", wordWrap: { width: 200 }}).setOrigin(0.5);
+    this.description = scene.add.text(0, -20, upgrade.description, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5);
     this.add(this.title);
     this.add(this.description);
 

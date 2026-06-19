@@ -83,6 +83,8 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       UPGRADEBOXES.forEach((box) => {
         box.update();
       });
+      new Tooltip(this.upgrade, this.currentTint);
+      applyUpgrades();
     }).on("pointerover", () => {
       if (this.state < 2) return;
       new Tooltip(this.upgrade, this.currentTint);

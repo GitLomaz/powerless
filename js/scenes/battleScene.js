@@ -24,6 +24,7 @@ let battleScene = new Phaser.Class({
   },
 
   create: function () {
+    applyUpgrades();
     this.anims.create({
       key: "rocket",
       frames: this.anims.generateFrameNumbers("rocket", { start: 0, end: 5 }),
@@ -57,10 +58,15 @@ let battleScene = new Phaser.Class({
     this.creditGroup = this.physics.add.group();
 
     this.player = new Player();
-
+    
     this.physics.add.overlap(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
+      const damage = bullet.damage;
+      if (!bullet.damage) {
+        damage = 25;
+        console.log('something doesnt have damage')
+      }
+      enemy.takeDamage(damage, bullet.x, bullet.y);
       bullet.destroy();
-      enemy.die(bullet.x, bullet.y);
     });
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {

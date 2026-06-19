@@ -10,11 +10,11 @@ class Shell extends Phaser.GameObjects.Container {
     this.add(this.image);
     scene.add.existing(this);
     this.speed = gameState.upgrades.weapons.cannon.speed;
+    this.damage = gameState.upgrades.weapons.cannon.damage;
     scene.bulletGroup.add(this);
     this.body.setCircle(6, -6, -6);
 
     const pointer = scene.input.activePointer;
-
     const worldPoint = scene.cameras.main.getWorldPoint(
         pointer.x,
         pointer.y

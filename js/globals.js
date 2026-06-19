@@ -4,15 +4,13 @@ const DEBUG = false;
 let scene;
 let tooltip;
 
-
-
-const gameState = {
+const gameStateTemplate  = {
   credits: 1000000,
   upgrades: {
     weapons: {
       minigun: {
         enabled: false,
-        damage: 1,
+        damage: 25,
         fireRate: 500,
         range: 300,
       },
@@ -25,7 +23,7 @@ const gameState = {
         speed: 200,
       },
       cannon: {
-        damage: 1,
+        damage: 25,
         fireRate: 1000,
         range: 2000,
         speed: 400,
@@ -77,9 +75,11 @@ const gameState = {
       },
       orbitalStrike: {
         damage: 0,
-        projeciles: 0,
+        projectiles: 0,
         cooldown: 15000
       }
     },
   },
 }
+
+let gameState = JSON.parse(JSON.stringify(gameStateTemplate));
