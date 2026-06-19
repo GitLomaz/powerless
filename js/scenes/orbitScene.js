@@ -1,7 +1,3 @@
-/* ------------------------------------------------------------------ */
-/*                       orbitScene (upgrade grid)                     */
-/* ------------------------------------------------------------------ */
-
 let orbitScene = new Phaser.Class({
   Extends: Phaser.Scene,
   initialize: function orbitScene() {
@@ -10,6 +6,18 @@ let orbitScene = new Phaser.Class({
 
   preload: function () {
     scene = this;
+    this.load.image("question", "images/questionSmall.png");
+    this.load.image("shimmer", "images/questionBG.png");
+
+    const icons = []
+    UPGRADES.forEach((upgrade) => {
+      icons.push(upgrade.grid.icon);
+    });
+
+    [...new Set(icons)].forEach((icon) => {
+      console.log('loading ' + icon)
+      this.load.image('upgrade_' + icon, 'images/upgrades/' + icon + '.png');
+    });
   },
 
   create: function () {

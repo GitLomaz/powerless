@@ -54,7 +54,7 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: 0,
-      icon: "damageIcon",
+      icon: "damage",
       size: "medium",
     },
   },
@@ -134,7 +134,7 @@ const UPGRADES = [
     grid: {
       x: 1,
       y: 2,
-      icon: "miniGunDamageIcon",
+      icon: "miniGundamage",
       size: "medium",
     },
   },
@@ -215,7 +215,7 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: -1,
-      icon: "missileDamageIcon",
+      icon: "missiledamage",
       size: "medium",
     },
   },
@@ -428,7 +428,7 @@ const UPGRADES = [
     grid: {
       x: -2,
       y: 0,
-      icon: "stompDamageIcon",
+      icon: "stompdamage",
       size: "medium",
     },
   },
@@ -466,7 +466,7 @@ const UPGRADES = [
     grid: {
       x: -4,
       y: 0,
-      icon: "stompDamageIcon",
+      icon: "stompdamage",
       size: "medium",
     },
   },
@@ -547,7 +547,7 @@ const UPGRADES = [
     grid: {
       x: -5,
       y:-1,
-      icon: "orbitalSupportDamageIcon",
+      icon: "orbitalSupportdamage",
       size: "medium",
     },
   },
@@ -647,7 +647,7 @@ const UPGRADES = [
     grid: {
       x: -5,
       y: 1,
-      icon: "energyBurstDamageIcon",
+      icon: "energyBurstdamage",
       size: "medium",
     },
   },

@@ -1,10 +1,10 @@
 class UpgradeBox extends Phaser.GameObjects.Container {
   constructor(upgrade, i) {
-    super(scene, upgrade.grid.x * 80 + 600, upgrade.grid.y * 80 + 400);
+    super(scene, upgrade.grid.x * 130 + 600, upgrade.grid.y * 130 + 400);
     this.index = i;
     this.upgrade = upgrade;
     this.tints = [
-      [0x000000, 0x000000],
+      [0x000000, 0x1a1a1a],
       [0xfffcc9, 0xe1ad26], // YELLOW, LOCKED
       [0xa7c4e2, 0x4d60c6], // PURPLE, UNLOCKED
       [0x75dceb, 0x3387ba], // BLUE, UPGRADED
@@ -30,8 +30,8 @@ class UpgradeBox extends Phaser.GameObjects.Container {
 
     this.currentTint = this.tints[0];
 
-    this.width = 50;
-    this.height = 50;
+    this.width = 70;
+    this.height = 70;
 
     this.r3 = scene.add.rectangle(
       0,
@@ -46,6 +46,19 @@ class UpgradeBox extends Phaser.GameObjects.Container {
     this.add(this.r2);
     this.add(this.r1);
     this.setDepth(5);
+
+    this.icon = scene.add.image(0, 0, "question")
+    this.iconBg = scene.add.tileSprite(0, 0, 24, 24, "shimmer");
+
+    scene.tweens.add({
+      targets: this.iconBg,
+      tilePositionY: 28,
+      duration: 1000,
+      repeat: -1
+    });
+
+    this.add(this.iconBg);
+    this.add(this.icon);
 
     // prerequisite lines
     this.prereq = UPGRADEBOXES[upgrade.prerequisite];
@@ -72,15 +85,19 @@ class UpgradeBox extends Phaser.GameObjects.Container {
     if (this.prereq) {
       this.prereq.update();
     }
+    this.icon.setTexture('upgrade_' + this.upgrade.grid.icon);
+    this.iconBg.setAlpha(0)
 
     if (!this.prereq || LEVELS[this.index] === this.upgrade.levels.length) {
-      this.state = 4; // Starting node, done nodes
+      this.state = 4;
     } else if (LEVELS[this.index] !== this.upgrade.levels.length && LEVELS[this.index] > 0) {
       this.state = 3;
     } else if (LEVELS[this.prereq.index] > 0) {
       this.state = 2;
     } else if (this.prereq.state === 2) {
       this.state = 1;
+      this.icon.setTexture("question");
+      this.iconBg.setAlpha(1)
     } else {
       this.state = 0;
     }
@@ -101,9 +118,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
     if (!this.prereq) return;
     this.graphics = scene.add.graphics();
     this.graphics.setDepth(0);
-    // 4. Set line style (thickness, color, alpha)
     this.graphics.lineStyle(2, 0xff0000, 1.0);
-    // 5. Draw the line between the two sprites
     this.graphics.beginPath();
     this.graphics.moveTo(this.prereq.x, this.prereq.y);
     this.graphics.lineTo(this.x, this.y);
