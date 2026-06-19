@@ -158,7 +158,7 @@ class Player extends Phaser.GameObjects.Container {
     if (gameState.upgrades.weapons.rocket.enabled) {
       const nearestEnemy = this.findNearestEnemy(1500);
       if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.weapons.rocket.fireRate) && nearestEnemy) {
-        new Rocket(nearestEnemy);
+        new Rocket(this, nearestEnemy, true);
         this.rocketLastShot = Date.now();
       }
     }

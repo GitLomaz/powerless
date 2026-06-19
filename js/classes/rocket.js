@@ -29,13 +29,9 @@ class Rocket extends Phaser.GameObjects.Container {
     scene.bullets.push(this);
 
     this.body.setCircle(4, -4, -4);
-
     this.damage = gameState.upgrades.weapons.rocket.damage;
-
     this.cooldown = 500;
-
     const launchAngle = scene.player.barrel.rotation;
-
     this.rotation = launchAngle;
 
     this.body.setVelocity(
@@ -47,6 +43,7 @@ class Rocket extends Phaser.GameObjects.Container {
   tick(delta) {
     if (!this.active) return;
     if (!this.target || !this.target.active) return;
+    console.log('tick?!')
 
     const dt = Math.min(delta, 33) / 1000;
 

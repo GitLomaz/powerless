@@ -17,7 +17,7 @@ const gameStateTemplate  = {
       rocket: {
         enabled: false,
         double: false,
-        damage: 1,
+        damage: 100,
         fireRate: 3500,
         splash: 200,
         speed: 200,

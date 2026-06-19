@@ -40774,7 +40774,7 @@ var Render = __webpack_require__(12310);
  * to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by
  * processing the font texture in an image editor, applying fills and any other effects required.
  *
- * To create multi-line text insert \r, \n or \r\n escape codes into the text string.
+ * To create multi-line text insert \r, \n or \r\nescape codes into the text string.
  *
  * To create a BitmapText data files you need a 3rd party app such as:
  *
@@ -41276,7 +41276,7 @@ var GameObjectFactory = __webpack_require__(39429);
  * to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by
  * processing the font texture in an image editor, applying fills and any other effects required.
  *
- * To create multi-line text insert \r, \n or \r\n escape codes into the text string.
+ * To create multi-line text insert \r, \n or \r\nescape codes into the text string.
  *
  * To create a BitmapText data files you need a 3rd party app such as:
  *
@@ -41679,7 +41679,7 @@ var TintModes = __webpack_require__(84322);
  * to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by
  * processing the font texture in an image editor, applying fills and any other effects required.
  *
- * To create multi-line text insert \r, \n or \r\n escape codes into the text string.
+ * To create multi-line text insert \r, \n or \r\nescape codes into the text string.
  *
  * To create a BitmapText data files you need a 3rd party app such as:
  *
@@ -43213,7 +43213,7 @@ var GameObjectFactory = __webpack_require__(39429);
  * to use Web Fonts, however you trade this flexibility for rendering speed. You can also create visually compelling BitmapTexts by
  * processing the font texture in an image editor, applying fills and any other effects required.
  *
- * To create multi-line text insert \r, \n or \r\n escape codes into the text string.
+ * To create multi-line text insert \r, \n or \r\nescape codes into the text string.
  *
  * To create BitmapText data files you need a 3rd party app such as:
  *
