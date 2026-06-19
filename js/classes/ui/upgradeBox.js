@@ -48,7 +48,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
     this.setDepth(5);
 
     this.icon = scene.add.image(0, 0, "question")
-    this.iconBg = scene.add.tileSprite(0, 0, 24, 24, "shimmer");
+    this.iconBg = scene.add.tileSprite(0, 0, 32, 45, "shimmer");
 
     scene.tweens.add({
       targets: this.iconBg,
