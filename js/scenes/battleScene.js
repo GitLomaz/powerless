@@ -58,22 +58,28 @@ let battleScene = new Phaser.Class({
 
     this.player = new Player();
 
-    this.physics.add.collider(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
+    this.physics.add.overlap(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
       bullet.destroy();
       enemy.die(bullet.x, bullet.y);
     });
 
-    this.physics.add.collider(this.player, this.enemyGroup, function (player, enemy) {
+    this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
       enemy.die(player.x, player.y);
       if (!gameState.upgrades.player.stomp) {
         player.energy -= 2000;
       }
     });
 
-    this.physics.add.collider(this.player, this.enemyBulletGroup, function (player, bullet) {
-      console.log("hit");
+    this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
       bullet.destroy();
       player.energy -= 500;
+    });
+
+    this.physics.add.overlap(this.bulletGroup, this.enemyBulletGroup, function (bullet, enemyBullet) {
+      if (enemyBullet.metaType === "rocket") {
+        bullet.destroy();
+        enemyBullet.destroy();
+      }
     });
 
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {

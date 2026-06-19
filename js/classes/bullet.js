@@ -4,6 +4,7 @@ class Bullet extends Phaser.GameObjects.Container {
     this.image = scene.add.image(0, 0, friendly ? "bullet" : "enemyBullet")
     this.setRotation(Math.atan2(target.y - this.y, target.x - this.x));
     this.add(this.image);
+    this.metaType = "bullet";
     scene.add.existing(this);
     if (friendly) {
       this.speed = gameState.upgrades.weapons.minigun.fireRate;

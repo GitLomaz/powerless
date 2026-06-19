@@ -6,6 +6,7 @@ class Rocket extends Phaser.GameObjects.Container {
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
+    this.metaType = "rocket";
 
     this.sprite = scene.add.sprite(0, 0, friendly ? "rocket" : "enemyRocket");
     this.sprite.play(friendly ? "rocket" : "enemyRocket");
