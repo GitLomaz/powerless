@@ -57,5 +57,7 @@ let orbitScene = new Phaser.Class({
       this.cameras.main.scrollX = camStartX - (pointer.x - dragStartX);
       this.cameras.main.scrollY = camStartY - (pointer.y - dragStartY);
     });
+
+    new Deploy();
   },
 });
