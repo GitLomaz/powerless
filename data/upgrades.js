@@ -297,44 +297,43 @@ const UPGRADES = [
     description: "Increase the battery capacity of your vehicle.",
     prerequisite: 0,
     levels: [
-      { cost: 5, effect: 30 },
-      { cost: 15, effect: 60 },
-      { cost: 40, effect: 90 },
+      { cost: 5, effect: 25000 },
+      { cost: 15, effect: 50000 },
+      { cost: 40, effect: 90000 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.battery.capacity = UPGRADES[13].levels[level - 1].effect;
+      gameState.upgrades.player.energy = UPGRADES[13].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.battery.capacity;
+      return gameState.upgrades.player.energy;
     },
     grid: {
       x: 0,
       y: 1,
-      icon: "batteryCapacityIcon",
+      icon: "batteryCapacity",
       size: "medium",
     },
   },
   {
     id: 14,
-
     name: "Movement Speed",
     description: "Increase the movement speed of your vehicle.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 1.1 },
-      { cost: 15, effect: 1.2 },
-      { cost: 40, effect: 1.3 },
+      { cost: 5, effect: 175 },
+      { cost: 15, effect: 225 },
+      { cost: 40, effect: 300 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.movement.speed = UPGRADES[14].levels[level - 1].effect;
+      gameState.upgrades.player.speed = UPGRADES[14].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.movement.speed;
+      return gameState.upgrades.player.speed;
     },
     grid: {
       x: -1,
       y: 1,
-      icon: "movementSpeedIcon",
+      icon: "movementSpeed",
       size: "medium",
     },
   },
