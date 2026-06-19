@@ -59,7 +59,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
 
     this.setInteractive();
     this.on("pointerdown", () => {
-      console.log("clicked", upgrade.name);
+      if (this.state < 2) return;
       if (LEVELS[this.index] !== this.upgrade.levels.length)
       LEVELS[this.index]++;
       UPGRADEBOXES.forEach((box) => {
