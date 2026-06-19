@@ -16,15 +16,23 @@ let battleScene = new Phaser.Class({
     this.load.image("mech-footprint", "images/mech/footprint.png");
     this.load.image("mech-shell", "images/mech/shell.png");
     this.load.image("bullet", "images/mech/bullet.png");
+    this.load.image("enemyBullet", "images/mech/enemyBullet.png");
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet("mech-rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
+    this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
+    this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.tilemapTiledJSON("map2", "json/map2.json");
   },
 
   create: function () {
     this.anims.create({
       key: "rocket",
-      frames: this.anims.generateFrameNumbers("mech-rocket", { start: 0, end: 5 }),
+      frames: this.anims.generateFrameNumbers("rocket", { start: 0, end: 5 }),
+      frameRate: 16,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "enemyRocket",
+      frames: this.anims.generateFrameNumbers("enemyRocket", { start: 0, end: 5 }),
       frameRate: 16,
       repeat: -1,
     });

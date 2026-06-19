@@ -32,17 +32,17 @@ const gameState = {
     },
     spawns: {
       tier1: {
-        units: 1,
+        units: 0,
         promotion: 0,
         doubleDrop: 0
       },
       tier2: {
-        units: 1,
+        units: 5,
         promotion: 0,
         doubleDrop: 0
       },
       tier3: {
-        units: 10,
+        units: 5,
         promotion: 0,
         doubleDrop: 0
       },
@@ -55,7 +55,7 @@ const gameState = {
     player: {
       magnet: 200,
       speed: 150,
-      energy: 1500000,
+      energy: 15000,
       energyLoss: 1,
       proximityShield: {
         health: 0,

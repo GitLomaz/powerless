@@ -7,8 +7,8 @@ class Rocket extends Phaser.GameObjects.Container {
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
-    this.sprite = scene.add.sprite(0, 0, "mech-rocket");
-    this.sprite.play("rocket");
+    this.sprite = scene.add.sprite(0, 0, friendly ? "rocket" : "enemyRocket");
+    this.sprite.play(friendly ? "rocket" : "enemyRocket");
     this.sprite.setScale(1.5);
     this.add(this.sprite);
 

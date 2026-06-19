@@ -1,8 +1,7 @@
 class Bullet extends Phaser.GameObjects.Container {
   constructor(origin, target, friendly = true) {
     super(scene, origin.x, origin.y);
-    this.image = scene.add.image(0, 0, "bullet");
-    this.image.setTint(friendly ? 0x00ff00 : 0xff0000);
+    this.image = scene.add.image(0, 0, friendly ? "bullet" : "enemyBullet")
     this.setRotation(Math.atan2(target.y - this.y, target.x - this.x));
     this.add(this.image);
     scene.add.existing(this);

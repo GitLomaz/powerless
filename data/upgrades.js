@@ -1,15 +1,5 @@
-// example: LEVELS[1] = 2; applyUpgrades();
-
-function applyUpgrades() {
-  LEVELS.forEach((level, id) => {
-    if (level > 0 && UPGRADES[id] && UPGRADES[id].applyUpgrade) {
-      UPGRADES[id].applyUpgrade(level);
-    }
-  });
-}
-
-const LEVELS = [0, 0];
-
+const LEVELS = [];
+const UPGRADEBOXES = [];
 const UPGRADES = [
   {
     id: 0,
@@ -47,7 +37,6 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  ,
   {
     id: 2,
     name: "Main Cannon - Damage",
@@ -234,7 +223,7 @@ const UPGRADES = [
     id: 11,
     name: "Missiles - Fire Rate",
     description: "Increase the fire rate of missiles.",
-    prerequisite: 9,
+    prerequisite: 10,
     levels: [
       { cost: 5, effect: 0.5 },
       { cost: 15, effect: 0.4 },
@@ -255,7 +244,7 @@ const UPGRADES = [
     id: 12,
     name: "Missiles - Splash Damage",
     description: "Unlock splash damage for missiles.",
-    prerequisite: 9,
+    prerequisite: 10,
     levels: [
       { cost: 10, effect: 5 },
       { cost: 30, effect: 10 },
@@ -264,6 +253,12 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.missiles.splashDamage =
         UPGRADES[12].levels[level].effect;
+    },
+    grid: {
+      x: 2,
+      y: -2,
+      icon: "batteryCapacityIcon",
+      size: "medium",
     },
   },
   {
@@ -311,7 +306,7 @@ const UPGRADES = [
     id: 15,
     name: "Battery Degradation",
     description: "Increase the energy efficiency of the vehicle.",
-    prerequisite: 13,
+    prerequisite: 14,
     levels: [
       { cost: 5, effect: 1 },
       { cost: 15, effect: 2 },
@@ -488,7 +483,7 @@ const UPGRADES = [
       gameState.upgrades.ability.cooldown = UPGRADES[24].levels[level].effect;
     },
     grid: {
-      x: -5,
+      x: -3,
       y: 1,
       icon: "abilityCooldownIcon",
       size: "medium",
@@ -627,7 +622,7 @@ const UPGRADES = [
         UPGRADES[31].levels[level].effect;
     },
     grid: {
-      x: -3,
+      x: -4,
       y: 1,
       icon: "energyBurstIcon",
       size: "medium",
@@ -650,7 +645,7 @@ const UPGRADES = [
     }
     ,
     grid: {
-      x: -4,
+      x: -5,
       y: 1,
       icon: "energyBurstDamageIcon",
       size: "medium",
@@ -670,7 +665,7 @@ const UPGRADES = [
         UPGRADES[33].levels[level].effect;
     },
     grid: {
-      x: -3,
+      x: -4,
       y: 2,
       icon: "energyBurstAoEIcon",
       size: "medium",
@@ -773,80 +768,82 @@ const UPGRADES = [
         UPGRADES[38].levels[level].effect;
     },
     grid: {
-      x: 2,
+      x: 1,
       y: -2,
       icon: "explosionIcon",
-
-  }
-},
-
-
-{
-  id: 39,
-  name: "Promotion Rate",
-  description: "Increase the rate at which you earn promotions.",
-  prerequisite: 38,
-  levels: [
-    { cost: 30, effect: 1.2 },
-    { cost: 80, effect: 1.5 },
-  ],
-  applyUpgrade: (level) => {
-    gameState.upgrades.promotionRate =
-      UPGRADES[39].levels[level].effect;
+    }
   },
-  grid: {
-    x: 2,
-    y: -3,
-    icon: "promotionRateIcon",
-    size: "medium",
+  {
+    id: 39,
+    name: "Promotion Rate",
+    description: "Increase the rate at which you earn promotions.",
+    prerequisite: 38,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.promotionRate =
+        UPGRADES[39].levels[level].effect;
+    },
+    grid: {
+      x: 1,
+      y: -3,
+      icon: "promotionRateIcon",
+      size: "medium",
+    },
   },
-
-},
-{
-
-  id: 40,
-  name: "Currency Drop Rate",
-  description: "Increase the rate at which enemies drop currency.",
-  prerequisite: 34,
-  levels: [
-    { cost: 30, effect: 1.2 },
-    { cost: 80, effect: 1.5 },
-  ],
-  applyUpgrade: (level) => {
-    gameState.upgrades.currencyDropRate =
-      UPGRADES[40].levels[level].effect;
+  {
+    id: 40,
+    name: "Currency Drop Rate",
+    description: "Increase the rate at which enemies drop currency.",
+    prerequisite: 34,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.currencyDropRate =
+        UPGRADES[40].levels[level].effect;
+    },
+    grid: {
+      x: -1,
+      y: -1,
+      icon: "currencyDropRateIcon",
+      size: "medium",
+    },
   },
-  grid: {
-    x: -1,
-    y: -1,
-    icon: "currencyDropRateIcon",
-    size: "medium",
+  {
+    id: 41,
+    name: "Double Drop",
+    description: "Increase the chance for enemies to drop double the resources.",
+    prerequisite: 40,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[41].levels[level].effect;
+    },
+    grid: {
+      x: -1,
+      y: -2,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
   },
-
-},
-
-{
-  id: 41,
-  name: "Double Drop",
-  description: "Increase the chance for enemies to drop double the resources.",
-  prerequisite: 40,
-  levels: [
-    { cost: 30, effect: 1.2 },
-    { cost: 80, effect: 1.5 },
-  ],
-  applyUpgrade: (level) => {
-    gameState.upgrades.doubleDrop =
-      UPGRADES[41].levels[level].effect;
-  },
-  grid: {
-    x: -1,
-    y: -2,
-    icon: "doubleDropIcon",
-    size: "medium",
-  },
-},
-
-
-
-
 ]
+
+function applyUpgrades() {
+  LEVELS.forEach((level, id) => {
+    if (level > 0 && UPGRADES[id] && UPGRADES[id].applyUpgrade) {
+      UPGRADES[id].applyUpgrade(level);
+    }
+  });
+}
+
+for (let i = 0; i < UPGRADES.length; i++) {
+  LEVELS[i] = 0;
+}
+LEVELS[0] = 1;
