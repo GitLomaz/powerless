@@ -9,13 +9,13 @@ const UPGRADES = [
     grid: {
       x: 0,
       y: 0,
-      icon: "deployIcon",
+      icon: "deploy",
       size: "medium",
     },
   },
   {
     id: 1,
-    name: "Main Cannon: Projectile Speed",
+    name: "Main Cannon:\r\n Projectile Speed",
     description: "Start the battle and deploy your turret.",
     prerequisite: 0,
     levels: [
@@ -33,13 +33,13 @@ const UPGRADES = [
     grid: {
       x: 1,
       y: 0,
-      icon: "projectileSpeedIcon",
+      icon: "cannonSpeed",
       size: "medium",
     },
   },
   {
     id: 2,
-    name: "Main Cannon: Damage",
+    name: "Main Cannon:\r\n Damage",
     description: "Increase the damage of the main cannon.",
     prerequisite: 1,
     levels: [
@@ -57,15 +57,15 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: 0,
-      icon: "damage",
+      icon: "cannonDamage",
       size: "medium",
     },
   },
-  {
+  { // REMOVED!
     id: 3,
-    name: "Main Cannon: Range",
+    name: "Main Cannon:\r\n Range",
     description: "Increase the range of the main cannon.",
-    prerequisite: 2,
+    // prerequisite: 0,
     levels: [
       { cost: 5, effect: 100 },
       { cost: 15, effect: 150 },
@@ -79,7 +79,7 @@ const UPGRADES = [
       return gameState.upgrades.weapons.cannon.range;
     },
     grid: {
-      x: 3,
+      x: 300,
       y: 0,
       icon: "rangeIcon",
       size: "medium",
@@ -87,13 +87,13 @@ const UPGRADES = [
   },
   {
     id: 4,
-    name: "Main Cannon: Fire Rate",
-    description: "Increase the fire rate of the main cannon.",
+    name: "Main Cannon:\r\n Reload Time",
+    description: "Decrease the reload time of the main cannon.",
     prerequisite: 2,
     levels: [
-      { cost: 5, effect: 1.0 },
-      { cost: 15, effect: 0.8 },
-      { cost: 40, effect: 0.6 },
+      { cost: 5, effect: 900},
+      { cost: 15, effect: 800 },
+      { cost: 40, effect: 650 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.fireRate =
@@ -105,7 +105,7 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: 1,
-      icon: "fireRateIcon",
+      icon: "cannonReload",
       size: "medium",
     },
   },
