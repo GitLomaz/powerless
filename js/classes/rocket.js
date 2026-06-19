@@ -43,7 +43,6 @@ class Rocket extends Phaser.GameObjects.Container {
   tick(delta) {
     if (!this.active) return;
     if (!this.target || !this.target.active) return;
-    console.log('tick?!')
 
     const dt = Math.min(delta, 33) / 1000;
 

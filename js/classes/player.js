@@ -148,7 +148,7 @@ class Player extends Phaser.GameObjects.Container {
     }
 
     if (gameState.upgrades.weapons.minigun.enabled) {
-      const nearestEnemy = this.findNearestEnemy(gameState.upgrades.weapons.minigun.range);
+      const nearestEnemy = this.findNearestEnemy(gameState.upgrades.weapons.minigun.range, 0);
       if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.weapons.minigun.fireRate) && nearestEnemy) {
         new Bullet(this, nearestEnemy, true);
         this.minigunLastShot = Date.now();
@@ -164,12 +164,13 @@ class Player extends Phaser.GameObjects.Container {
     }
   }
 
-  findNearestEnemy(maxRange = 1500) {
+  findNearestEnemy(maxRange = 1500, minRange = 300) {
     let nearestEnemy = null;
     let nearestDist = Infinity;
     for (const enemy of scene.enemies) {
+      if (!enemy.active) continue;
       const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-      if (dist < nearestDist && dist < maxRange) {
+      if (dist < nearestDist && dist < maxRange && dist > minRange) {
         nearestDist = dist;
         nearestEnemy = enemy;
       }
