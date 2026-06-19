@@ -111,93 +111,93 @@ const UPGRADES = [
   },
   {
     id: 5,
-    name: "Mini Gun Weapon",
-    description: "Unlock the mini gun weapon.",
+    name: "Minigun Weapon",
+    description: "Unlock the minigun weapon.",
     prerequisite: 1,
     levels: [{ cost: 10, effect: true }],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.miniGun.unlocked =
+      gameState.upgrades.weapons.minigun.enabled =
         UPGRADES[5].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.miniGun.unlocked;
+      return gameState.upgrades.weapons.minigun.enabled;
     },
     grid: {
       x: 1,
       y: 1,
-      icon: "miniGunIcon",
+      icon: "minigun",
       size: "medium",
     },
   },
   {
     id: 6,
-    name: "Mini Gun: Damage",
-    description: "Increase the damage of the mini gun.",
+    name: "Minigun:\r\nDamage",
+    description: "Increase the damage of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 1 },
-      { cost: 15, effect: 2 },
-      { cost: 40, effect: 3 },
+      { cost: 5, effect: 7 },
+      { cost: 15, effect: 10 },
+      { cost: 40, effect: 15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.miniGun.damage =
+      gameState.upgrades.weapons.minigun.damage =
         UPGRADES[6].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.miniGun.damage;
+      return gameState.upgrades.weapons.minigun.damage;
     },
     grid: {
       x: 1,
       y: 2,
-      icon: "miniGundamage",
+      icon: "minigunDamage",
       size: "medium",
     },
   },
   {
     id: 7,
-    name: "Mini Gun: Fire Rate",
-    description: "Increase the fire rate of the mini gun.",
+    name: "Minigun:\r\nReload Time",
+    description: "Decrease the reload time of the minigun.",
     prerequisite: 6,
     levels: [
-      { cost: 5, effect: 0.5 },
-      { cost: 15, effect: 0.4 },
-      { cost: 40, effect: 0.3 },
+      { cost: 5, effect: 350 },
+      { cost: 15, effect: 300 },
+      { cost: 40, effect: 250 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.miniGun.fireRate =
+      gameState.upgrades.weapons.minigun.fireRate =
         UPGRADES[7].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.miniGun.fireRate;
+      return gameState.upgrades.weapons.minigun.fireRate;
     },
     grid: {
       x: 1,
       y: 3,
-      icon: "miniGunFireRateIcon",
+      icon: "minigunReload",
       size: "medium",
     },
   },
   {
     id: 8,
-    name: "Mini Gun: Range",
-    description: "Increase the range of the mini gun.",
+    name: "Minigun:\r\nRange",
+    description: "Increase the range of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 50 },
-      { cost: 15, effect: 75 },
-      { cost: 40, effect: 100 },
+      { cost: 5, effect: 400 },
+      { cost: 15, effect: 550 },
+      { cost: 40, effect: 700 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.miniGun.range =
+      gameState.upgrades.weapons.minigun.range =
         UPGRADES[8].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.miniGun.range;
+      return gameState.upgrades.weapons.minigun.range;
     },
     grid: {
       x: 2,
       y: 2,
-      icon: "miniGunRangeIcon",
+      icon: "minigunRange",
       size: "medium",
     },
   },
@@ -205,27 +205,27 @@ const UPGRADES = [
   {
     id: 9,
     name: "Missiles",
-    description: "Unlock the missile weapon.",
+    description: "Unlock the rocket weapon.",
     prerequisite: 1,
     levels: [{ cost: 20, effect: true }],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.missiles.unlocked =
+      gameState.upgrades.weapons.rockets.unlocked =
         UPGRADES[9].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.missiles.unlocked;
+      return gameState.upgrades.weapons.rockets.unlocked;
     },
     grid: {
       x: 1,
       y: -1,
-      icon: "missileIcon",
+      icon: "rocketIcon",
       size: "medium",
     },
   },
   {
     id: 10,
     name: "Missiles: Damage",
-    description: "Increase the damage of missiles.",
+    description: "Increase the damage of rockets.",
     prerequisite: 9,
     levels: [
       { cost: 5, effect: 5 },
@@ -233,23 +233,23 @@ const UPGRADES = [
       { cost: 40, effect: 15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.missiles.damage =
+      gameState.upgrades.weapons.rockets.damage =
         UPGRADES[10].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.missiles.damage;
+      return gameState.upgrades.weapons.rockets.damage;
     },
     grid: {
       x: 2,
       y: -1,
-      icon: "missiledamage",
+      icon: "rocketdamage",
       size: "medium",
     },
   },
   {
     id: 11,
     name: "Missiles: Fire Rate",
-    description: "Increase the fire rate of missiles.",
+    description: "Increase the fire rate of rockets.",
     prerequisite: 10,
     levels: [
       { cost: 5, effect: 0.5 },
@@ -257,23 +257,23 @@ const UPGRADES = [
       { cost: 40, effect: 0.3 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.missiles.fireRate =
+      gameState.upgrades.weapons.rockets.fireRate =
         UPGRADES[11].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.missiles.fireRate;
+      return gameState.upgrades.weapons.rockets.fireRate;
     },
     grid: {
       x: 3,
       y: -1,
-      icon: "missileFireRateIcon",
+      icon: "rocketFireRateIcon",
       size: "medium",
     },
   },
   {
     id: 12,
     name: "Missiles: Splash Damage",
-    description: "Unlock splash damage for missiles.",
+    description: "Unlock splash damage for rockets.",
     prerequisite: 10,
     levels: [
       { cost: 10, effect: 5 },
@@ -281,11 +281,11 @@ const UPGRADES = [
       { cost: 80, effect: 15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.missiles.splashDamage =
+      gameState.upgrades.weapons.rockets.splashDamage =
         UPGRADES[12].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.missiles.splashDamage;
+      return gameState.upgrades.weapons.rockets.splashDamage;
     },
     grid: {
       x: 2,

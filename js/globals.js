@@ -10,8 +10,8 @@ const gameStateTemplate  = {
     weapons: {
       minigun: {
         enabled: false,
-        damage: 25,
-        fireRate: 500,
+        damage: 5,
+        fireRate: 400,
         range: 300,
       },
       rocket: {
@@ -31,22 +31,22 @@ const gameStateTemplate  = {
     },
     spawns: {
       tier1: {
-        units: 0,
+        units: 10,
         promotion: 0,
         doubleDrop: 0
       },
       tier2: {
-        units: 5,
+        units: 0,
         promotion: 0,
         doubleDrop: 0
       },
       tier3: {
-        units: 5,
+        units: 0,
         promotion: 0,
         doubleDrop: 0
       },
       tier4: {
-        units: 10,
+        units: 0,
         promotion: 0,
         doubleDrop: 0
       },

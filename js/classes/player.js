@@ -148,39 +148,33 @@ class Player extends Phaser.GameObjects.Container {
     }
 
     if (gameState.upgrades.weapons.minigun.enabled) {
-      // Find nearest enemy within range
-      let nearestEnemy = null;
-      let nearestDist = Infinity;
-      for (const enemy of scene.enemies) {
-        const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        if (dist < nearestDist && dist < gameState.upgrades.weapons.minigun.range) {
-          nearestDist = dist;
-          nearestEnemy = enemy;
-        }
-      }
-      // console.log(nearestEnemy.x, nearestEnemy.y);
+      const nearestEnemy = this.findNearestEnemy(gameState.upgrades.weapons.minigun.range);
       if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.weapons.minigun.fireRate) && nearestEnemy) {
-        new Bullet(nearestEnemy);
+        new Bullet(this, nearestEnemy, true);
         this.minigunLastShot = Date.now();
       }
     }
 
     if (gameState.upgrades.weapons.rocket.enabled) {
-      // Find nearest enemy within range
-      let nearestEnemy = null;
-      let nearestDist = Infinity;
-      for (const enemy of scene.enemies) {
-        const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
-        if (dist < nearestDist && dist < 1500) {
-          nearestDist = dist;
-          nearestEnemy = enemy;
-        }
-      }
+      const nearestEnemy = this.findNearestEnemy(1500);
       if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.weapons.rocket.fireRate) && nearestEnemy) {
         new Rocket(nearestEnemy);
         this.rocketLastShot = Date.now();
       }
     }
+  }
+
+  findNearestEnemy(maxRange = 1500) {
+    let nearestEnemy = null;
+    let nearestDist = Infinity;
+    for (const enemy of scene.enemies) {
+      const dist = Phaser.Math.Distance.Between(this.x, this.y, enemy.x, enemy.y);
+      if (dist < nearestDist && dist < maxRange) {
+        nearestDist = dist;
+        nearestEnemy = enemy;
+      }
+    }
+    return nearestEnemy;
   }
 
   updateFeet(delta) {
