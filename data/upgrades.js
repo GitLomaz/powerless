@@ -340,24 +340,24 @@ const UPGRADES = [
   {
     id: 15,
     name: "Battery Degradation",
-    description: "Increase the energy efficiency of the vehicle.",
+    description: "Decrease the energy loss of the vehicle.",
     prerequisite: 14,
     levels: [
-      { cost: 5, effect: 1 },
-      { cost: 15, effect: 2 },
-      { cost: 40, effect: 3 },
+      { cost: 5, effect: .95 },
+      { cost: 15, effect: .9 },
+      { cost: 40, effect: .85 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.energy.regeneration =
+      gameState.upgrades.player.energyLoss =
         UPGRADES[15].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.energy.regeneration;
+      return gameState.upgrades.player.energyLoss;
     },
     grid: {
       x: -2,
       y: 1,
-      icon: "energyRegenerationIcon",
+      icon: "energyLoss",
       size: "medium",
     },
   },

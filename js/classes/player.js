@@ -79,7 +79,7 @@ class Player extends Phaser.GameObjects.Container {
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
 
-    this.energy -= delta;
+    this.energy -= delta * gameState.upgrades.player.energyLoss;
     if (this.energy < 0) {
       return;
     }
