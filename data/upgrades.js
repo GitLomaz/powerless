@@ -27,6 +27,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.cannon.speed =
         UPGRADES[1].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.cannon.speed;
+    },
     grid: {
       x: 1,
       y: 0,
@@ -47,6 +50,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.damage =
         UPGRADES[2].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.cannon.damage;
     },
     grid: {
       x: 2,
@@ -69,6 +75,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.cannon.range =
         UPGRADES[3].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.cannon.range;
+    },
     grid: {
       x: 3,
       y: 0,
@@ -90,6 +99,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.cannon.fireRate =
         UPGRADES[4].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.cannon.fireRate;
+    },
     grid: {
       x: 2,
       y: 1,
@@ -106,6 +118,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.miniGun.unlocked =
         UPGRADES[5].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.miniGun.unlocked;
     },
     grid: {
       x: 1,
@@ -128,6 +143,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.miniGun.damage =
         UPGRADES[6].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.miniGun.damage;
+    },
     grid: {
       x: 1,
       y: 2,
@@ -148,6 +166,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.miniGun.fireRate =
         UPGRADES[7].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.miniGun.fireRate;
     },
     grid: {
       x: 1,
@@ -170,6 +191,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.miniGun.range =
         UPGRADES[8].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.miniGun.range;
+    },
     grid: {
       x: 2,
       y: 2,
@@ -187,6 +211,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.missiles.unlocked =
         UPGRADES[9].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.missiles.unlocked;
     },
     grid: {
       x: 1,
@@ -209,6 +236,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.missiles.damage =
         UPGRADES[10].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.missiles.damage;
+    },
     grid: {
       x: 2,
       y: -1,
@@ -229,6 +259,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.missiles.fireRate =
         UPGRADES[11].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.missiles.fireRate;
     },
     grid: {
       x: 3,
@@ -251,6 +284,9 @@ const UPGRADES = [
       gameState.upgrades.weapons.missiles.splashDamage =
         UPGRADES[12].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.weapons.missiles.splashDamage;
+    },
     grid: {
       x: 2,
       y: -2,
@@ -270,6 +306,9 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.battery.capacity = UPGRADES[13].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.battery.capacity;
     },
     grid: {
       x: 0,
@@ -292,6 +331,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.movement.speed = UPGRADES[14].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.movement.speed;
+    },
     grid: {
       x: -1,
       y: 1,
@@ -313,6 +355,9 @@ const UPGRADES = [
       gameState.upgrades.energy.regeneration =
         UPGRADES[15].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.energy.regeneration;
+    },
     grid: {
       x: -2,
       y: 1,
@@ -332,6 +377,9 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.magnet.range = UPGRADES[16].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.magnet.range;
     },
     grid: {
       x: 0,
@@ -354,6 +402,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.shield.proximity = UPGRADES[17].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.shield.proximity;
+    },
     grid: {
       x: -1,
       y: 2,
@@ -369,6 +420,9 @@ const UPGRADES = [
     levels: [{ cost: 5, effect: 1 }],
     applyUpgrade: (level) => {
       gameState.upgrades.filler.upgrade = UPGRADES[18].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.filler.upgrade;
     },
     grid: {
       x: -1,
@@ -386,6 +440,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.filler.upgrade = UPGRADES[19].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.filler.upgrade;
+    },
     grid: {
       x: -2,
       y: 2,
@@ -402,6 +459,9 @@ const UPGRADES = [
     levels: [{ cost: 20, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.stomp.unlocked = UPGRADES[20].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.stomp.unlocked;
     },
     grid: {
       x: -1,
@@ -422,6 +482,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.stomp.damage = UPGRADES[21].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.stomp.damage;
+    },
     grid: {
       x: -2,
       y: 0,
@@ -440,6 +503,9 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.stomp.range = UPGRADES[22].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.stomp.range;
     },
     grid: {
       x: -3,
@@ -460,6 +526,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.stomp.damage = UPGRADES[23].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.stomp.damage;
+    },
     grid: {
       x: -4,
       y: 0,
@@ -479,6 +548,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.ability.cooldown = UPGRADES[24].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.ability.cooldown;
+    },
     grid: {
       x: -3,
       y: 1,
@@ -495,6 +567,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.orbitalSupport.unlocked =
         UPGRADES[25].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.orbitalSupport.unlocked;
     },
     grid: {
       x: -5,
@@ -517,6 +592,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.orbitalSupport.quantity =
         UPGRADES[26].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.orbitalSupport.quantity;
     },
     grid: {
       x: -6,
@@ -541,6 +619,9 @@ const UPGRADES = [
       gameState.upgrades.orbitalSupport.damage =
         UPGRADES[27].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.orbitalSupport.damage;
+    },
     grid: {
       x: -5,
       y:-1,
@@ -557,6 +638,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.powerResupply.unlocked =
         UPGRADES[28].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.powerResupply.unlocked;
     },
     grid: {
       x: -3,
@@ -579,6 +663,9 @@ const UPGRADES = [
       gameState.upgrades.powerResupply.cooldown =
         UPGRADES[29].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.powerResupply.cooldown;
+    },
     grid: {
       x: -4,
       y: -1,
@@ -600,6 +687,9 @@ const UPGRADES = [
       gameState.upgrades.powerResupply.quantity =
         UPGRADES[30].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.powerResupply.quantity;
+    },
     grid: {
       x: -3,
       y: -2,
@@ -617,6 +707,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.energyBurst.unlocked =
         UPGRADES[31].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.energyBurst.unlocked;
     },
     grid: {
       x: -4,
@@ -640,6 +733,9 @@ const UPGRADES = [
       gameState.upgrades.energyBurst.damage =
         UPGRADES[32].levels[level - 1].effect;
     }
+    ,getCurrentValue: () => {
+      return gameState.upgrades.energyBurst.damage;
+    }
     ,
     grid: {
       x: -5,
@@ -660,6 +756,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.energyBurst.aoe =
         UPGRADES[33].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.energyBurst.aoe;
     },
     grid: {
       x: -4,
@@ -683,6 +782,9 @@ const UPGRADES = [
       gameState.upgrades.spawnIncrease.quantity =
         UPGRADES[34].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawnIncrease.quantity;
+    },
     grid: {
       x: 0,
       y: -1,
@@ -702,6 +804,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.currencyDropRate =
         UPGRADES[40].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.currencyDropRate;
     },
     grid: {
       x: -1,
@@ -723,6 +828,9 @@ const UPGRADES = [
       gameState.upgrades.doubleDrop =
         UPGRADES[41].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.doubleDrop;
+    },
     grid: {
       x: -2,
       y: -1,
@@ -742,6 +850,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
         UPGRADES[42].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.doubleDrop;
     },
     grid: {
       x: -1,
@@ -765,6 +876,9 @@ const UPGRADES = [
       gameState.upgrades.spawnIncrease.quantity =
         UPGRADES[34].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawnIncrease.quantity;
+    },
     grid: {
       x: 0,
       y: -2,
@@ -784,6 +898,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
         UPGRADES[41].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.doubleDrop;
     },
     grid: {
       x: 0,
@@ -805,6 +922,9 @@ const UPGRADES = [
       gameState.upgrades.doubleDrop =
         UPGRADES[42].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.doubleDrop;
+    },
     grid: {
       x: 1,
       y: -3,
@@ -824,6 +944,9 @@ const UPGRADES = [
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
         UPGRADES[42].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.doubleDrop;
     },
     grid: {
       x: 1,
