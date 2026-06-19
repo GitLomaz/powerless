@@ -13,7 +13,7 @@ const UPGRADES = [
       x: 0,
       y: 0,
       icon: "deployIcon",
-      size: "large",
+      size: "medium",
     },
   },
   {
@@ -604,8 +604,8 @@ const UPGRADES = [
         UPGRADES[30].levels[level].effect;
     },
     grid: {
-      x: -2,
-      y: -1,
+      x: -3,
+      y: -2,
       icon: "powerResupplyQuantityIcon",
       size: "medium",
     },
@@ -671,10 +671,10 @@ const UPGRADES = [
       size: "medium",
     },
   },
-
-   { id: 34,
-    name: "Spawn Increase",
-    description: "Increase the number of enemies that spawn in each wave.", 
+  { 
+    id: 34,
+    name: "Tier 1: Spawn Increase",
+    description: "[Needed]",
     prerequisite: 0,
     levels: [
       { cost: 10, effect: 1 },
@@ -695,106 +695,6 @@ const UPGRADES = [
   },
   {
     id: 35,
-    name: "Spawn Increase 2",   
-    description: "Further increase the number of enemies that spawn in each wave.",
-    prerequisite: 34,
-    levels: [
-      { cost: 25, effect: 5 },
-      { cost: 50, effect: 6 },
-      { cost: 100, effect: 7 }
-    ],
-    applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[35].levels[level].effect;
-    },
-    grid: {
-      x: 0,
-      y: -2,
-      icon: "spawnIncreaseIcon",
-      size: "medium",
-    },
-  },
-  {
-    id: 36,
-    name: "Spawn Increase 3",
-    description: "Max out the number of enemies that spawn in each wave.",
-    prerequisite: 35,
-    levels: [
-      { cost: 50, effect: 8 },
-      { cost: 100, effect: 9 },
-      { cost: 200, effect: 10 }
-    ],
-    applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[36].levels[level].effect;
-    },
-    grid: {
-      x: 0,
-      y: -3,
-      icon: "spawnIncreaseIcon",
-      size: "medium",
-    },
-  },
-  {
-    id: 37,
-    name: "Spawn Increase 4",
-    description: "Push the limits of enemy spawns with this upgrade.",
-    prerequisite: 36,
-    levels: [
-      { cost: 100, effect: 11 },
-      { cost: 200, effect: 12 },
-      { cost: 400, effect: 15 }
-    ],
-    applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[37].levels[level].effect;
-    }
-    ,
-    grid: {
-      x: 0,
-      y: -4,
-      icon: "spawnIncreaseIcon",
-      size: "medium",
-    }
-  },
-  {
-    id: 38,
-    name: "Explosion",
-    description: "Unlock the explosion ability, allowing you to detonate your vehicle and damage nearby enemies.",
-    prerequisite: 35,
-    levels: [{ cost: 50, effect: true }],
-    applyUpgrade: (level) => {
-      gameState.upgrades.explosion.unlocked =
-        UPGRADES[38].levels[level].effect;
-    },
-    grid: {
-      x: 1,
-      y: -2,
-      icon: "explosionIcon",
-    }
-  },
-  {
-    id: 39,
-    name: "Promotion Rate",
-    description: "Increase the rate at which you earn promotions.",
-    prerequisite: 38,
-    levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
-    ],
-    applyUpgrade: (level) => {
-      gameState.upgrades.promotionRate =
-        UPGRADES[39].levels[level].effect;
-    },
-    grid: {
-      x: 1,
-      y: -3,
-      icon: "promotionRateIcon",
-      size: "medium",
-    },
-  },
-  {
-    id: 40,
     name: "Currency Drop Rate",
     description: "Increase the rate at which enemies drop currency.",
     prerequisite: 34,
@@ -814,10 +714,10 @@ const UPGRADES = [
     },
   },
   {
-    id: 41,
-    name: "Double Drop",
+    id: 36,
+    name: "Tier 1: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
-    prerequisite: 40,
+    prerequisite: 35,
     levels: [
       { cost: 30, effect: 1.2 },
       { cost: 80, effect: 1.5 },
@@ -827,10 +727,298 @@ const UPGRADES = [
         UPGRADES[41].levels[level].effect;
     },
     grid: {
+      x: -2,
+      y: -1,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 37,
+    name: "Tier 1: Promotion Rate",
+    description: "[NEEDED]",
+    prerequisite: 34,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
       x: -1,
       y: -2,
       icon: "doubleDropIcon",
       size: "medium",
+    },
+  },
+  { 
+    id: 38,
+    name: "Tier 2: Spawn Increase",
+    description: "[Needed]",
+    prerequisite: 34,
+    levels: [
+      { cost: 10, effect: 1 },
+      { cost: 25, effect: 2 },
+      { cost: 50, effect: 3 },
+      { cost: 100, effect: 4 }
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.spawnIncrease.quantity =
+        UPGRADES[34].levels[level].effect;
+    },
+    grid: {
+      x: 0,
+      y: -2,
+      icon: "spawnIncreaseIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 39,
+    name: "Tier 2: Double Drop",
+    description: "Increase the chance for enemies to drop double the resources.",
+    prerequisite: 38,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[41].levels[level].effect;
+    },
+    grid: {
+      x: 0,
+      y: -3,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 40,
+    name: "Tier 2: Promotion Rate",
+    description: "[NEEDED]",
+    prerequisite: 38,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: 1,
+      y: -3,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 41,
+    name: "Tier 2: Explosion",
+    description: "[NEEDED]",
+    prerequisite: 38,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: 1,
+      y: -2,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  { 
+    id: 42,
+    name: "Tier 3: Spawn Increase",
+    description: "[Needed]",
+    prerequisite: 38,
+    levels: [
+      { cost: 10, effect: 1 },
+      { cost: 25, effect: 2 },
+      { cost: 50, effect: 3 },
+      { cost: 100, effect: 4 }
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.spawnIncrease.quantity =
+        UPGRADES[34].levels[level].effect;
+    },
+    grid: {
+      x: -1,
+      y: -3,
+      icon: "spawnIncreaseIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 43,
+    name: "Tier 3: Double Drop",
+    description: "Increase the chance for enemies to drop double the resources.",
+    prerequisite: 42,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[41].levels[level].effect;
+    },
+    grid: {
+      x: 0,
+      y: -4,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 44,
+    name: "Tier 3: Promotion Rate",
+    description: "[NEEDED]",
+    prerequisite: 42,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: -1,
+      y: -4,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 45,
+    name: "Tier 3: Explosion",
+    description: "[NEEDED]",
+    prerequisite: 42,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: -2,
+      y: -3,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  { 
+    id: 46,
+    name: "Tier 4: Spawn Increase",
+    description: "[Needed]",
+    prerequisite: 42,
+    levels: [
+      { cost: 10, effect: 1 },
+      { cost: 25, effect: 2 },
+      { cost: 50, effect: 3 },
+      { cost: 100, effect: 4 }
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.spawnIncrease.quantity =
+        UPGRADES[34].levels[level].effect;
+    },
+    grid: {
+      x: -2,
+      y: -4,
+      icon: "spawnIncreaseIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 47,
+    name: "Tier 4: Double Drop",
+    description: "Increase the chance for enemies to drop double the resources.",
+    prerequisite: 46,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[41].levels[level].effect;
+    },
+    grid: {
+      x: -3,
+      y: -3,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 48,
+    name: "Tier 4: Promotion Rate",
+    description: "[NEEDED]",
+    prerequisite: 46,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: -3,
+      y: -4,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  {
+    id: 49,
+    name: "Tier 4: Explosion",
+    description: "[NEEDED]",
+    prerequisite: 46,
+    levels: [
+      { cost: 30, effect: 1.2 },
+      { cost: 80, effect: 1.5 },
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.doubleDrop =
+        UPGRADES[42].levels[level].effect;
+    },
+    grid: {
+      x: -3,
+      y: -5,
+      icon: "doubleDropIcon",
+      size: "medium",
+    },
+  },
+  { 
+    id: 50,
+    name: "BOSS",
+    description: "[Needed]",
+    prerequisite: 46,
+    levels: [
+      { cost: 10, effect: 1 },
+      { cost: 25, effect: 2 },
+      { cost: 50, effect: 3 },
+      { cost: 100, effect: 4 }
+    ],
+    applyUpgrade: (level) => {
+      gameState.upgrades.spawnIncrease.quantity =
+        UPGRADES[34].levels[level].effect;
+    },
+    grid: {
+      x: 0,
+      y: -6,
+      icon: "spawnIncreaseIcon",
+      size: "large",
     },
   },
 ]

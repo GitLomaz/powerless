@@ -10,6 +10,7 @@
     <script type="text/javascript" src="./js/classes/player.js"></script>
     <script type="text/javascript" src="./js/classes/ui/powerbar.js"></script>
     <script type="text/javascript" src="./js/classes/ui/upgradeBox.js"></script>
+    <script type="text/javascript" src="./js/classes/ui/tooltip.js"></script>
     <script type="text/javascript" src="./js/classes/enemy.js"></script>
     <script type="text/javascript" src="./js/classes/enemies/t1.js"></script>
     <script type="text/javascript" src="./js/classes/enemies/t2.js"></script>
@@ -28,6 +29,10 @@
 
       canvas {
         cursor: var(--cursor);
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
       }
       </style>
   </head>

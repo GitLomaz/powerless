@@ -33,6 +33,11 @@ class UpgradeBox extends Phaser.GameObjects.Container {
     this.width = 70;
     this.height = 70;
 
+    if (upgrade.grid.size === "large") {
+     this.width = 70 * 2;
+    this.height = 70 * 2;     
+    }
+
     this.r3 = scene.add.rectangle(
       0,
       0,
@@ -78,7 +83,15 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       UPGRADEBOXES.forEach((box) => {
         box.update();
       });
-    })
+    }).on("pointerover", () => {
+      if (this.state < 2) return;
+      new Tooltip(this.upgrade, this.currentTint);
+    }).on("pointerout", () => {
+      if (tooltip) {
+        tooltip.destroy();
+        tooltip = null;
+      }
+    });
   }
 
   update() {

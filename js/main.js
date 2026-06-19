@@ -5,6 +5,7 @@ let config = {
   parent: "wrapper",
   // scene: [battleScene, orbitScene],
   scene: [orbitScene, battleScene],
+  roundPixels: true,
   physics: {
     default: 'arcade',
     arcade: {
