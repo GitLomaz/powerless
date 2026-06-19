@@ -6,9 +6,6 @@ const UPGRADES = [
     name: "Deploy",
     description: "Start the battle and deploy your turret.",
     levels: [{ cost: 0, effect: true }],
-    applyUpgrade: () => {
-  
-    },
     grid: {
       x: 0,
       y: 0,
