@@ -4,6 +4,9 @@ class Player extends Phaser.GameObjects.Container {
 
     this.energy = gameState.upgrades.player.energy
 
+    this.cannonCanShoot=true;
+    this.rocketCanShoot=true;
+
     scene.physics.add.existing(this);
     this.body.setCircle(48, -48, -48);
 
@@ -46,6 +49,23 @@ class Player extends Phaser.GameObjects.Container {
 
     
     this.powerbar = new Powerbar(Math.floor(gameState.upgrades.player.energy / 7500));
+
+    //add mini gun if we have it
+      if (gameState.upgrades.weapons.minigun.enabled) {
+    
+     this.minigun = this.scene.time.addEvent({
+        delay: gameState.upgrades.weapons.minigun.fireRate,
+        callback: () => {
+          const nearestEnemy = this.findEnemies(gameState.upgrades.weapons.minigun.range, 0)[0];
+          if(this.energy>0){
+          if (nearestEnemy) {
+            new Bullet(this, nearestEnemy, true);
+          }
+        }},
+        callbackScope: this,
+        repeat:-1
+      });
+    }
   }
 
   gainCredits(amount) {
@@ -141,25 +161,24 @@ class Player extends Phaser.GameObjects.Container {
 
     this.barrel.rotation = Math.atan2(worldPoint.y - this.y, worldPoint.x - this.x);
     if (scene.input.activePointer.isDown) {
+      if(this.cannonCanShoot){
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
         new Shell();
-        this.lastShot = Date.now();
+        this.cannonCanShoot=false;
+        scene.time.delayedCall(gameState.upgrades.weapons.cannon.fireRate, () => {
+          this.cannonCanShoot=true;
+        });
       }
-    }
+    }}
 
-    if (gameState.upgrades.weapons.minigun.enabled) {
-      const nearestEnemy = this.findEnemies(gameState.upgrades.weapons.minigun.range, 0)[0];
-      if ((!this.minigunLastShot || Date.now() - this.minigunLastShot > gameState.upgrades.weapons.minigun.fireRate) && nearestEnemy) {
-        new Bullet(this, nearestEnemy, true);
-        this.minigunLastShot = Date.now();
-      }
-    }
+  
 
     if (gameState.upgrades.weapons.rocket.enabled) {
+      if(this.rocketCanShoot){
       const enemies = this.findEnemies(1500)
       console.log(enemies);
       const nearestEnemy = enemies[0];
-      if ((!this.rocketLastShot || Date.now() - this.rocketLastShot > gameState.upgrades.weapons.rocket.fireRate) && nearestEnemy) {
+   
         new Rocket(this, nearestEnemy, true);
         if (gameState.upgrades.weapons.rocket.double) {
           console.log('double rocket!');
@@ -169,9 +188,12 @@ class Player extends Phaser.GameObjects.Container {
             new Rocket(this, secondNearestEnemy, true);
           }
         }
-        this.rocketLastShot = Date.now();
-      }
-    }
+        this.rocketCanShoot=false;
+        scene.time.delayedCall(gameState.upgrades.weapons.rocket.fireRate, () => {
+          this.rocketCanShoot=true;
+        });
+      
+    }}
   }
 
   findNearestEnemy(maxRange = 1500, minRange = 300) {
