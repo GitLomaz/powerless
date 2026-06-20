@@ -101,7 +101,7 @@ class Player extends Phaser.GameObjects.Container {
 
     this.energy -= delta * gameState.upgrades.player.energyLoss;
     if (this.energy < 0) {
-      return;
+      this.returnToOrbit();
     }
     this.powerbar.setPower(this.energy / gameState.upgrades.player.energy);
 
@@ -334,4 +334,9 @@ class Player extends Phaser.GameObjects.Container {
     this.x = Phaser.Math.Linear(this.x, cx, lerpFactor);
     this.y = Phaser.Math.Linear(this.y, cy, lerpFactor);
   }
+
+  returnToOrbit() {
+  gameState.credits += this.creditsGained;
+    this.scene.scene.start("orbitScene", { creditsGained: this.creditsGained });
+}
 }

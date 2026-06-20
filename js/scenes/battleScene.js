@@ -6,6 +6,8 @@ let battleScene = new Phaser.Class({
     });
   },
 
+  
+
   preload: function () {
     scene = this;
     this.load.image("sheet2", "images/sheet2.png");

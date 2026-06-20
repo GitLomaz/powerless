@@ -6,7 +6,7 @@ class T2 extends Enemy {
     this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
-    this.fireCooldown = Random.between(0, 2000);
+  this.canShoot=false;
   }
 
   tick(delta) {
@@ -34,9 +34,13 @@ class T2 extends Enemy {
       }
     } else if (this.mode === "fire") {
       this.fireCooldown -= delta;
-      if (this.fireCooldown <= 0) {
+      if (this.canShoot) {
         new Bullet(this, scene.player, false);
-        this.fireCooldown = 2000;
+        this.canShoot=false;
+        let cooldown = Phaser.Math.Between(0,2000);
+        this.scene.time.delayedCall(cooldown, () => {
+          this.canShoot = true;
+        });
       }
     }
     if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 300) {
