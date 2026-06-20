@@ -56,6 +56,7 @@ const gameStateTemplate  = {
       speed: 150,
       energy: 15000,
       energyLoss: 1,
+      dropRate: 1,
       proximityShield: {
         health: 0,
         regen: 0

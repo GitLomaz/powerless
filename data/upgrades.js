@@ -600,8 +600,6 @@ const UPGRADES = [
     },
 
   },
-
-
   {
     id: 27,
     name: "Orbital Support Damage",
@@ -694,7 +692,8 @@ const UPGRADES = [
     },
 
 
-  },{
+  },
+  {
     id: 31,
     name: "Energy Burst",
     description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",
@@ -769,22 +768,23 @@ const UPGRADES = [
     description: "[Needed]",
     prerequisite: 0,
     levels: [
-      { cost: 10, effect: 1 },
-      { cost: 25, effect: 2 },
-      { cost: 50, effect: 3 },
-      { cost: 100, effect: 4 }
+      { cost: 10, effect: 15 },
+      { cost: 25, effect: 20 },
+      { cost: 50, effect: 30 },
+      { cost: 100, effect: 40 },
+      { cost: 200, effect: 50 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
+      gameState.upgrades.spawns.tier1.units =
         UPGRADES[34].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.spawnIncrease.quantity;
+      return gameState.upgrades.spawns.tier1.units;
     },
     grid: {
       x: 0,
       y: -1,
-      icon: "spawnIncreaseIcon",
+      icon: "tier1Spawn",
       size: "medium",
     },
   },
@@ -796,13 +796,15 @@ const UPGRADES = [
     levels: [
       { cost: 30, effect: 1.2 },
       { cost: 80, effect: 1.5 },
+      { cost: 80, effect: 2 },
+      { cost: 80, effect: 3 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.currencyDropRate =
-        UPGRADES[40].levels[level - 1].effect;
+      gameState.upgrades.player.dropRate =
+        UPGRADES[35].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.currencyDropRate;
+      return gameState.upgrades.player.dropRate;
     },
     grid: {
       x: -1,
@@ -822,7 +824,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[41].levels[level - 1].effect;
+        UPGRADES[36].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.doubleDrop;
@@ -845,7 +847,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[37].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.doubleDrop;
@@ -870,7 +872,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[34].levels[level - 1].effect;
+        UPGRADES[38].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.spawnIncrease.quantity;
@@ -893,7 +895,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[41].levels[level - 1].effect;
+        UPGRADES[39].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.doubleDrop;
@@ -916,7 +918,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[40].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.doubleDrop;
@@ -939,7 +941,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[41].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.doubleDrop;
@@ -963,8 +965,8 @@ const UPGRADES = [
       { cost: 100, effect: 4 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[34].levels[level - 1].effect;
+      gameState.upgrades.spawns.tier3.units =
+        UPGRADES[42].levels[level - 1].effect;
     },
     grid: {
       x: -1,
@@ -984,7 +986,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[41].levels[level - 1].effect;
+        UPGRADES[43].levels[level - 1].effect;
     },
     grid: {
       x: 0,
@@ -1004,7 +1006,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[44].levels[level - 1].effect;
     },
     grid: {
       x: -1,
@@ -1024,7 +1026,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[45].levels[level - 1].effect;
     },
     grid: {
       x: -2,
@@ -1046,7 +1048,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[34].levels[level - 1].effect;
+        UPGRADES[46].levels[level - 1].effect;
     },
     grid: {
       x: -2,
@@ -1066,7 +1068,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[41].levels[level - 1].effect;
+        UPGRADES[47].levels[level - 1].effect;
     },
     grid: {
       x: -3,
@@ -1086,7 +1088,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[48].levels[level - 1].effect;
     },
     grid: {
       x: -3,
@@ -1106,7 +1108,7 @@ const UPGRADES = [
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.doubleDrop =
-        UPGRADES[42].levels[level - 1].effect;
+        UPGRADES[49].levels[level - 1].effect;
     },
     grid: {
       x: -3,
@@ -1127,8 +1129,8 @@ const UPGRADES = [
       { cost: 100, effect: 4 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
-        UPGRADES[34].levels[level - 1].effect;
+      gameState.upgrades.spawns.tier4.units =
+        UPGRADES[50].levels[level - 1].effect;
     },
     grid: {
       x: 0,
