@@ -367,20 +367,20 @@ const UPGRADES = [
     description: "Increase the range at which you can pick up credits.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 50 },
-      { cost: 15, effect: 100 },
-      { cost: 40, effect: 150 },
+      { cost: 5, effect: 300 },
+      { cost: 15, effect: 400 },
+      { cost: 40, effect: 500 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.magnet.range = UPGRADES[16].levels[level - 1].effect;
+      gameState.upgrades.player.magnet = UPGRADES[16].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.magnet.range;
+      return gameState.upgrades.player.magnet;
     },
     grid: {
       x: 0,
       y: 2,
-      icon: "magnetRangeIcon",
+      icon: "magnetRange",
       size: "medium",
     },
   },
