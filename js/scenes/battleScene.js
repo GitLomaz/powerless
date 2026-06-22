@@ -76,10 +76,10 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
-      enemy.die(player.x, player.y);
-      if (!gameState.upgrades.player.stomp) {
+      if (gameState.upgrades.player.stomp < enemy.tier) {
         player.energy -= 2000;
       }
+      enemy.die(player.x, player.y);
     });
 
     this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
@@ -110,7 +110,9 @@ let battleScene = new Phaser.Class({
     for (let i = 0; i < gameState.upgrades.spawns.tier3.units; i++) {
       this.enemies.push(new T3());
     }
-
+    for (let i = 0; i < gameState.upgrades.spawns.tier4.units; i++) {
+      this.enemies.push(new T4());
+    }
   },
 
   update: function (time, delta) {

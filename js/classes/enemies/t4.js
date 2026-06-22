@@ -1,13 +1,13 @@
-class T2 extends Enemy {
+class T4 extends Enemy {
   constructor() {
     super();
-    this.circle = scene.add.circle(0, 0, 12, 0x0000ff);
+    this.circle = scene.add.circle(0, 0, 12, 0x00FFff);
     this.add(this.circle);
     this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
-    this.canShoot=false;
-    this.tier = 2
+    this.fireCooldown = Random.between(0, 10000);
+    this.tier = 4
   }
 
   tick(delta) {
@@ -35,18 +35,14 @@ class T2 extends Enemy {
       }
     } else if (this.mode === "fire") {
       this.fireCooldown -= delta;
-      if (this.canShoot) {
-        new Bullet(this, scene.player, false);
-        this.canShoot=false;
-        let cooldown = Phaser.Math.Between(0,2000);
-        this.scene.time.delayedCall(cooldown, () => {
-          this.canShoot = true;
-        });
+      if (this.fireCooldown <= 0) {
+        new Rocket(this, scene.player, false);
+        this.fireCooldown = 10000;
       }
     }
-    if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 300) {
+    if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 800) {
       this.mode = "fire";
-    } else if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 800) {
+    } else if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 1300) {
       this.mode = "chase";
     } else {
       this.mode = "wander";
