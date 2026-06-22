@@ -19,6 +19,7 @@ let battleScene = new Phaser.Class({
     this.load.image("mech-shell", "images/mech/shell.png");
     this.load.image("bullet", "images/mech/bullet.png");
     this.load.image("enemyBullet", "images/mech/enemyBullet.png");
+    this.load.image("aura", "images/aura.png");
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });

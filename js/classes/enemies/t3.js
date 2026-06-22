@@ -10,6 +10,7 @@ class T3 extends Enemy {
     this.tier = 3
     this.value = Random.between(28,50)
     this.damage = 500
+    this.checkPromotion();
   }
 
   tick(delta) {

@@ -839,26 +839,26 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 37,
     name: "Tier I: Promotion Rate",
-    description: "[NEEDED]",
+    description: "Increase the chance for Tier I enemies to be promoted.",
     prerequisite: 34,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .05 },
+      { cost: 80, effect: .15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier1.promotion =
         UPGRADES[37].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.doubleDrop;
+      return gameState.upgrades.spawns.tier1.promotion;
     },
     grid: {
       x: -1,
       y: -2,
-      icon: "doubleDropIcon",
+      icon: "tierIPromotion",
       size: "medium",
     },
   },
@@ -916,23 +916,23 @@ const UPGRADES = [
   {
     id: 40,
     name: "Tier II: Promotion Rate",
-    description: "[NEEDED]",
+    description: "Increase the chance for Tier II enemies to be promoted.",
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .05 },
+      { cost: 80, effect: .15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier2.promotion =
         UPGRADES[40].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.doubleDrop;
+      return gameState.upgrades.spawns.tier2.promotion;
     },
     grid: {
       x: 1,
       y: -3,
-      icon: "doubleDropIcon",
+      icon: "tierIIPromotion",
       size: "medium",
     },
   },
@@ -1013,20 +1013,23 @@ const UPGRADES = [
   {
     id: 44,
     name: "Tier III: Promotion Rate",
-    description: "[NEEDED]",
+    description: "Increase the chance for Tier III enemies to be promoted.",
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .05 },
+      { cost: 80, effect: .15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier3.promotion =
         UPGRADES[44].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier3.promotion;
     },
     grid: {
       x: -1,
       y: -4,
-      icon: "doubleDropIcon",
+      icon: "tierIIIPromotion",
       size: "medium",
     },
   },
@@ -1103,20 +1106,23 @@ const UPGRADES = [
   {
     id: 48,
     name: "Tier IV: Promotion Rate",
-    description: "[NEEDED]",
+    description: "Increase the chance for Tier IV enemies to be promoted.",
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .05 },
+      { cost: 80, effect: .15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier4.promotion =
         UPGRADES[48].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier4.promotion;
     },
     grid: {
       x: -3,
       y: -4,
-      icon: "doubleDropIcon",
+      icon: "tierIVPromotion",
       size: "medium",
     },
   },
