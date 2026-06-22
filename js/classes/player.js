@@ -290,6 +290,7 @@ class Player extends Phaser.GameObjects.Container {
         );
 
         if (dist > STEP_DISTANCE) {
+          console.log('spawning foot!')
           const footprint = scene.add.image(
             foot.x,
             foot.y,

@@ -103,6 +103,22 @@ class Enemy extends Phaser.GameObjects.Container {
 
     this.payout(impactX, impactY);
     this.destroy();
+    setTimeout(() => {
+      switch (this.tier) {
+        case 1:
+          scene.enemies.push(new T1());
+          break;
+        case 2:
+          scene.enemies.push(new T2());
+          break;
+        case 3:
+          scene.enemies.push(new T3());
+          break;
+        case 4:
+          scene.enemies.push(new T4());
+          break;
+      }
+    }, 4000);
   }
 
   payout(impactX, impactY) {
