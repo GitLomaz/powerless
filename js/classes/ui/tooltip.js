@@ -36,7 +36,7 @@ class Tooltip extends Phaser.GameObjects.Container {
     }
 
     if (LEVELS[upgrade.id] !== upgrade.levels.length && upgrade.levels.length > 1) {
-      const increaseString = upgrade.getCurrentValue() + " -> " + (upgrade.levels[LEVELS[upgrade.id]].effect + upgrade.getCurrentValue())
+      const increaseString = upgrade.getCurrentValue() + " -> " + upgrade.levels[LEVELS[upgrade.id]].effect
       const inscrease = scene.add.text(0, 30, increaseString, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5, 0);
       this.add(inscrease);
     } else if (upgrade.levels.length > 1) {

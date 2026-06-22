@@ -57,9 +57,10 @@ const gameStateTemplate  = {
       energy: 15000,
       energyLoss: 1,
       dropRate: 1,
-      proximityShield: {
-        health: 0,
-        regen: 0
+      energyLeech: {
+        enabled: false,
+        chance: .1,
+        amount: 1000
       }
     },
     abilities: {

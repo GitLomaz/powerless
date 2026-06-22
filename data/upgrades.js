@@ -19,12 +19,12 @@ const UPGRADES = [
     description: "Start the battle and deploy your turret.",
     prerequisite: 0,
     levels: [
-      { cost: 5, effect: 100 },
-      { cost: 15, effect: 200 },
-      { cost: 40, effect: 300 },
+      { cost: 5, effect: 500 },
+      { cost: 15, effect: 600 },
+      { cost: 40, effect: 700 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.cannon.speed +=
+      gameState.upgrades.weapons.cannon.speed =
         UPGRADES[1].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -43,12 +43,12 @@ const UPGRADES = [
     description: "Increase the damage of the main cannon.",
     prerequisite: 1,
     levels: [
-      { cost: 5, effect: 10 },
-      { cost: 15, effect: 25 },
-      { cost: 40, effect: 50 },
+      { cost: 5, effect: 35 },
+      { cost: 15, effect: 50 },
+      { cost: 40, effect: 75 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.cannon.damage +=
+      gameState.upgrades.weapons.cannon.damage =
         UPGRADES[2].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -61,7 +61,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // removed
+  { // REMOVED
     id: 3,
     name: "Rocket Launcher:\r\nDouble Rockets",
     description: "Fires two rockets at once instead of one.",
@@ -89,12 +89,12 @@ const UPGRADES = [
     description: "Decrease the reload time of the main cannon.",
     prerequisite: 2,
     levels: [
-      { cost: 5, effect: 100},
-      { cost: 15, effect: 200 },
-      { cost: 40, effect: 350 },
+      { cost: 5, effect: 900},
+      { cost: 15, effect: 800 },
+      { cost: 40, effect: 650 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.cannon.fireRate -=
+      gameState.upgrades.weapons.cannon.fireRate =
         UPGRADES[4].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -133,12 +133,12 @@ const UPGRADES = [
     description: "Increase the damage of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 2 },
-      { cost: 15, effect: 5 },
-      { cost: 40, effect: 10 },
+      { cost: 5, effect: 7 },
+      { cost: 15, effect: 10 },
+      { cost: 40, effect: 15 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.minigun.damage +=
+      gameState.upgrades.weapons.minigun.damage =
         UPGRADES[6].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -157,12 +157,12 @@ const UPGRADES = [
     description: "Decrease the reload time of the minigun.",
     prerequisite: 6,
     levels: [
-      { cost: 5, effect: 50 },
-      { cost: 15, effect: 100 },
-      { cost: 40, effect: 150 },
+      { cost: 5, effect: 350 },
+      { cost: 15, effect: 300 },
+      { cost: 40, effect: 250 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.minigun.fireRate -=
+      gameState.upgrades.weapons.minigun.fireRate =
         UPGRADES[7].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -181,12 +181,12 @@ const UPGRADES = [
     description: "Increase the targeting range of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 100 },
-      { cost: 15, effect: 250 },
-      { cost: 40, effect: 400 },
+      { cost: 5, effect: 400 },
+      { cost: 15, effect: 550 },
+      { cost: 40, effect: 700 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.minigun.range +=
+      gameState.upgrades.weapons.minigun.range =
         UPGRADES[8].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -225,12 +225,12 @@ const UPGRADES = [
     description: "Increase the damage of rockets.",
     prerequisite: 9,
     levels: [
-      { cost: 5, effect: 50 },
-      { cost: 15, effect: 150 },
-      { cost: 40, effect: 300 },
+      { cost: 5, effect: 150 },
+      { cost: 15, effect: 250 },
+      { cost: 40, effect: 400 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.rocket.damage +=
+      gameState.upgrades.weapons.rocket.damage =
         UPGRADES[10].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -249,12 +249,12 @@ const UPGRADES = [
     description: "Decrease the reload time of rockets.",
     prerequisite: 10,
     levels: [
-      { cost: 5, effect: 500 },
-      { cost: 15, effect: 1000 },
-      { cost: 40, effect: 1500 },
+      { cost: 5, effect: 3000 },
+      { cost: 15, effect: 2500 },
+      { cost: 40, effect: 2000 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.rocket.fireRate -=
+      gameState.upgrades.weapons.rocket.fireRate =
         UPGRADES[11].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -267,18 +267,18 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  {
+  { // NOT IMPLEMENTED YET
     id: 12,
     name: "Rocket Launcher:\r\nSplash Damage",
     description: "Increases splash AOE for rockets.",
     prerequisite: 10,
     levels: [
-      { cost: 10, effect: 50 },
-      { cost: 30, effect: 100 },
-      { cost: 80, effect: 150 },
+      { cost: 10, effect: 250 },
+      { cost: 30, effect: 300 },
+      { cost: 80, effect: 350 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.rocket.splash +=
+      gameState.upgrades.weapons.rocket.splash =
         UPGRADES[12].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -297,13 +297,12 @@ const UPGRADES = [
     description: "Increase the battery capacity of your vehicle.",
     prerequisite: 0,
     levels: [
-      { cost: 5, effect: 10000 },
-      { cost: 15, effect: 30000 },
-      { cost: 40, effect: 65000 },
+      { cost: 5, effect: 25000 },
+      { cost: 15, effect: 50000 },
+      { cost: 40, effect: 90000 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.player.energy += 
-        UPGRADES[13].levels[level - 1].effect;
+      gameState.upgrades.player.energy = UPGRADES[13].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.player.energy;
@@ -321,12 +320,12 @@ const UPGRADES = [
     description: "Increase the movement speed of your vehicle.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 25 },
-      { cost: 15, effect: 75 },
-      { cost: 40, effect: 150 },
+      { cost: 5, effect: 175 },
+      { cost: 15, effect: 225 },
+      { cost: 40, effect: 300 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.player.speed += UPGRADES[14].levels[level - 1].effect;
+      gameState.upgrades.player.speed = UPGRADES[14].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.player.speed;
@@ -344,12 +343,12 @@ const UPGRADES = [
     description: "Decrease the energy loss of the vehicle.",
     prerequisite: 14,
     levels: [
-      { cost: 5, effect: .05 },
-      { cost: 15, effect: .1 },
-      { cost: 40, effect: .15 },
+      { cost: 5, effect: .95 },
+      { cost: 15, effect: .9 },
+      { cost: 40, effect: .85 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.player.energyLoss -=
+      gameState.upgrades.player.energyLoss =
         UPGRADES[15].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -368,13 +367,12 @@ const UPGRADES = [
     description: "Increase the range at which you can pick up credits.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 100 },
-      { cost: 15, effect: 300 },
-      { cost: 40, effect: 300 },
+      { cost: 5, effect: 300 },
+      { cost: 15, effect: 400 },
+      { cost: 40, effect: 500 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.player.magnet += 
-        UPGRADES[16].levels[level - 1].effect;
+      gameState.upgrades.player.magnet = UPGRADES[16].levels[level - 1].effect;
     },
     getCurrentValue: () => {
       return gameState.upgrades.player.magnet;
@@ -386,65 +384,74 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  { // NOT IMPLEMENTED YET
     id: 17,
-    name: "Proximity Shield",
+    name: "Energy Leech",
     description:
-      "Improved shield reduces energy consumption when blocking a hit.",
+      "10% chance to gain some energy back when destroying an enemy",
     prerequisite: 13,
     levels: [
       { cost: 10, effect: 1 },
-      { cost: 30, effect: 2 },
-      { cost: 80, effect: 3 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.shield.proximity = UPGRADES[17].levels[level - 1].effect;
+      gameState.upgrades.player.energyLeech.enabled = true
     },
     getCurrentValue: () => {
-      return gameState.upgrades.shield.proximity;
     },
     grid: {
       x: -1,
       y: 2,
-      icon: "proximityShieldIcon",
+      icon: "energyLeech",
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  { // NOT IMPLEMENTED YET
     id: 18,
-    name: "Filler Upgrade",
-    description: "A filler upgrade for demonstration purposes.",
+    name: "Leech Chance",
+    description: "Increases the chance Energy Leech will trigger",
     prerequisite: 17,
-    levels: [{ cost: 5, effect: 1 }],
+    levels: [
+      { cost: 5, effect: .2 },
+      { cost: 5, effect: .3 },
+      { cost: 5, effect: .4 },
+      { cost: 5, effect: .5 },
+      { cost: 5, effect: .6 },
+    ],
     applyUpgrade: (level) => {
-      gameState.upgrades.filler.upgrade = UPGRADES[18].levels[level - 1].effect;
+      gameState.upgrades.player.energyLeech.chance = UPGRADES[18].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.filler.upgrade;
+      return gameState.upgrades.player.energyLeech.chance;
     },
     grid: {
       x: -1,
       y: 3,
-      icon: "fillerIcon",
+      icon: "leechChance",
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  { // NOT IMPLEMENTED YET
     id: 19,
-    name: "Filler Upgrade 2",
-    description: "Another filler upgrade for demonstration purposes.",
+    name: "Leech Power",
+    description: "Increases the amount of energy leeched",
     prerequisite: 17,
-    levels: [{ cost: 5, effect: 1 }],
+    levels: [
+      { cost: 5, effect: 1200 },
+      { cost: 5, effect: 1400 },
+      { cost: 5, effect: 1600 },
+      { cost: 5, effect: 1800 },
+      { cost: 5, effect: 2000 },
+    ],
     applyUpgrade: (level) => {
-      gameState.upgrades.filler.upgrade = UPGRADES[19].levels[level - 1].effect;
+      gameState.upgrades.player.energyLeech.amount = UPGRADES[19].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.filler.upgrade;
+      return gameState.upgrades.player.energyLeech.amount;
     },
     grid: {
       x: -2,
       y: 2,
-      icon: "fillerIcon",
+      icon: "leechPower",
       size: "medium",
     },
   },
@@ -456,7 +463,7 @@ const UPGRADES = [
     prerequisite: 0,
     levels: [{ cost: 20, effect: true }],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.stomp += 1;
+      gameState.upgrades.abilities.stomp = 1;
     },
     getCurrentValue: () => {
     },
@@ -476,7 +483,7 @@ const UPGRADES = [
       { cost: 30, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.stomp += 1;
+      gameState.upgrades.abilities.stomp = 2;
     },
     getCurrentValue: () => {
     },
@@ -496,7 +503,7 @@ const UPGRADES = [
       { cost: 30, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.stomp += 1;
+      gameState.upgrades.abilities.stomp = 3;
     },
     getCurrentValue: () => {
     },
@@ -516,7 +523,7 @@ const UPGRADES = [
       { cost: 30, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.stomp += 1;
+      gameState.upgrades.abilities.stomp = 4;
     },
     getCurrentValue: () => {
     },
@@ -762,14 +769,14 @@ const UPGRADES = [
     description: "Increase the number of Tier 1 enemies.",
     prerequisite: 0,
     levels: [
-      { cost: 10, effect: 5 },
-      { cost: 25, effect: 10 },
-      { cost: 50, effect: 20 },
-      { cost: 100, effect: 30 },
-      { cost: 200, effect: 40 }
+      { cost: 10, effect: 15 },
+      { cost: 25, effect: 20 },
+      { cost: 50, effect: 30 },
+      { cost: 100, effect: 40 },
+      { cost: 200, effect: 50 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawns.tier1.units +=
+      gameState.upgrades.spawns.tier1.units =
         UPGRADES[34].levels[level - 1].effect;
     },
     getCurrentValue: () => {
@@ -782,7 +789,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  {
+  { // NOT DONE YET
     id: 35,
     name: "Currency Drop Rate",
     description: "Increase the rate at which enemies drop currency.",
@@ -807,7 +814,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  {
+  { // NOT DONE YET
     id: 36,
     name: "Tier 1: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
@@ -830,7 +837,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  {
+  { // NOT DONE YET
     id: 37,
     name: "Tier 1: Promotion Rate",
     description: "[NEEDED]",
