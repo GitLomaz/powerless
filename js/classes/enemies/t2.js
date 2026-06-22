@@ -9,6 +9,7 @@ class T2 extends Enemy {
     this.canShoot = false;
     this.tier = 2
     this.value = Random.between(8,18)
+    this.damage = 100
   }
 
   tick(delta) {
@@ -37,7 +38,7 @@ class T2 extends Enemy {
     } else if (this.mode === "fire") {
       this.fireCooldown -= delta;
       if (this.canShoot) {
-        new Bullet(this, scene.player, false);
+        new Bullet(this, scene.player, false, this.damage);
         this.canShoot = false;
         let cooldown = Phaser.Math.Between(0,2000);
         this.scene.time.delayedCall(cooldown, () => {

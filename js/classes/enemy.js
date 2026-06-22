@@ -11,6 +11,16 @@ class Enemy extends Phaser.GameObjects.Container {
     this.add(this.healthBar);
   }
 
+  checkPromotion() {
+    if (Random.xInY(gameState.upgrades.spawns['tier' + this.tier].promotion * 100, 100)) {
+      this.promoted = true;
+      this.speed = this.speed * 1.5
+      this.damage = this.damage * 2
+      this.health = this.health * 2
+      this.healthMax = this.healthMax * 2
+    }
+  }
+
   takeDamage(amount, impactX, impactY) {
     this.health -= amount;
     this.healthBar.clear();

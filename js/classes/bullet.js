@@ -1,5 +1,5 @@
 class Bullet extends Phaser.GameObjects.Container {
-  constructor(origin, target, friendly = true) {
+  constructor(origin, target, friendly = true, damage) {
     super(scene, origin.x, origin.y);
     this.image = scene.add.image(0, 0, friendly ? "bullet" : "enemyBullet")
     this.setRotation(Math.atan2(target.y - this.y, target.x - this.x));
@@ -12,7 +12,7 @@ class Bullet extends Phaser.GameObjects.Container {
       scene.bulletGroup.add(this);
     } else {
       this.speed = 200;
-      this.damage = 10;
+      this.damage = damage;
       scene.enemyBulletGroup.add(this);
     }
 

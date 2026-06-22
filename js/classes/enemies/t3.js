@@ -9,6 +9,7 @@ class T3 extends Enemy {
     this.fireCooldown = Random.between(0, 10000);
     this.tier = 3
     this.value = Random.between(28,50)
+    this.damage = 500
   }
 
   tick(delta) {
@@ -37,7 +38,7 @@ class T3 extends Enemy {
     } else if (this.mode === "fire") {
       this.fireCooldown -= delta;
       if (this.fireCooldown <= 0) {
-        new Rocket(this, scene.player, false);
+        new Rocket(this, scene.player, false, this.damage);
         this.fireCooldown = 10000;
       }
     }

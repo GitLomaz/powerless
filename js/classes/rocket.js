@@ -1,5 +1,5 @@
 class Rocket extends Phaser.GameObjects.Container {
-  constructor(source, target, friendly = true) {
+  constructor(source, target, friendly = true, damage) {
     super(scene, source.x, source.y);
 
     this.target = target;
@@ -26,7 +26,7 @@ class Rocket extends Phaser.GameObjects.Container {
       this.maxSpeed = 120;
       this.acceleration = 20;
       this.turnRate = 2; // radians/sec
-      this.damage = 20;
+      this.damage = damage;
     }
     scene.bullets.push(this);
 

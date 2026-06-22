@@ -9,6 +9,7 @@ class T4 extends Enemy {
     this.fireCooldown = Random.between(0, 10000);
     this.tier = 4
     this.value = Random.between(80,200)
+    this.damage = 2000
   }
 
   tick(delta) {
