@@ -66,6 +66,15 @@ class Player extends Phaser.GameObjects.Container {
         repeat:-1
       });
     }
+
+    this.supplyCooldown = 0;
+    this.strikeCooldown = 0;
+    this.burstCooldown = 0;
+
+    let posX = 60
+    if (gameState.upgrades.abilities.resupply.enabled) {
+      new AbilityButton("resupply", posX, GAME_HEIGHT - 60);
+    }
   }
 
   gainCredits(amount) {

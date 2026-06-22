@@ -69,9 +69,10 @@ const gameStateTemplate  = {
     abilities: {
       stomp: 0,
       resupply: {
-        packs: 0,
+        packs: 1,
         value: 10000,
-        cooldown: 15000
+        cooldown: 30000,
+        enabled: true
       },
       energyBurst: {
         range: 0,

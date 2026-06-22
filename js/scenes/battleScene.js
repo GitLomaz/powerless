@@ -20,6 +20,8 @@ let battleScene = new Phaser.Class({
     this.load.image("bullet", "images/mech/bullet.png");
     this.load.image("enemyBullet", "images/mech/enemyBullet.png");
     this.load.image("aura", "images/aura.png");
+    this.load.image("ability-resupply", "images/ability-resupply.png");
+    this.load.spritesheet("resupply", "images/resupply.png", { frameWidth: 32, frameHeight: 64 });
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });
@@ -59,6 +61,7 @@ let battleScene = new Phaser.Class({
     this.enemyBulletGroup = this.physics.add.group();
     this.enemyGroup = this.physics.add.group();
     this.creditGroup = this.physics.add.group();
+    this.resupplyGroup = this.physics.add.group();
 
     this.player = new Player();
     
@@ -108,6 +111,16 @@ let battleScene = new Phaser.Class({
 
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
       credit.collect();
+    });
+
+
+    this.physics.add.overlap(this.player, this.resupplyGroup, function (player, resupply) {
+      if (resupply.falling) return;
+      player.energy += resupply.value;
+      if (player.energy > gameState.upgrades.player.energy) {
+        player.energy = gameState.upgrades.player.energy;
+      }
+      resupply.destroy();
     });
 
     this.enemies = [];    

@@ -490,7 +490,7 @@ const UPGRADES = [
     grid: {
       x: -2,
       y: 0,
-      icon: "StompII",
+      icon: "stompII",
       size: "medium",
     },
   },
@@ -510,7 +510,7 @@ const UPGRADES = [
     grid: {
       x: -3,
       y: 0,
-      icon: "StompIII",
+      icon: "stompIII",
       size: "medium",
     },
   },
@@ -530,7 +530,7 @@ const UPGRADES = [
     grid: {
       x: -4,
       y: 0,
-      icon: "StompIV",
+      icon: "stompIV",
       size: "medium",
     },
   },
@@ -627,74 +627,73 @@ const UPGRADES = [
   { // NOT DONE YET
     id: 28,
     name: "Power Resupply",
-    description: "Unlock the power resupply ability, allowing you to instantly refill your battery.",
+    description: "Unlock the power resupply ability, allowing request an energy resupply package from orbit.",
     prerequisite: 22,
     levels: [{ cost: 50, effect: true }],
     applyUpgrade: (level) => {
-      // gameState.upgrades.powerResupply.unlocked =
-      //   UPGRADES[28].levels[level - 1].effect;
-    },
-    getCurrentValue: () => {
-      return gameState.upgrades.powerResupply.unlocked;
+      gameState.upgrades.abilities.resupply.unlocked = true
     },
     grid: {
       x: -3,
       y: -1,
-      icon: "powerResupplyIcon",
+      icon: "resupply",
       size: "medium",
     },
 
   },
-  { // NOT DONE YET
+  {
     id: 29,
     name: "Power Resupply Efficiency",
     description: "Reduce the cooldown of the power resupply ability.",
     prerequisite: 28,
     levels: [
-      { cost: 30, effect: 0.9 },
-      { cost: 80, effect: 0.8 },
+      { cost: 30, effect: 28000 },
+      { cost: 80, effect: 26000 },
+      { cost: 80, effect: 24000 },
+      { cost: 80, effect: 22000 },
+      { cost: 80, effect: 20000 },
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.powerResupply.cooldown =
-      //   UPGRADES[29].levels[level - 1].effect;
+      gameState.upgrades.abilities.resupply.cooldown =
+        UPGRADES[29].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.powerResupply.cooldown;
+      return gameState.upgrades.abilities.resupply.cooldown;
     },
     grid: {
       x: -4,
       y: -1,
-      icon: "powerResupplyEfficiencyIcon",
+      icon: "resupplyCooldown",
       size: "medium",
     },
 
   },
-  { // NOT DONE YET
+  {
     id: 30,
-    name: "Power Resupply Quantity",
-    description: "Increase the number of times you can use power resupply.",
+    name: "Power Resupply Additional Packs",
+    description: "Increase the number of packs received.",
     prerequisite: 28,
     levels: [
-      { cost: 30, effect: 1 },
-      { cost: 80, effect: 2 },
+      { cost: 30, effect: 2 },
+      { cost: 30, effect: 3 }
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.powerResupply.quantity =
-      //   UPGRADES[30].levels[level - 1].effect;
+      gameState.upgrades.abilities.resupply.packs =
+        UPGRADES[30].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.powerResupply.quantity;
+      return gameState.upgrades.abilities.resupply.packs;
     },
     grid: {
       x: -3,
       y: -2,
-      icon: "powerResupplyQuantityIcon",
+      icon: "resupplyPacks",
       size: "medium",
     },
 
 
   },
-  { // NOT DONE YET
+  {
     id: 31,
     name: "Energy Burst",
     description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",
@@ -1220,4 +1219,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-maxAllUpgrades()
+// maxAllUpgrades()
