@@ -95,4 +95,48 @@ class Rocket extends Phaser.GameObjects.Container {
 
     super.destroy();
   }
+
+  explode(duration = 350) {
+    const explosion = scene.add.circle(
+      this.x,
+      this.y,
+      1,
+      0xffaa00,
+      0.4
+    );
+
+    const hitEnemies = new Set();
+
+    scene.tweens.add({
+      targets: explosion,
+      radius: gameState.upgrades.weapons.rocket.splash,
+      alpha: 0,
+      duration,
+      ease: "Quad.Out",
+
+      onUpdate: () => {
+        const radius = explosion.radius;
+        const radiusSq = radius * radius;
+
+        for (const enemy of scene.enemies) {
+          if (!enemy.active || hitEnemies.has(enemy)) continue;
+
+          const dx = enemy.x - this.x;
+          const dy = enemy.y - this.y;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq <= radiusSq) {
+            enemy.takeDamage(gameState.upgrades.weapons.rocket.damage, explosion.x, explosion.y);
+          }
+        }
+      },
+
+      onComplete: () => {
+        explosion.destroy();
+      }
+    });
+
+    this.destroy();
+  }
+  
 }

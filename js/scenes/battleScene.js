@@ -68,6 +68,10 @@ let battleScene = new Phaser.Class({
         console.log('something doesnt have damage')
       }
       enemy.takeDamage(damage, bullet.x, bullet.y);
+      if (bullet.metaType === "rocket") {
+        bullet.explode();
+        return
+      } 
       bullet.destroy();
     });
 

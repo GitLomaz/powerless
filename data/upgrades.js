@@ -267,7 +267,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT IMPLEMENTED YET
+  {
     id: 12,
     name: "Rocket Launcher:\r\nSplash Damage",
     description: "Increases splash AOE for rockets.",
