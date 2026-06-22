@@ -8,6 +8,7 @@ class T3 extends Enemy {
     this.body.setCircle(12, -12, -12);
     this.fireCooldown = Random.between(0, 10000);
     this.tier = 3
+    this.value = Random.between(28,50)
   }
 
   tick(delta) {

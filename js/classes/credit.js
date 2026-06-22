@@ -1,16 +1,21 @@
 class Credit extends Phaser.GameObjects.Container {
-  constructor(x, y, impactX, impactY, value = 1) {
+  constructor(denom, x, y, impactX, impactY) {
     super(scene, x, y);
-    this.circle = scene.add.circle(0, 0, 6, 0xFFD700);
-    this.value = value;
+    const size = Math.log10(denom) * 2 + 4;
+    this.circle = scene.add.circle(0, 0, size, 0xFFD700);
+    this.value = denom;
     this.add(this.circle);
     scene.add.existing(this);
     scene.credits.push(this);
     scene.creditGroup.add(this);
-    this.body.setCircle(6, -6, -6);
+    this.body.setCircle(size, -size, -size);
     this.speed = -100;
-    this.velocity = new Phaser.Math.Vector2(impactX - this.x, impactY - this.y).normalize().scale(Random.between(this.speed * 0.5, this.speed * 2));
-    this.body.setVelocity(this.velocity.x, this.velocity.y);
+    const angleOffset = Phaser.Math.DegToRad(Random.between(-20, 20));
+
+    this.velocity = new Phaser.Math.Vector2(
+        impactX - this.x,
+        impactY - this.y
+    ).normalize().rotate(angleOffset).scale(Random.between(this.speed * 0.5, this.speed * 2));this.body.setVelocity(this.velocity.x, this.velocity.y);
     this.body.setDrag(80);
     this.life = 0
   }

@@ -33,8 +33,21 @@ class Enemy extends Phaser.GameObjects.Container {
       }
     }
 
-    new Credit(this.x, this.y, impactX, impactY);
+    this.payout(impactX, impactY);
     this.destroy();
+  }
+
+  payout(impactX, impactY) {
+    const DENOMS = [10000, 1000, 100, 10, 1];
+    for (const denom of DENOMS) {
+        let spawns = Math.floor(this.value / denom);
+        if (spawns > 0) {
+          for (let i = 0; i < spawns; i++) {
+            new Credit(denom, this.x, this.y, impactX, impactY);
+          }
+        }
+        this.value %= denom;
+    }
   }
 
   destroy() {

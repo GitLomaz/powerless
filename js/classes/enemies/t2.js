@@ -8,6 +8,7 @@ class T2 extends Enemy {
     this.body.setCircle(12, -12, -12);
     this.canShoot = false;
     this.tier = 2
+    this.value = Random.between(8,18)
   }
 
   tick(delta) {

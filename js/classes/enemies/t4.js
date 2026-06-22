@@ -8,6 +8,7 @@ class T4 extends Enemy {
     this.body.setCircle(12, -12, -12);
     this.fireCooldown = Random.between(0, 10000);
     this.tier = 4
+    this.value = Random.between(80,200)
   }
 
   tick(delta) {
