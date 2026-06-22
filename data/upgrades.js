@@ -459,7 +459,7 @@ const UPGRADES = [
     id: 20,
     name: "Stomp",
     description:
-      "Unlock the stomp ability, allowing you to crush Tier 1 enemies without taking damage.",
+      "Unlock the stomp ability, allowing you to crush Tier I enemies without taking damage.",
     prerequisite: 0,
     levels: [{ cost: 20, effect: true }],
     applyUpgrade: (level) => {
@@ -477,7 +477,7 @@ const UPGRADES = [
   {
     id: 21,
     name: "Stomp II",
-    description: "Allows Stomp to crush Tier 2 enemies.",
+    description: "Allows Stomp to crush Tier II enemies.",
     prerequisite: 20,
     levels: [
       { cost: 30, effect: 1.2 },
@@ -497,7 +497,7 @@ const UPGRADES = [
   {
     id: 22,
     name: "Stomp III",
-    description: "Allows Stomp to crush Tier 3 enemies.",
+    description: "Allows Stomp to crush Tier III enemies.",
     prerequisite: 21,
     levels: [
       { cost: 30, effect: 1.2 },
@@ -517,7 +517,7 @@ const UPGRADES = [
   {
     id: 23,
     name: "Stomp IV",
-    description: "Allows Stomp to crush Tier 4 enemies.",
+    description: "Allows Stomp to crush Tier IV enemies.",
     prerequisite: 22,
     levels: [
       { cost: 30, effect: 1.2 },
@@ -765,8 +765,8 @@ const UPGRADES = [
   },
   { 
     id: 34,
-    name: "Tier 1: Spawn Increase",
-    description: "Increase the number of Tier 1 enemies.",
+    name: "Tier I: Spawn Increase",
+    description: "Increase the number of Tier I enemies.",
     prerequisite: 0,
     levels: [
       { cost: 10, effect: 15 },
@@ -785,7 +785,7 @@ const UPGRADES = [
     grid: {
       x: 0,
       y: -1,
-      icon: "tier1Spawn",
+      icon: "tierISpawn",
       size: "medium",
     },
   },
@@ -816,7 +816,7 @@ const UPGRADES = [
   },
   { // NOT DONE YET
     id: 36,
-    name: "Tier 1: Double Drop",
+    name: "Tier I: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
     prerequisite: 35,
     levels: [
@@ -839,7 +839,7 @@ const UPGRADES = [
   },
   { // NOT DONE YET
     id: 37,
-    name: "Tier 1: Promotion Rate",
+    name: "Tier I: Promotion Rate",
     description: "[NEEDED]",
     prerequisite: 34,
     levels: [
@@ -862,32 +862,33 @@ const UPGRADES = [
   },
   { 
     id: 38,
-    name: "Tier 2: Spawn Increase",
-    description: "[Needed]",
+    name: "Tier II: Spawn Increase",
+    description: "Increase the number of Tier II enemies.",
     prerequisite: 34,
     levels: [
-      { cost: 10, effect: 1 },
-      { cost: 25, effect: 2 },
-      { cost: 50, effect: 3 },
-      { cost: 100, effect: 4 }
+      { cost: 10, effect: 5 },
+      { cost: 25, effect: 10 },
+      { cost: 50, effect: 20 },
+      { cost: 100, effect: 40 },
+      { cost: 100, effect: 50 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
+      gameState.upgrades.spawns.tier2.units =
         UPGRADES[38].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.spawnIncrease.quantity;
+      return gameState.upgrades.spawns.tier2.units;
     },
     grid: {
       x: 0,
       y: -2,
-      icon: "spawnIncreaseIcon",
+      icon: "tierIISpawn",
       size: "medium",
     },
   },
   {
     id: 39,
-    name: "Tier 2: Double Drop",
+    name: "Tier II: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
     prerequisite: 38,
     levels: [
@@ -910,7 +911,7 @@ const UPGRADES = [
   },
   {
     id: 40,
-    name: "Tier 2: Promotion Rate",
+    name: "Tier II: Promotion Rate",
     description: "[NEEDED]",
     prerequisite: 38,
     levels: [
@@ -933,7 +934,7 @@ const UPGRADES = [
   },
   {
     id: 41,
-    name: "Tier 2: Explosion",
+    name: "Tier II: Explosion",
     description: "[NEEDED]",
     prerequisite: 38,
     levels: [
@@ -956,29 +957,33 @@ const UPGRADES = [
   },
   { 
     id: 42,
-    name: "Tier 3: Spawn Increase",
-    description: "[Needed]",
+    name: "Tier III: Spawn Increase",
+    description: "Increase the number of Tier III enemies.",
     prerequisite: 38,
     levels: [
-      { cost: 10, effect: 1 },
-      { cost: 25, effect: 2 },
-      { cost: 50, effect: 3 },
-      { cost: 100, effect: 4 }
+      { cost: 10, effect: 5 },
+      { cost: 25, effect: 10 },
+      { cost: 50, effect: 20 },
+      { cost: 100, effect: 30 },
+      { cost: 100, effect: 40 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier3.units =
         UPGRADES[42].levels[level - 1].effect;
     },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier3.units
+    },
     grid: {
       x: -1,
       y: -3,
-      icon: "spawnIncreaseIcon",
+      icon: "tierIIISpawn",
       size: "medium",
     },
   },
   {
     id: 43,
-    name: "Tier 3: Double Drop",
+    name: "Tier III: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
     prerequisite: 42,
     levels: [
@@ -998,7 +1003,7 @@ const UPGRADES = [
   },
   {
     id: 44,
-    name: "Tier 3: Promotion Rate",
+    name: "Tier III: Promotion Rate",
     description: "[NEEDED]",
     prerequisite: 42,
     levels: [
@@ -1018,7 +1023,7 @@ const UPGRADES = [
   },
   {
     id: 45,
-    name: "Tier 3: Explosion",
+    name: "Tier III: Explosion",
     description: "[NEEDED]",
     prerequisite: 42,
     levels: [
@@ -1038,29 +1043,32 @@ const UPGRADES = [
   },
   { 
     id: 46,
-    name: "Tier 4: Spawn Increase",
-    description: "[Needed]",
+    name: "Tier IV: Spawn Increase",
+    description: "Increase the number of Tier IV enemies.",
     prerequisite: 42,
     levels: [
-      { cost: 10, effect: 1 },
-      { cost: 25, effect: 2 },
-      { cost: 50, effect: 3 },
-      { cost: 100, effect: 4 }
+      { cost: 10, effect: 3 },
+      { cost: 25, effect: 8 },
+      { cost: 50, effect: 15 },
+      { cost: 100, effect: 25 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawnIncrease.quantity =
+      gameState.upgrades.spawns.tier4.units =
         UPGRADES[46].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier4.units
     },
     grid: {
       x: -2,
       y: -4,
-      icon: "spawnIncreaseIcon",
+      icon: "tierIVSpawn",
       size: "medium",
     },
   },
   {
     id: 47,
-    name: "Tier 4: Double Drop",
+    name: "Tier IV: Double Drop",
     description: "Increase the chance for enemies to drop double the resources.",
     prerequisite: 46,
     levels: [
@@ -1080,7 +1088,7 @@ const UPGRADES = [
   },
   {
     id: 48,
-    name: "Tier 4: Promotion Rate",
+    name: "Tier IV: Promotion Rate",
     description: "[NEEDED]",
     prerequisite: 46,
     levels: [
@@ -1100,7 +1108,7 @@ const UPGRADES = [
   },
   {
     id: 49,
-    name: "Tier 4: Explosion",
+    name: "Tier IV: Explosion",
     description: "[NEEDED]",
     prerequisite: 46,
     levels: [
