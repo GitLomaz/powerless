@@ -95,6 +95,41 @@ class Player extends Phaser.GameObjects.Container {
     return foot;
   }
 
+  createLeechLine(target) {
+    const graphics = scene.add.graphics();
+    graphics.setDepth(1);
+
+    const lineData = {
+        width: 4,
+        alpha: 1
+    };
+
+    const redraw = () => {
+      graphics.clear();
+      graphics.lineStyle(
+      lineData.width,
+      0x0000ff,
+      lineData.alpha
+      );
+
+      graphics.beginPath();
+      graphics.moveTo(target.x, target.y);
+      graphics.lineTo(this.x, this.y);
+      graphics.strokePath();
+    };
+
+    redraw();
+    scene.tweens.add({
+      targets: lineData,
+      width: 0,
+      alpha: 0,
+      duration: 400,
+      ease: 'Quad.easeOut',
+      onUpdate: redraw,
+      onComplete: () => graphics.destroy()
+    });
+  }
+
   tick(delta) {
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;

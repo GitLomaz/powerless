@@ -287,7 +287,7 @@ const UPGRADES = [
     grid: {
       x: 2,
       y: -2,
-      icon: "batteryCapacityIcon",
+      icon: "rocketSplash",
       size: "medium",
     },
   },
@@ -384,7 +384,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT IMPLEMENTED YET
+  {
     id: 17,
     name: "Energy Leech",
     description:
@@ -405,7 +405,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT IMPLEMENTED YET
+  {
     id: 18,
     name: "Leech Chance",
     description: "Increases the chance Energy Leech will trigger",
@@ -430,7 +430,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT IMPLEMENTED YET
+  {
     id: 19,
     name: "Leech Power",
     description: "Increases the amount of energy leeched",

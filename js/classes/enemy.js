@@ -22,6 +22,17 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   die(impactX, impactY) {
+    if (gameState.upgrades.player.energyLeech.enabled) {
+      const energyGained = gameState.upgrades.player.energyLeech.amount;
+      if (Random.xInY(gameState.upgrades.player.energyLeech.chance * 10, 10)) {
+        scene.player.energy += energyGained;
+        if (scene.player.energy > gameState.upgrades.player.energy) {
+          scene.player.energy = gameState.upgrades.player.energy;
+        }
+        scene.player.createLeechLine(this);
+      }
+    }
+
     new Credit(this.x, this.y, impactX, impactY);
     this.destroy();
   }
