@@ -6,6 +6,7 @@ class T1 extends Enemy {
     this.speed = 20;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
+    this.tier = 1
   }
 
   tick(delta) {
