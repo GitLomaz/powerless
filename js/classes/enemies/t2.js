@@ -6,7 +6,7 @@ class T2 extends Enemy {
     this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
-    this.canShoot=false;
+    this.canShoot = false;
     this.tier = 2
   }
 
@@ -37,7 +37,7 @@ class T2 extends Enemy {
       this.fireCooldown -= delta;
       if (this.canShoot) {
         new Bullet(this, scene.player, false);
-        this.canShoot=false;
+        this.canShoot = false;
         let cooldown = Phaser.Math.Between(0,2000);
         this.scene.time.delayedCall(cooldown, () => {
           this.canShoot = true;
