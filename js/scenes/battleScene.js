@@ -62,6 +62,17 @@ let battleScene = new Phaser.Class({
 
     this.player = new Player();
     
+    // FPS counter and debug info
+    this.fpsText = this.add.text(GAME_WIDTH - 20, 20, "FPS: 60", { 
+      font: "16px Arial", 
+      fill: "#00ff00" 
+    }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
+    
+    this.debugText = this.add.text(GAME_WIDTH - 20, 45, "", { 
+      font: "14px Arial", 
+      fill: "#ffff00" 
+    }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
+    
     this.physics.add.overlap(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
       const damage = bullet.damage;
       if (!bullet.damage) {
@@ -117,6 +128,20 @@ let battleScene = new Phaser.Class({
   },
 
   update: function (time, delta) {
+    // Update FPS counter
+    const fps = Math.round(1000 / delta);
+    this.fpsText.setText(`FPS: ${fps}`);
+    
+    // Update debug info
+    const tweenCount = this.tweens.getTweens().length;
+    const objectCount = this.children.list.length;
+    this.debugText.setText(
+      `Tweens: ${tweenCount}\n` +
+      `Objects: ${objectCount}\n` +
+      `Bullets: ${this.bullets.length}\n` +
+      `Enemies: ${this.enemies.length}`
+    );
+    
     this.player.tick(delta);
     for (const enemy of this.enemies) {
       enemy.tick(delta);

@@ -34,6 +34,16 @@ class Credit extends Phaser.GameObjects.Container {
         scene.physics.moveToObject(this, scene.player, 300);
       }
     }
+    if (this.life > 10000) {
+      scene.tweens.add({
+        targets: this,
+        alpha: 0,
+        duration: 1000,
+        onComplete: () => {
+          this.destroy();
+        },
+      });
+    }
   }
 
   collect() {

@@ -211,15 +211,12 @@ class Player extends Phaser.GameObjects.Container {
     if (gameState.upgrades.weapons.rocket.enabled) {
       if(this.rocketCanShoot){
       const enemies = this.findEnemies(1500)
-      console.log(enemies);
       const nearestEnemy = enemies[0];
    
         new Rocket(this, nearestEnemy, true);
         if (gameState.upgrades.weapons.rocket.double) {
-          console.log('double rocket!');
           const secondNearestEnemy = enemies[1];
           if (secondNearestEnemy) {
-            console.log('second rocket?!')
             new Rocket(this, secondNearestEnemy, true);
           }
         }

@@ -47,9 +47,14 @@ class T2 extends Enemy {
         });
       }
     }
-    if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 300) {
+    // Calculate distance once using squared distance (avoids expensive sqrt)
+    const dx = scene.player.x - this.x;
+    const dy = scene.player.y - this.y;
+    const distSq = dx * dx + dy * dy;
+    
+    if (distSq < 300 * 300) {
       this.mode = "fire";
-    } else if (Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 800) {
+    } else if (distSq < 800 * 800) {
       this.mode = "chase";
     } else {
       this.mode = "wander";
