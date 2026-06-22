@@ -39,6 +39,10 @@ class Enemy extends Phaser.GameObjects.Container {
 
   payout(impactX, impactY) {
     const DENOMS = [10000, 1000, 100, 10, 1];
+    this.value = this.value * gameState.upgrades.player.dropRate;
+    if (Random.xInY(gameState.upgrades.spawns['tier' + this.tier].doubleDrop * 100, 100)) {
+      this.value = this.value * 2
+    }
     for (const denom of DENOMS) {
         let spawns = Math.floor(this.value / denom);
         if (spawns > 0) {

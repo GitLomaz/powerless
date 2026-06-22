@@ -789,10 +789,10 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 35,
-    name: "Currency Drop Rate",
-    description: "Increase the rate at which enemies drop currency.",
+    name: "Credits Drop Increase",
+    description: "Increase the rate at which enemies drop credits.",
     prerequisite: 34,
     levels: [
       { cost: 30, effect: 1.2 },
@@ -810,30 +810,32 @@ const UPGRADES = [
     grid: {
       x: -1,
       y: -1,
-      icon: "currencyDropRateIcon",
+      icon: "creditsDrop",
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 36,
     name: "Tier I: Double Drop",
-    description: "Increase the chance for enemies to drop double the resources.",
+    description: "Increase the chance for Tier I enemies to drop double credits.",
     prerequisite: 35,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .1 },
+      { cost: 80, effect: .2 },
+      { cost: 80, effect: .35 },
+      { cost: 80, effect: .5 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier1.doubleDrop =
         UPGRADES[36].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.doubleDrop;
+      return gameState.upgrades.spawns.tier1.doubleDrop;
     },
     grid: {
       x: -2,
       y: -1,
-      icon: "doubleDropIcon",
+      icon: "tierIDouble",
       size: "medium",
     },
   },
@@ -889,23 +891,25 @@ const UPGRADES = [
   {
     id: 39,
     name: "Tier II: Double Drop",
-    description: "Increase the chance for enemies to drop double the resources.",
+    description: "Increase the chance for Tier II enemies to drop double credits.",
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .1 },
+      { cost: 80, effect: .2 },
+      { cost: 80, effect: .35 },
+      { cost: 80, effect: .5 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier2.doubleDrop =
         UPGRADES[39].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.doubleDrop;
+      return gameState.upgrades.spawns.tier2.doubleDrop;
     },
     grid: {
       x: 0,
       y: -3,
-      icon: "doubleDropIcon",
+      icon: "tierIIDouble",
       size: "medium",
     },
   },
@@ -984,20 +988,25 @@ const UPGRADES = [
   {
     id: 43,
     name: "Tier III: Double Drop",
-    description: "Increase the chance for enemies to drop double the resources.",
+    description: "Increase the chance for Tier III enemies to drop double credits.",
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .1 },
+      { cost: 80, effect: .2 },
+      { cost: 80, effect: .35 },
+      { cost: 80, effect: .5 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier3.doubleDrop =
         UPGRADES[43].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier3.doubleDrop;
     },
     grid: {
       x: 0,
       y: -4,
-      icon: "doubleDropIcon",
+      icon: "tierIIIDouble",
       size: "medium",
     },
   },
@@ -1069,20 +1078,25 @@ const UPGRADES = [
   {
     id: 47,
     name: "Tier IV: Double Drop",
-    description: "Increase the chance for enemies to drop double the resources.",
+    description: "Increase the chance for Tier IV enemies to drop double credits.",
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: .1 },
+      { cost: 80, effect: .2 },
+      { cost: 80, effect: .35 },
+      { cost: 80, effect: .5 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier4.doubleDrop =
         UPGRADES[47].levels[level - 1].effect;
+    },
+    getCurrentValue: () => {
+      return gameState.upgrades.spawns.tier4.doubleDrop;
     },
     grid: {
       x: -3,
       y: -3,
-      icon: "doubleDropIcon",
+      icon: "tierIVDouble",
       size: "medium",
     },
   },
