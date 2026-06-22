@@ -35,8 +35,58 @@ class Enemy extends Phaser.GameObjects.Container {
     this.healthBar.fillStyle(0xff0000, 1);
     this.healthBar.fillRect(-25, -40, 50 * (this.health / this.healthMax), 5);
     if (this.health <= 0) {
+      const healthMax = this.healthMax
       this.die(impactX, impactY);
+      this.explode(gameState.upgrades.spawns['tier' + this.tier].explosion, healthMax);
     }
+  }
+
+  explode(radius, damage) {
+    if (!radius || radius <= 0) return;
+    const duration = 350
+    // Capture coordinates before destroying
+    const explosionX = this.x;
+    const explosionY = this.y;
+    const explosion = scene.add.circle(
+      explosionX,
+      explosionY,
+      1,
+      0xffaa00,
+      0.4
+    );
+    const hitEnemies = new Set();
+    scene.tweens.add({
+      targets: explosion,
+      radius: radius,
+      alpha: 0,
+      duration,
+      ease: "Quad.Out",
+
+      onUpdate: () => {
+        const radius = explosion.radius;
+        const radiusSq = radius * radius;
+
+        for (const enemy of scene.enemies) {
+          if (!enemy.active || hitEnemies.has(enemy)) continue;
+
+          const dx = enemy.x - explosionX;
+          const dy = enemy.y - explosionY;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq <= radiusSq) {
+            console.log(damage / 4)
+            enemy.takeDamage(damage / 4, explosion.x, explosion.y);
+            hitEnemies.add(enemy);
+          }
+        }
+      },
+
+      onComplete: () => {
+        explosion.destroy();
+      }
+    });
+
+    this.destroy();
   }
 
   die(impactX, impactY) {

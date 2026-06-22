@@ -939,23 +939,23 @@ const UPGRADES = [
   {
     id: 41,
     name: "Tier II: Explosion",
-    description: "[NEEDED]",
+    description: "When destroyed, Tier II enemies explode, damaging nearby enemies in radius.",
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 50 },
+      { cost: 80, effect: 75 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier2.explosion =
         UPGRADES[41].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.doubleDrop;
+      return gameState.upgrades.spawns.tier2.explosion;
     },
     grid: {
       x: 1,
       y: -2,
-      icon: "doubleDropIcon",
+      icon: "tierIIExplosion",
       size: "medium",
     },
   },
@@ -1036,20 +1036,20 @@ const UPGRADES = [
   {
     id: 45,
     name: "Tier III: Explosion",
-    description: "[NEEDED]",
+    description: "When destroyed, Tier III enemies explode, damaging nearby enemies in radius.",
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 50 },
+      { cost: 80, effect: 75 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier3.explosion =
         UPGRADES[45].levels[level - 1].effect;
     },
     grid: {
       x: -2,
       y: -3,
-      icon: "doubleDropIcon",
+      icon: "tierIIIExplosion",
       size: "medium",
     },
   },
@@ -1129,20 +1129,20 @@ const UPGRADES = [
   {
     id: 49,
     name: "Tier IV: Explosion",
-    description: "[NEEDED]",
+    description: "When destroyed, Tier IV enemies explode, damaging nearby enemies in radius.",
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 50 },
+      { cost: 80, effect: 75 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.doubleDrop =
+      gameState.upgrades.spawns.tier4.explosion =
         UPGRADES[49].levels[level - 1].effect;
     },
     grid: {
       x: -3,
       y: -5,
-      icon: "doubleDropIcon",
+      icon: "tierIVExplosion",
       size: "medium",
     },
   },
