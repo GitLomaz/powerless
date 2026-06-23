@@ -10,6 +10,7 @@
 - Stats button
 - Restart button
 - Statistic collection
+- Make sure all values display correctly 
 
 ## Battle Scene
 
@@ -24,6 +25,7 @@
 - Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
 - Victory screen
 - Tie abilities to hotkeys
+- Fix calls that cause errors when scene ends
 
 ## Assets needed
 
