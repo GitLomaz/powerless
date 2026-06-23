@@ -60,6 +60,7 @@ class OrbitalStrike {
 
           if (distSq <= radiusSq) {
             enemy.takeDamage(damage, x, y);
+            hitEnemies.add(enemy);
           }
         }
       },

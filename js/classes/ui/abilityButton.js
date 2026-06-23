@@ -8,6 +8,9 @@ class AbilityButton extends Phaser.GameObjects.Container {
       case "orbitalStrike":
         this.image = scene.add.image(0, 0, "ability-strike");
         break;
+      case "energyBurst":
+        this.image = scene.add.image(0, 0, "ability-energyBurst");
+        break;
     }
     this.add(this.image);
     this.setDepth(1000);
@@ -53,6 +56,12 @@ class AbilityButton extends Phaser.GameObjects.Container {
                 new OrbitalStrike(enemy.x, enemy.y);
               }
             });
+          }
+          break;
+        case "energyBurst":
+          if (scene.player.energyBurstCooldown <= 0 || true) {
+            scene.player.energyBurstCooldown = gameState.upgrades.abilities.energyBurst.cooldown;
+            scene.player.burst();
           }
           break;
       }

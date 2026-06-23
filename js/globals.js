@@ -75,9 +75,10 @@ const gameStateTemplate  = {
         enabled: false
       },
       energyBurst: {
-        range: 0,
-        damage: 0,
-        cooldown: 15000
+        range: 200,
+        damage: 200,
+        cooldown: 15000,
+        enabled: false
       },
       orbitalStrike: {
         damage: 300,

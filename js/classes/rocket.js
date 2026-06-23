@@ -127,6 +127,7 @@ class Rocket extends Phaser.GameObjects.Container {
 
           if (distSq <= radiusSq) {
             enemy.takeDamage(gameState.upgrades.weapons.rocket.damage, explosion.x, explosion.y);
+            hitEnemies.add(enemy);
           }
         }
       },

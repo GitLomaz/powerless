@@ -80,6 +80,10 @@ class Player extends Phaser.GameObjects.Container {
       new AbilityButton("orbitalStrike", posX, GAME_HEIGHT - 60);
       posX += 100
     }
+    if (gameState.upgrades.abilities.energyBurst.enabled) {
+      new AbilityButton("energyBurst", posX, GAME_HEIGHT - 60);
+      posX += 100
+    }
   }
 
   gainCredits(amount) {
@@ -141,6 +145,48 @@ class Player extends Phaser.GameObjects.Container {
       ease: 'Quad.easeOut',
       onUpdate: redraw,
       onComplete: () => graphics.destroy()
+    });
+  }
+
+  burst(duration = 350) {
+    this.energy -= 1500;
+    const explosion = scene.add.circle(
+      this.x,
+      this.y,
+      1,
+      0x000099,
+      0.4
+    );
+
+    const hitEnemies = new Set();
+    scene.tweens.add({
+      targets: explosion,
+      radius: gameState.upgrades.abilities.energyBurst.range,
+      alpha: 0,
+      duration,
+      ease: "Quad.Out",
+
+      onUpdate: () => {
+        const radius = explosion.radius;
+        const radiusSq = radius * radius;
+
+        for (const enemy of scene.enemies) {
+          if (!enemy.active || hitEnemies.has(enemy)) continue;
+
+          const dx = enemy.x - this.x;
+          const dy = enemy.y - this.y;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq <= radiusSq) {
+            enemy.takeDamage(gameState.upgrades.abilities.energyBurst.damage, explosion.x, explosion.y);
+            hitEnemies.add(enemy);
+          }
+        }
+      },
+
+      onComplete: () => {
+        explosion.destroy();
+      }
     });
   }
 

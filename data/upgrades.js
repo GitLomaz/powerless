@@ -631,7 +631,7 @@ const UPGRADES = [
     prerequisite: 22,
     levels: [{ cost: 50, effect: true }],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.resupply.unlocked = true
+      gameState.upgrades.abilities.resupply.enabled = true
     },
     grid: {
       x: -3,
@@ -693,72 +693,66 @@ const UPGRADES = [
 
 
   },
-  { // NOT DONE YET
+  {
     id: 31,
     name: "Energy Burst",
     description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",
     prerequisite: 23,
     levels: [{ cost: 50, effect: true }],
     applyUpgrade: (level) => {
-      // gameState.upgrades.energyBurst.unlocked =
-      //   UPGRADES[31].levels[level - 1].effect;
-    },
-    getCurrentValue: () => {
-      return gameState.upgrades.energyBurst.unlocked;
+      gameState.upgrades.abilities.energyBurst.enabled = true
     },
     grid: {
       x: -4,
       y: 1,
-      icon: "energyBurstIcon",
+      icon: "energyBurst",
       size: "medium",
     },
-
-
   },
-  { // NOT DONE YET
+  {
     id: 32,
     name: "Energy Burst Damage",
     description: "Increase the damage of the energy burst ability.",
     prerequisite: 31,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 300 },
+      { cost: 80, effect: 500 },
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.energyBurst.damage =
-      //   UPGRADES[32].levels[level - 1].effect;
+      gameState.upgrades.abilities.energyBurst.damage =
+        UPGRADES[32].levels[level - 1].effect;
     }
     ,getCurrentValue: () => {
-      return gameState.upgrades.energyBurst.damage;
+      return gameState.upgrades.abilities.energyBurst.damage;
     }
     ,
     grid: {
       x: -5,
       y: 1,
-      icon: "energyBurstdamage",
+      icon: "energyBurstDamage",
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 33,
-    name: "Energy Burst AoE",
+    name: "Energy Burst Range",
     description: "Increase the area of effect of the energy burst ability.",
     prerequisite: 31,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 250 },
+      { cost: 80, effect: 400 },
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.energyBurst.aoe =
-      //   UPGRADES[33].levels[level - 1].effect;
+      gameState.upgrades.abilities.energyBurst.range =
+        UPGRADES[33].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.energyBurst.aoe;
+      return gameState.upgrades.abilities.energyBurst.range;
     },
     grid: {
       x: -4,
       y: 2,
-      icon: "energyBurstAoEIcon",
+      icon: "energyBurstRange",
       size: "medium",
     },
   },
