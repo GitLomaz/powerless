@@ -98,7 +98,6 @@ class Enemy extends Phaser.GameObjects.Container {
           const distSq = dx * dx + dy * dy;
 
           if (distSq <= radiusSq) {
-            console.log(damage / 4)
             enemy.takeDamage(damage / 4, explosion.x, explosion.y);
             hitEnemies.add(enemy);
           }

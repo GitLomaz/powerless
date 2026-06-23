@@ -191,7 +191,6 @@ class Player extends Phaser.GameObjects.Container {
     const dt = delta / 1000;
 
     const decay = Math.sqrt(time / 100)
-    console.log(decay)
 
     this.energy -= delta * gameState.upgrades.player.energyLoss + decay;
     if (this.energy < 0) {
