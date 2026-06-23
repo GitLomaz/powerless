@@ -171,7 +171,7 @@ let battleScene = new Phaser.Class({
       `Enemies: ${this.enemies.length}`
     );
     
-    this.player.tick(delta);
+    this.player.tick(time, delta);
     for (const enemy of this.enemies) {
       enemy.tick(delta);
     }
