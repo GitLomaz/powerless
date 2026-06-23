@@ -20,6 +20,7 @@
 - Final boss
 - End of round stats screen
 - Energy decay over time
+- Do not fire when using an ability (click action)
 
 ## Assets needed
 
