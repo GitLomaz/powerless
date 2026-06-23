@@ -26,7 +26,7 @@
 + Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
 - Victory screen
 - Tie abilities to hotkeys
-- Fix calls that cause errors when scene ends
+- Fix calls that cause errors when scene ends (all setTimeouts)
 + Enemy health bars only show up when enemy takes damage
 + Enemy health bars are tweened, not instant
 + Don't fire missiles if nothing in range
