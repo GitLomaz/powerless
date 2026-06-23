@@ -31,6 +31,7 @@
 - Enemy health bars are tweened, not instant
 + Don't fire missiles if nothing in range
 - Slow down and stuff when low on power maybe?
+- Final boss deluxe version
 
 ## Assets needed
 
