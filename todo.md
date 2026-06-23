@@ -27,8 +27,8 @@
 - Victory screen
 - Tie abilities to hotkeys
 - Fix calls that cause errors when scene ends
-- Enemy health bars only show up when enemy takes damage
-- Enemy health bars are tweened, not instant
++ Enemy health bars only show up when enemy takes damage
++ Enemy health bars are tweened, not instant
 + Don't fire missiles if nothing in range
 - Slow down and stuff when low on power maybe?
 - Final boss deluxe version

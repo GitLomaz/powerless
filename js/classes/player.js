@@ -19,6 +19,7 @@ class Player extends Phaser.GameObjects.Container {
 
     this.lastShot = 0;
 
+    this.collectiveTime = 0;
 
     this.dirX = 1;
     this.dirY = 0;
@@ -194,7 +195,12 @@ class Player extends Phaser.GameObjects.Container {
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
 
-    const decay = time > 30000 ? Math.sqrt(time / 100) : 0;
+    this.collectiveTime += delta;
+
+    const decay = this.collectiveTime > 30000 ? Math.sqrt(this.collectiveTime / 100) : 0;
+
+    console.log(delta * gameState.upgrades.player.energyLoss + decay)
+    console.log(delta * gameState.upgrades.player.energyLoss)
 
     this.energy -= delta * gameState.upgrades.player.energyLoss + decay;
     if (this.energy < 0) {
