@@ -6,7 +6,7 @@
 - Balance upgrades
 - Background Image
 - General Cleanup
-- Music/Sound button
++ Music/Sound button
 - Stats button
 - Restart button
 - Statistic collection

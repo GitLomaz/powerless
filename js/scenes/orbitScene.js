@@ -59,5 +59,6 @@ let orbitScene = new Phaser.Class({
     });
 
     new Deploy();
+    new SoundToggle(12, 12,this);
   },
 });

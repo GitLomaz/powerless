@@ -3,6 +3,7 @@ const GAME_HEIGHT = 720;
 const DEBUG = false;
 let scene;
 let tooltip;
+let soundStatus = true;
 
 const gameStateTemplate  = {
   credits: 1000000,
