@@ -71,18 +71,14 @@ class Player extends Phaser.GameObjects.Container {
     this.strikeCooldown = 0;
     this.burstCooldown = 0;
 
-    let posX = 60
     if (gameState.upgrades.abilities.resupply.enabled) {
-      new AbilityButton("resupply", posX, GAME_HEIGHT - 60);
-      posX += 100
+      new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
     }
     if (gameState.upgrades.abilities.orbitalStrike.enabled) {
-      new AbilityButton("orbitalStrike", posX, GAME_HEIGHT - 60);
-      posX += 100
+      new AbilityButton("orbitalStrike", 160, GAME_HEIGHT - 60);
     }
     if (gameState.upgrades.abilities.energyBurst.enabled) {
-      new AbilityButton("energyBurst", posX, GAME_HEIGHT - 60);
-      posX += 100
+      new AbilityButton("energyBurst", 260, GAME_HEIGHT - 60);
     }
   }
 

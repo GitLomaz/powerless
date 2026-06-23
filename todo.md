@@ -11,6 +11,7 @@
 - Restart button
 - Statistic collection
 - Make sure all values display correctly 
+- Format numbers where needed
 
 ## Battle Scene
 
