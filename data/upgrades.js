@@ -1209,4 +1209,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-maxAllUpgrades()
+// maxAllUpgrades()

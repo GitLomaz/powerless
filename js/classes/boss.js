@@ -3,7 +3,7 @@ class Boss extends Phaser.GameObjects.Container {
     super(scene, x, y);
     
     scene.physics.add.existing(this);
-    this.body.setCircle(48, -48, -48);
+    this.body.setCircle(128, -128, -128);
     scene.enemyGroup.add(this);
     scene.add.existing(this);
 
@@ -14,31 +14,31 @@ class Boss extends Phaser.GameObjects.Container {
 
     // Create 8 feet evenly spaced in a circle (45° apart)
     this.feet = [
-      this.createFoot( 50,   0).setAngle(0),
-      this.createFoot( 35, -35).setAngle(45),
-      this.createFoot(  0, -50).setAngle(90),
-      this.createFoot(-35, -35).setAngle(135),
-      this.createFoot(-50,   0).setAngle(180),
-      this.createFoot(-35,  35).setAngle(225),
-      this.createFoot(  0,  50).setAngle(270),
-      this.createFoot( 35,  35).setAngle(315)
+      this.createFoot( 50 * 2,   0).setAngle(0),
+      this.createFoot( 35 * 2, -35 * 2).setAngle(45),
+      this.createFoot(  0, -50 * 2).setAngle(90),
+      this.createFoot(-35 * 2, -35 * 2).setAngle(135),
+      this.createFoot(-50 * 2,   0).setAngle(180),
+      this.createFoot(-35 * 2,  35 * 2).setAngle(225),
+      this.createFoot(  0,  50 * 2).setAngle(270),
+      this.createFoot( 35 * 2,  35 * 2).setAngle(315)
     ];
 
     this.legs = [
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
-      scene.add.image(0, 0, "mech-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3),
     ];
 
-    this.platform = scene.add.image(0, 0, "mech-body").setOrigin(0.5, 0.5);
+    this.platform = scene.add.image(0, 0, "boss-body").setOrigin(0.5, 0.5);
     this.add(this.platform);
 
-    this.barrel = scene.add.image(0, 0, "mech-barrel").setOrigin(0.5, 0.5).setDepth(4);
+    this.barrel = scene.add.image(0, 0, "boss-barrel").setOrigin(0.5, 0.5).setDepth(4);
     this.add(this.barrel);
     this.setDepth(4);
 
@@ -47,13 +47,18 @@ class Boss extends Phaser.GameObjects.Container {
 
     // Boss speed
     this.speed = 50;
+
+    this.health = 1000;
+    this.maxHealth = 1000;
+    this.powerbar = new BossPowerbar(20);
+    this.active = true;
   }
 
   createFoot(offsetX, offsetY) {
     const foot = scene.add.image(
       this.x + offsetX,
       this.y + offsetY,
-      "mech-foot"
+      "boss-foot"
     );
 
     foot.setDepth(2);
@@ -71,6 +76,9 @@ class Boss extends Phaser.GameObjects.Container {
   }
 
   tick(delta) {
+    // Don't do anything if boss is destroyed
+    if (!this.active) return;
+
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
 
@@ -163,7 +171,7 @@ class Boss extends Phaser.GameObjects.Container {
           const footprint = scene.add.image(
             foot.x,
             foot.y,
-            "mech-footprint"
+            "boss-footprint"
           )
           footprint.setDepth(1)
           footprint.setRotation(foot.rotation);
@@ -243,5 +251,37 @@ class Boss extends Phaser.GameObjects.Container {
   takeDamage(amount) {
     // Handle damage logic here
     console.log(`Boss takes ${amount} damage!`);
+    this.health -= amount;
+    if (this.health <= 0) {
+      this.health = 0;
+      this.destroy();
+    }
+    this.powerbar.setPower(this.health / this.maxHealth);
+  }
+
+  destroy() {
+    // Mark as inactive immediately
+    this.active = false;
+    // Destroy all feet
+    this.feet.forEach(foot => {
+      if (foot && foot.destroy) {
+        foot.destroy();
+      }
+    });
+
+    // Destroy all legs
+    this.legs.forEach(leg => {
+      if (leg && leg.destroy) {
+        leg.destroy();
+      }
+    });
+
+    // Destroy powerbar
+    // if (this.powerbar && this.powerbar.destroy) {
+    //   this.powerbar.destroy();
+    // }
+
+    // Call parent destroy
+    super.destroy();
   }
 }

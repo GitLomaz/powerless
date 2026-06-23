@@ -18,7 +18,7 @@
 - Proper ability buttons
 - Ability cooldowns
 - Ability Cooldown upgrade
-- Final boss
++ Final boss
 - End of round stats screen
 - Energy decay over time
 - Do not fire when using an ability (click action)

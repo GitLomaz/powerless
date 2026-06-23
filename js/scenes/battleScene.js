@@ -16,6 +16,11 @@ let battleScene = new Phaser.Class({
     this.load.image("mech-leg", "images/mech/leg.png");
     this.load.image("mech-barrel", "images/mech/barrel.png");
     this.load.image("mech-footprint", "images/mech/footprint.png");
+    this.load.image("boss-foot", "images/boss/foot.png");
+    this.load.image("boss-body", "images/boss/body.png");
+    this.load.image("boss-leg", "images/boss/leg.png");
+    this.load.image("boss-barrel", "images/boss/barrel.png");
+    this.load.image("boss-footprint", "images/boss/footprint.png");
     this.load.image("mech-shell", "images/mech/shell.png");
     this.load.image("bullet", "images/mech/bullet.png");
     this.load.image("enemyBullet", "images/mech/enemyBullet.png");
@@ -147,7 +152,7 @@ let battleScene = new Phaser.Class({
     // }
 
     if (gameState.upgrades.spawns.boss) {
-      this.enemies.push(new Boss(2000, 1000));
+      this.enemies.push(new Boss(1200, 1000));
     }
   },
 
