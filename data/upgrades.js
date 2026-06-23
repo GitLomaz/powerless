@@ -556,75 +556,75 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 25,
-    name: "Orbital Support",
-    description: "Unlock orbital support, calling in a powerful strike from above.",
+    name: "Orbital Strike",
+    description: "Unlock orbital strike, calling in a powerful strike from above.",
     prerequisite: 23,
     levels: [{ cost: 50, effect: true }],
     applyUpgrade: (level) => {
-      // gameState.upgrades.orbitalSupport.unlocked =
-      //   UPGRADES[25].levels[level - 1].effect;
-    },
-    getCurrentValue: () => {
-      return gameState.upgrades.orbitalSupport.unlocked;
+      gameState.upgrades.abilities.orbitalStrike.enabled = true
     },
     grid: {
       x: -5,
       y: 0,
-      icon: "orbitalSupportIcon",
+      icon: "orbitalStrike",
       size: "medium",
     },
     
   },
-  { // NOT DONE YET
+  {
     id: 26,
-    name: "Orbital Support Quantity",
-    description: "Increase the number of orbital strikes you can call in.",
+    name: "Orbital Strike Quantity",
+    description: "Increase the number of orbital strikes per call.",
     prerequisite: 25,
     levels: [
-      { cost: 30, effect: 1 },
-      { cost: 80, effect: 2 },
+      { cost: 30, effect: 10 },
+      { cost: 80, effect: 12 },
+      { cost: 80, effect: 14 },
+      { cost: 80, effect: 16 },
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.orbitalSupport.quantity =
-      //   UPGRADES[26].levels[level - 1].effect;
+      gameState.upgrades.abilities.orbitalStrike.quantity = UPGRADES[26].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.orbitalSupport.quantity;
+      return gameState.upgrades.abilities.orbitalStrike.quantity;
     },
     grid: {
       x: -6,
       y: 0,
-      icon: "orbitalSupportQuantityIcon",
+      icon: "orbitalStrikeQuantity",
       size: "medium",
     },
 
   },
-  { // NOT DONE YET
+  {
     id: 27,
-    name: "Orbital Support Damage",
+    name: "Orbital Strike Damage",
     description: "Increase the damage of orbital strikes.",
     prerequisite: 25,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
+      { cost: 30, effect: 400 },
+      { cost: 80, effect: 500 },
+      { cost: 80, effect: 600 },
+      { cost: 80, effect: 700 },
+      { cost: 80, effect: 800 },
     ],  
     applyUpgrade: (level) => {
-      // gameState.upgrades.orbitalSupport.damage =
-      //   UPGRADES[27].levels[level - 1].effect;
+      gameState.upgrades.abilities.orbitalStrike.damage =
+        UPGRADES[27].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.orbitalSupport.damage;
+      return gameState.upgrades.abilities.orbitalStrike.damage;
     },
     grid: {
       x: -5,
       y:-1,
-      icon: "orbitalSupportdamage",
+      icon: "orbitalStrikeDamage",
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 28,
     name: "Power Resupply",
     description: "Unlock the power resupply ability, allowing request an energy resupply package from orbit.",
@@ -693,7 +693,7 @@ const UPGRADES = [
 
 
   },
-  {
+  { // NOT DONE YET
     id: 31,
     name: "Energy Burst",
     description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",

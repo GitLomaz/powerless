@@ -5,6 +5,9 @@ class AbilityButton extends Phaser.GameObjects.Container {
       case "resupply":
         this.image = scene.add.image(0, 0, "ability-resupply");
         break;
+      case "orbitalStrike":
+        this.image = scene.add.image(0, 0, "ability-strike");
+        break;
     }
     this.add(this.image);
     this.setDepth(1000);
@@ -13,7 +16,6 @@ class AbilityButton extends Phaser.GameObjects.Container {
     this.image.on("pointerdown", () => {
       switch (ability) {
         case "resupply":
-          console.log('boop?!')
           if (scene.player.supplyCooldown <= 0 || true) {
             scene.player.supplyCooldown = gameState.upgrades.abilities.resupply.cooldown;
             for (let i = 0; i < gameState.upgrades.abilities.resupply.packs; i++) {
@@ -35,6 +37,22 @@ class AbilityButton extends Phaser.GameObjects.Container {
                 gameState.upgrades.abilities.resupply.value
               );
             }
+          }
+          break;
+        case "orbitalStrike":
+          if (scene.player.orbitalCooldown <= 0 || true) {
+            scene.time.addEvent({
+              delay: 150,
+              repeat: gameState.upgrades.abilities.orbitalStrike.quantity - 1,
+              callback: () => {
+                const enemies = scene.enemies;
+                if (enemies.length === 0) {
+                    return;
+                }
+                const enemy = Phaser.Utils.Array.GetRandom(enemies);
+                new OrbitalStrike(enemy.x, enemy.y);
+              }
+            });
           }
           break;
       }

@@ -72,7 +72,7 @@ const gameStateTemplate  = {
         packs: 1,
         value: 10000,
         cooldown: 30000,
-        enabled: true
+        enabled: false
       },
       energyBurst: {
         range: 0,
@@ -80,9 +80,10 @@ const gameStateTemplate  = {
         cooldown: 15000
       },
       orbitalStrike: {
-        damage: 0,
-        projectiles: 0,
-        cooldown: 15000
+        damage: 300,
+        projectiles: 8,
+        cooldown: 30000,
+        enabled: false
       }
     },
   },

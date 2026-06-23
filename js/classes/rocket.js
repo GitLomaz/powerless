@@ -138,5 +138,4 @@ class Rocket extends Phaser.GameObjects.Container {
 
     this.destroy();
   }
-  
 }

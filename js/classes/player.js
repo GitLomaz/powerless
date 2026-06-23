@@ -74,6 +74,11 @@ class Player extends Phaser.GameObjects.Container {
     let posX = 60
     if (gameState.upgrades.abilities.resupply.enabled) {
       new AbilityButton("resupply", posX, GAME_HEIGHT - 60);
+      posX += 100
+    }
+    if (gameState.upgrades.abilities.orbitalStrike.enabled) {
+      new AbilityButton("orbitalStrike", posX, GAME_HEIGHT - 60);
+      posX += 100
     }
   }
 
