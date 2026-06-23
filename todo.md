@@ -22,12 +22,14 @@
 - End of round stats screen
 - Energy decay over time
 - Do not fire when using an ability (click action)
-- Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
++ Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
 - Victory screen
 - Tie abilities to hotkeys
 - Fix calls that cause errors when scene ends
 - Enemy health bars only show up when enemy takes damage
 - Enemy health bars are tweened, not instant
+- Don't fire missiles if nothing in range
+- Slow down and stuff when low on power maybe?
 
 ## Assets needed
 

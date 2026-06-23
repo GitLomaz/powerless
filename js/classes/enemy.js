@@ -1,6 +1,30 @@
 class Enemy extends Phaser.GameObjects.Container {
-  constructor() {
-    super(scene, Random.between(GAME_WIDTH - 200, GAME_WIDTH * 2 + 200), Random.between(GAME_HEIGHT - 200, GAME_HEIGHT * 2 + 200));
+  constructor(offscreen = false) {
+    let x, y;
+    
+    if (offscreen) {
+      // Spawn anywhere in the world that is NOT visible by the camera
+      const cam = scene.cameras.main;
+      const camLeft = cam.scrollX;
+      const camRight = cam.scrollX + cam.width;
+      const camTop = cam.scrollY;
+      const camBottom = cam.scrollY + cam.height;
+      const worldWidth = scene.map.widthInPixels;
+      const worldHeight = scene.map.heightInPixels;
+      
+      // Keep trying until we find a position outside the camera view
+      do {
+        x = Random.between(0, worldWidth);
+        y = Random.between(0, worldHeight);
+      } while (x >= camLeft && x <= camRight && y >= camTop && y <= camBottom);
+      
+    } else {
+      // Spawn at a random point anywhere in the world
+      x = Random.between(0, scene.map.widthInPixels);
+      y = Random.between(0, scene.map.heightInPixels);
+    }
+    
+    super(scene, x, y);
     scene.add.existing(this);
     scene.enemyGroup.add(this);
     this.healthMax = 100;
@@ -103,22 +127,20 @@ class Enemy extends Phaser.GameObjects.Container {
 
     this.payout(impactX, impactY);
     this.destroy();
-    setTimeout(() => {
-      switch (this.tier) {
-        case 1:
-          scene.enemies.push(new T1());
-          break;
-        case 2:
-          scene.enemies.push(new T2());
-          break;
-        case 3:
-          scene.enemies.push(new T3());
-          break;
-        case 4:
-          scene.enemies.push(new T4());
-          break;
-      }
-    }, 4000);
+    switch (this.tier) {
+      case 1:
+        scene.enemies.push(new T1(true));
+        break;
+      case 2:
+        scene.enemies.push(new T2(true));
+        break;
+      case 3:
+        scene.enemies.push(new T3(true));
+        break;
+      case 4:
+        scene.enemies.push(new T4(true));
+        break;
+    }
   }
 
   payout(impactX, impactY) {
@@ -147,3 +169,4 @@ class Enemy extends Phaser.GameObjects.Container {
     super.destroy();
   }
 }
+
