@@ -70,6 +70,10 @@ class Player extends Phaser.GameObjects.Container {
     this.supplyCooldown = 0;
     this.strikeCooldown = 0;
     this.burstCooldown = 0;
+    
+    // Track UI clicks to prevent cannon firing on UI interaction
+    this.lastUIClick = 0;
+    this.sceneStartTime = scene.time.now;
 
     if (gameState.upgrades.abilities.resupply.enabled) {
       this.resupply = new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
@@ -278,7 +282,13 @@ class Player extends Phaser.GameObjects.Container {
     );
 
     this.barrel.rotation = Math.atan2(worldPoint.y - this.y, worldPoint.x - this.x);
-    if (scene.input.activePointer.isDown) {
+    
+    // Don't fire if we just clicked UI or just started the scene
+    const timeSinceUIClick = scene.time.now - this.lastUIClick;
+    const timeSinceSceneStart = scene.time.now - this.sceneStartTime;
+    const canFireCannon = timeSinceUIClick > 100 && timeSinceSceneStart > 100;
+    
+    if (scene.input.activePointer.isDown && canFireCannon) {
       if(this.cannonCanShoot){
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
         new Shell();

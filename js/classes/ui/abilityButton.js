@@ -42,10 +42,12 @@ class AbilityButton extends Phaser.GameObjects.Container {
     this.setDepth(1000);
     this.setScrollFactor(0);
     this.setInteractive()
-    this.on("pointerdown", () => {
+    this.on("pointerdown", (pointer) => {
       if (!this.ready) {
         return;
       }
+      // Prevent cannon from firing when clicking UI
+      scene.player.lastUIClick = scene.time.now;
       const cooldownReduction = gameState.upgrades.player.cooldownReduction || 0;
       switch (ability) {
         case "resupply":
