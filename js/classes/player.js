@@ -190,7 +190,7 @@ class Player extends Phaser.GameObjects.Container {
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
 
-    const decay = Math.sqrt(time / 100)
+    const decay = time > 30000 ? Math.sqrt(time / 100) : 0;
 
     this.energy -= delta * gameState.upgrades.player.energyLoss + decay;
     if (this.energy < 0) {
