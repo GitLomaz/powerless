@@ -4,7 +4,10 @@ class Boss extends Phaser.GameObjects.Container {
     
     scene.physics.add.existing(this);
     this.body.setCircle(48, -48, -48);
+    scene.enemyGroup.add(this);
     scene.add.existing(this);
+
+    this.tier = 5
 
     this.dirX = 1;
     this.dirY = 0;
@@ -98,7 +101,7 @@ class Boss extends Phaser.GameObjects.Container {
 
       const len = Math.hypot(dx, dy);
 
-      if (len > 300) {
+      if (len > 0) {
         dx /= len;
         dy /= len;
 
@@ -110,6 +113,9 @@ class Boss extends Phaser.GameObjects.Container {
 
         this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
         this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
+      } else {
+        this.dirX = 0;
+        this.dirY = 0;
       }
     }
 

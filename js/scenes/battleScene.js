@@ -94,10 +94,14 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
-      if (gameState.upgrades.player.stomp < enemy.tier) {
-        player.energy -= 2000;
+      if (enemy.tier === 5) {
+        player.energy = -100;
+      } else {
+        if (gameState.upgrades.player.stomp < enemy.tier) {
+          player.energy -= 2000;
+        }
+        enemy.die(player.x, player.y);
       }
-      enemy.die(player.x, player.y);
     });
 
     this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
@@ -129,18 +133,18 @@ let battleScene = new Phaser.Class({
     this.enemies = [];    
     this.bullets = [];    
     this.credits = [];
-    for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
-      this.enemies.push(new T1());
-    }
-    for (let i = 0; i < gameState.upgrades.spawns.tier2.units; i++) {
-      this.enemies.push(new T2());
-    }
-    for (let i = 0; i < gameState.upgrades.spawns.tier3.units; i++) {
-      this.enemies.push(new T3());
-    }
-    for (let i = 0; i < gameState.upgrades.spawns.tier4.units; i++) {
-      this.enemies.push(new T4());
-    }
+    // for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
+    //   this.enemies.push(new T1());
+    // }
+    // for (let i = 0; i < gameState.upgrades.spawns.tier2.units; i++) {
+    //   this.enemies.push(new T2());
+    // }
+    // for (let i = 0; i < gameState.upgrades.spawns.tier3.units; i++) {
+    //   this.enemies.push(new T3());
+    // }
+    // for (let i = 0; i < gameState.upgrades.spawns.tier4.units; i++) {
+    //   this.enemies.push(new T4());
+    // }
 
     if (gameState.upgrades.spawns.boss) {
       this.enemies.push(new Boss(2000, 1000));
