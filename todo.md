@@ -16,9 +16,9 @@
 ## Battle Scene
 
 - Animate turret firing
-- Proper ability buttons
-- Ability cooldowns
-- Ability Cooldown upgrade
++ Proper ability buttons
++ Ability cooldowns
++ Ability Cooldown upgrade
 + Final boss
 - End of round stats screen
 + Energy decay over time
@@ -29,7 +29,7 @@
 - Fix calls that cause errors when scene ends
 - Enemy health bars only show up when enemy takes damage
 - Enemy health bars are tweened, not instant
-- Don't fire missiles if nothing in range
++ Don't fire missiles if nothing in range
 - Slow down and stuff when low on power maybe?
 
 ## Assets needed

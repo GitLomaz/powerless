@@ -72,13 +72,13 @@ class Player extends Phaser.GameObjects.Container {
     this.burstCooldown = 0;
 
     if (gameState.upgrades.abilities.resupply.enabled) {
-      new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
+      this.resupply = new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
     }
     if (gameState.upgrades.abilities.orbitalStrike.enabled) {
-      new AbilityButton("orbitalStrike", 160, GAME_HEIGHT - 60);
+      this.orbitalStrike = new AbilityButton("orbitalStrike", 160, GAME_HEIGHT - 60);
     }
     if (gameState.upgrades.abilities.energyBurst.enabled) {
-      new AbilityButton("energyBurst", 260, GAME_HEIGHT - 60);
+      this.energyBurst = new AbilityButton("energyBurst", 260, GAME_HEIGHT - 60);
     }
   }
 
@@ -198,6 +198,31 @@ class Player extends Phaser.GameObjects.Container {
     }
     this.powerbar.setPower(this.energy / gameState.upgrades.player.energy);
 
+    // Update ability cooldowns
+    if (this.supplyCooldown > 0) {
+      this.supplyCooldown -= delta;
+      if (this.supplyCooldown <= 0) {
+        this.supplyCooldown = 0;
+        if (this.resupply) this.resupply.setReady(true);
+      }
+    }
+
+    if (this.strikeCooldown > 0) {
+      this.strikeCooldown -= delta;
+      if (this.strikeCooldown <= 0) {
+        this.strikeCooldown = 0;
+        if (this.orbitalStrike) this.orbitalStrike.setReady(true);
+      }
+    }
+
+    if (this.burstCooldown > 0) {
+      this.burstCooldown -= delta;
+      if (this.burstCooldown <= 0) {
+        this.burstCooldown = 0;
+        if (this.energyBurst) this.energyBurst.setReady(true);
+      }
+    }
+
     this.legs.forEach((leg, i) => {
       const foot = this.feet[i];
 
@@ -270,7 +295,7 @@ class Player extends Phaser.GameObjects.Container {
       if(this.rocketCanShoot){
       const enemies = this.findEnemies(1500)
       const nearestEnemy = enemies[0];
-   
+      if (nearestEnemy) {
         new Rocket(this, nearestEnemy, true);
         if (gameState.upgrades.weapons.rocket.double) {
           const secondNearestEnemy = enemies[1];
@@ -282,7 +307,7 @@ class Player extends Phaser.GameObjects.Container {
         scene.time.delayedCall(gameState.upgrades.weapons.rocket.fireRate, () => {
           this.rocketCanShoot=true;
         });
-      
+      }
     }}
   }
 

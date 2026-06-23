@@ -59,6 +59,7 @@ const gameStateTemplate  = {
       magnet: 200,
       speed: 150,
       energy: 15000,
+      cooldownReduction: 0,
       energyLoss: 1,
       dropRate: 1,
       energyLeech: {
@@ -73,18 +74,21 @@ const gameStateTemplate  = {
         packs: 1,
         value: 10000,
         cooldown: 30000,
+        currentCooldown: 0,
         enabled: false
       },
       energyBurst: {
         range: 200,
         damage: 200,
-        cooldown: 15000,
+        cooldown: 10000,
+        currentCooldown: 0,
         enabled: false
       },
       orbitalStrike: {
         damage: 300,
         projectiles: 8,
         cooldown: 30000,
+        currentCooldown: 0,
         enabled: false
       }
     },

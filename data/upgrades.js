@@ -534,25 +534,28 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // NOT DONE YET
+  {
     id: 24,
     name: "Ability Cooldown",
     description: "Reduce the cooldown of all abilities.",
     prerequisite: 22,
     levels: [
-      { cost: 30, effect: 0.9 },
-      { cost: 80, effect: 0.8 },
+      { cost: 30, effect: -1000 },
+      { cost: 30, effect: -2000 },
+      { cost: 30, effect: -3000 },
+      { cost: 30, effect: -4000 },
+      { cost: 80, effect: -5000 },
     ],
     applyUpgrade: (level) => {
-      // gameState.upgrades.ability.cooldown = UPGRADES[24].levels[level - 1].effect;
+      gameState.upgrades.player.cooldownReduction = UPGRADES[24].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.ability.cooldown;
+      return gameState.upgrades.player.cooldownReduction;
     },
     grid: {
       x: -3,
       y: 1,
-      icon: "abilityCooldownIcon",
+      icon: "abilityCooldown",
       size: "medium",
     },
   },
