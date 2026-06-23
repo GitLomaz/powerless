@@ -4,7 +4,7 @@ let config = {
   height: GAME_HEIGHT,
   parent: "wrapper",
   // scene: [battleScene, orbitScene],
-  scene: [orbitScene, battleScene],
+  scene: [orbitScene, battleScene, soundManager],
   roundPixels: true,
   physics: {
     default: 'arcade',
