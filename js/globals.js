@@ -54,7 +54,7 @@ const gameStateTemplate  = {
         doubleDrop: 0,
         explosion: 0
       },
-      boss: true
+      boss: false
     },
     player: {
       magnet: 200,

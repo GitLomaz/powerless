@@ -27,7 +27,9 @@ class Deploy extends Phaser.GameObjects.Container {
 
     this.setScrollFactor(0);
     this.setInteractive();
-    this.on('pointerdown', () => {
+    this.on('pointerdown', (pointer) => {
+      // Consume the click event to prevent it from firing cannon on scene start
+      pointer.event.stopPropagation();
       scene.scene.start('battleScene');
     });
     scene.add.existing(this);

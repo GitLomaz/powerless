@@ -32,6 +32,7 @@ class Enemy extends Phaser.GameObjects.Container {
     this.healthBar = scene.add.graphics();
     this.healthBar.fillStyle(0xff0000, 1);
     this.healthBar.fillRect(-25, -40, 50, 5);
+    this.healthBar.setAlpha(0);
     this.add(this.healthBar);
   }
 
@@ -54,10 +55,29 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   takeDamage(amount, impactX, impactY) {
+    scene.tweens.add({
+      targets: this.healthBar,
+      alpha: 1, 
+      duration: 100,
+    });  
+    
+    const oldHealth = this.health;
     this.health -= amount;
-    this.healthBar.clear();
-    this.healthBar.fillStyle(0xff0000, 1);
-    this.healthBar.fillRect(-25, -40, 50 * (this.health / this.healthMax), 5);
+    
+    // Tween the health bar width smoothly
+    const healthDisplay = { value: oldHealth };
+    scene.tweens.add({
+      targets: healthDisplay,
+      value: this.health,
+      duration: 300,
+      ease: 'Quad.Out',
+      onUpdate: () => {
+        this.healthBar.clear();
+        this.healthBar.fillStyle(0xff0000, 1);
+        this.healthBar.fillRect(-25, -40, 50 * (healthDisplay.value / this.healthMax), 5);
+      }
+    });
+    
     if (this.health <= 0) {
       const healthMax = this.healthMax
       this.die(impactX, impactY);
