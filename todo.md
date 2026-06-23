@@ -22,9 +22,12 @@
 - Energy decay over time
 - Do not fire when using an ability (click action)
 - Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
+- Victory screen
+- Tie abilities to hotkeys
 
 ## Assets needed
 
 - All upgrade icons
 - Background
 - All enemies
+- Orbital impact crator
