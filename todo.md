@@ -21,6 +21,7 @@
 - End of round stats screen
 - Energy decay over time
 - Do not fire when using an ability (click action)
+- Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
 
 ## Assets needed
 
