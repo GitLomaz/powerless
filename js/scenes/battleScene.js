@@ -141,6 +141,10 @@ let battleScene = new Phaser.Class({
     for (let i = 0; i < gameState.upgrades.spawns.tier4.units; i++) {
       this.enemies.push(new T4());
     }
+
+    if (gameState.upgrades.spawns.boss) {
+      this.enemies.push(new Boss(2000, 1000));
+    }
   },
 
   update: function (time, delta) {

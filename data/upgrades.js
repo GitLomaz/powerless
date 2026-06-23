@@ -1148,22 +1148,18 @@ const UPGRADES = [
   { 
     id: 50,
     name: "BOSS",
-    description: "[Needed]",
+    description: "The final big baddie, do you have what it takes to take him down?!",
     prerequisite: 46,
     levels: [
-      { cost: 10, effect: 1 },
-      { cost: 25, effect: 2 },
-      { cost: 50, effect: 3 },
-      { cost: 100, effect: 4 }
+      { cost: 10, effect: 1 }
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.spawns.tier4.units =
-        UPGRADES[50].levels[level - 1].effect;
+      gameState.upgrades.spawns.boss = true
     },
     grid: {
       x: 0,
       y: -6,
-      icon: "spawnIncreaseIcon",
+      icon: "bossSpawn",
       size: "large",
     },
   },  
@@ -1213,4 +1209,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-// maxAllUpgrades()
+maxAllUpgrades()

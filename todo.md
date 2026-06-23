@@ -26,6 +26,8 @@
 - Victory screen
 - Tie abilities to hotkeys
 - Fix calls that cause errors when scene ends
+- Enemy health bars only show up when enemy takes damage
+- Enemy health bars are tweened, not instant
 
 ## Assets needed
 
