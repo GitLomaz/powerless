@@ -27,7 +27,7 @@
 + Do not fire when using an ability (click action)
 + Enemies can spawn anywhere on game load, but should only RESPAWN outside player view
 - Victory screen
-- Tie abilities to hotkeys
++ Tie abilities to hotkeys
 + Fix calls that cause errors when scene ends (all setTimeouts)
 + Enemy health bars only show up when enemy takes damage
 + Enemy health bars are tweened, not instant
@@ -39,5 +39,5 @@
 
 - All upgrade icons
 - Background
-- All enemies
++ All enemies
 - Orbital impact crator

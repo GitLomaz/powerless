@@ -78,7 +78,7 @@ class Player extends Phaser.GameObjects.Container {
           )[0];
           if (this.energy > 0) {
             if (nearestEnemy) {
-              scene.sound.play('smallgun')
+              scene.sound.play('minigun')
               new Bullet(this, nearestEnemy, true);
             }
           }
@@ -110,6 +110,17 @@ class Player extends Phaser.GameObjects.Container {
         GAME_HEIGHT - 60,
       );
     }
+
+    // Setup hotkeys for abilities
+    scene.input.keyboard.on('keydown-ONE', () => {
+      if (this.resupply) this.resupply.emit('pointerdown');
+    });
+    scene.input.keyboard.on('keydown-TWO', () => {
+      if (this.orbitalStrike) this.orbitalStrike.emit('pointerdown');
+    });
+    scene.input.keyboard.on('keydown-THREE', () => {
+      if (this.energyBurst) this.energyBurst.emit('pointerdown');
+    });
 
     this.pointer.on('pointerdown',()=>this.fireMainCannon())
 
