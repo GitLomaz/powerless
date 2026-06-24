@@ -52,7 +52,7 @@ let battleScene = new Phaser.Class({
     this.sounds["click"] = this.sound.add("click");
     this.sounds["cannon"] = this.sound.add("cannon");
     this.sounds["crash"] = this.sound.add("crash");
-    this.sounds["explosion"] = this.sound.add("explosion");
+    this.sounds["explosion"] = this.sound.add("explosion").setVolume(0.4);
     game.sound.mute = muteAll;
 
     applyUpgrades();
