@@ -45,7 +45,10 @@ class UpgradePanel {
     });
 
     // Click – attempt upgrade through centralized system
-    bg.addListener('pointerdown', () => this._onUpgrade());
+    bg.addListener('pointerdown', () => {
+      scene.sounds["click"].play();
+      this._onUpgrade();
+    });
   }
 
   /* ---- data accessors ---- */

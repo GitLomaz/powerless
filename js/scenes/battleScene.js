@@ -10,6 +10,8 @@ let battleScene = new Phaser.Class({
 
   preload: function () {
     scene = this;
+    this.load.audio("click", "audio/click.ogg");
+    this.load.audio("cannon", "audio/cannon.ogg");
     this.load.image("sheet2", "images/sheet2.png");
     this.load.image("mech-foot", "images/mech/foot.png");
     this.load.image("mech-body", "images/mech/body.png");
@@ -40,6 +42,11 @@ let battleScene = new Phaser.Class({
   },
 
   create: function () {
+    this.sounds = [];
+    this.sounds["click"] = this.sound.add("click");
+    this.sounds["cannon"] = this.sound.add("cannon");
+    game.sound.mute = muteAll;
+
     applyUpgrades();
     this.anims.create({
       key: "rocket",

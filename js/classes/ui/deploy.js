@@ -30,6 +30,7 @@ class Deploy extends Phaser.GameObjects.Container {
     this.on('pointerdown', (pointer) => {
       // Consume the click event to prevent it from firing cannon on scene start
       pointer.event.stopPropagation();
+      scene.sounds["click"].play();
       scene.scene.start('battleScene');
     });
     scene.add.existing(this);

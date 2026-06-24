@@ -8,6 +8,7 @@ let orbitScene = new Phaser.Class({
     scene = this;
     this.load.image("question", "images/upgrades/question.png");
     this.load.image("shimmer", "images/upgrades/questionBG.png");
+    this.load.audio("click", "audio/click.ogg");
 
     const icons = []
     UPGRADES.forEach((upgrade) => {
@@ -21,6 +22,10 @@ let orbitScene = new Phaser.Class({
   },
 
   create: function () {
+    this.sounds = [];
+    this.sounds["click"] = this.sound.add("click");
+    game.sound.mute = muteAll;
+
     const bg = this.add.graphics();
     bg.fillStyle(0x1a1a2e, 1);
     bg.fillRect(-2000, -2000, 6000, 6000)

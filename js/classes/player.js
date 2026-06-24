@@ -296,6 +296,7 @@ class Player extends Phaser.GameObjects.Container {
       if(this.cannonCanShoot){
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
         this.barrel.play("mech-barrel-anim", true);
+        scene.sounds["cannon"].play();
         new Shell();
         this.cannonCanShoot=false;
         scene.time.delayedCall(gameState.upgrades.weapons.cannon.fireRate, () => {

@@ -3,7 +3,8 @@ const GAME_HEIGHT = 720;
 const DEBUG = false;
 let scene;
 let tooltip;
-let soundStatus = true;
+let muteAll = localStorage.getItem('muteAll') === 'true' || false;
+let music = false;
 
 const gameStateTemplate  = {
   credits: 1000000,

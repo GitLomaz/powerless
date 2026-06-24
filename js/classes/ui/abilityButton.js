@@ -47,6 +47,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
         return;
       }
       // Prevent cannon from firing when clicking UI
+      scene.sounds["click"].play();
       scene.player.lastUIClick = scene.time.now;
       const cooldownReduction = gameState.upgrades.player.cooldownReduction || 0;
       switch (ability) {
