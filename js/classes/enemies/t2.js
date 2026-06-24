@@ -13,6 +13,7 @@ class T2 extends Enemy {
     this.damage = 100
     this.checkPromotion();
     this.distanceTrveled = 0;
+    this.setScale(.8);
   }
 
   tick(delta) {

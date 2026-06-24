@@ -5,11 +5,10 @@ let config = {
   parent: "wrapper",
   scene: [orbitScene, battleScene],
   roundPixels: true,
-
   physics: {
     default: "arcade",
     arcade: {
-      debug: true,
+      // debug: true,
     },
   },
 };
