@@ -14,6 +14,11 @@ let battleScene = new Phaser.Class({
     this.load.audio("cannon", "audio/cannon.ogg");
     this.load.audio("crash", "audio/crash.ogg");
     this.load.audio("explosion", "audio/explosion.ogg");
+    this.load.audio("minigun","audio/minigun.ogg")
+
+
+
+
     this.load.image("sheet2", "images/sheet2.png");
     this.load.image("mech-foot", "images/mech/foot.png");
     this.load.image("mech-body", "images/mech/body.png");
@@ -53,6 +58,7 @@ let battleScene = new Phaser.Class({
     this.sounds["cannon"] = this.sound.add("cannon");
     this.sounds["crash"] = this.sound.add("crash");
     this.sounds["explosion"] = this.sound.add("explosion").setVolume(0.4);
+    this.sounds["minigun"] = this.sound.add("minigun").setVolume(0.3);
     game.sound.mute = muteAll;
 
     applyUpgrades();

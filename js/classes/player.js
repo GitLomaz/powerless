@@ -78,8 +78,11 @@ class Player extends Phaser.GameObjects.Container {
           )[0];
           if (this.energy > 0) {
             if (nearestEnemy) {
-              scene.sound.play('minigun')
-              new Bullet(this, nearestEnemy, true);
+              scene.sounds["minigun"].play();
+              // Instant damage
+              nearestEnemy.takeDamage(gameState.upgrades.weapons.minigun.damage, this.x, this.y);
+              // Quick visual line effect
+              this.createMinigunLine(nearestEnemy);
             }
           }
         },
@@ -179,6 +182,51 @@ class Player extends Phaser.GameObjects.Container {
       alpha: 0,
       duration: 400,
       ease: "Quad.easeOut",
+      onUpdate: redraw,
+      onComplete: () => graphics.destroy(),
+    });
+  }
+
+  createMinigunLine(target) {
+    const graphics = scene.add.graphics();
+    graphics.setDepth(3);
+
+    const dx = target.x - this.x;
+    const dy = target.y - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const lineLength = 30; // Short line segment
+    
+    const lineData = {
+      progress: 0,
+      alpha: 0.8,
+    };
+
+    const redraw = () => {
+      graphics.clear();
+      graphics.lineStyle(3, 0xffff00, lineData.alpha);
+
+      // Calculate the moving line segment position
+      const startProgress = Math.max(0, lineData.progress - lineLength / distance);
+      const endProgress = lineData.progress;
+      
+      const startX = this.x + dx * startProgress;
+      const startY = this.y + dy * startProgress;
+      const endX = this.x + dx * endProgress;
+      const endY = this.y + dy * endProgress;
+
+      graphics.beginPath();
+      graphics.moveTo(startX, startY);
+      graphics.lineTo(endX, endY);
+      graphics.strokePath();
+    };
+
+    redraw();
+    scene.tweens.add({
+      targets: lineData,
+      progress: 1,
+      alpha: 0.3,
+      duration: 80,
+      ease: "Linear",
       onUpdate: redraw,
       onComplete: () => graphics.destroy(),
     });
