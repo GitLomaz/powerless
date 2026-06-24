@@ -140,6 +140,7 @@ let battleScene = new Phaser.Class({
     this.physics.add.overlap(this.bulletGroup, this.enemyBulletGroup, function (bullet, enemyBullet) {
       if (enemyBullet.metaType === "rocket") {
         bullet.destroy();
+        enemyBullet.explode();
         enemyBullet.destroy();
       }
     });

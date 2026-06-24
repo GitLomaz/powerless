@@ -5,7 +5,10 @@ let config = {
   parent: "wrapper",
   scene: [orbitScene, battleScene],
   roundPixels: true,
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/main
   physics: {
     default: "arcade",
     arcade: {

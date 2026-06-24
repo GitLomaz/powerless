@@ -38,13 +38,13 @@ const gameStateTemplate  = {
         doubleDrop: 0
       },
       tier2: {
-        units: 5,
+        units: 0,
         promotion: 0,
         doubleDrop: 0,
         explosion: 0
       },
       tier3: {
-        units: 0,
+        units: 5,
         promotion: 0,
         doubleDrop: 0,
         explosion: 0
