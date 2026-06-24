@@ -36,6 +36,9 @@ let battleScene = new Phaser.Class({
     this.load.image("enemy-jeep", "images/enemies/jeep.png");
     this.load.image("enemy-truck", "images/enemies/explosiveTruck.png");
     this.load.image("enemy-jeep-tread", "images/enemies/jeepTracks.png");
+    this.load.image("enemy-tank-body", "images/enemies/tankBody.png");
+    this.load.image("enemy-tank-barrel", "images/enemies/tankBarrel.png");
+    this.load.image("enemy-tank-tread", "images/enemies/tankTracks.png");
     this.load.spritesheet("resupply", "images/resupply.png", { frameWidth: 32, frameHeight: 64 });
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
