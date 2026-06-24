@@ -8,7 +8,9 @@ class T1 extends Enemy {
     this.body.setCircle(24, -24, -24);
     this.tier = 1
     this.damage = 0
-    this.value = Random.between(2,5)
+    this.health = 80
+    this.healthMax = 80
+    this.value = Random.between(1,3)
     this.checkPromotion();
 
     this.target = new Phaser.Math.Vector2(

@@ -9,8 +9,10 @@ class T2 extends Enemy {
     this.body.setCircle(32, -32, -32);
     this.canShoot = true;
     this.tier = 2
-    this.value = Random.between(8,18)
-    this.damage = 100
+    this.health = 150
+    this.healthMax = 150
+    this.value = Random.between(4,8)
+    this.damage = 80
     this.checkPromotion();
     this.distanceTrveled = 0;
     this.setScale(.8);

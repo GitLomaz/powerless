@@ -64,5 +64,14 @@ let orbitScene = new Phaser.Class({
 
     new Deploy();
     new SoundToggle(12, 12,this);
+    
+    // Credits display
+    this.creditsText = this.add.text(GAME_WIDTH - 220, 20, `Credits: ${gameState.credits}`, {
+      fontFamily: 'Consolas',
+      fontSize: '24px',
+      fill: '#FFD700',
+      stroke: '#000000',
+      strokeThickness: 2
+    }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
   },
 });

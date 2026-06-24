@@ -134,10 +134,10 @@ let battleScene = new Phaser.Class({
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
       if (enemy.tier === 5) {
-        player.energy = -100;
+        player.energy = -100000;
       } else {
-        if (gameState.upgrades.player.stomp < enemy.tier) {
-          player.energy -= 2000;
+        if (gameState.upgrades.abilities.stomp < enemy.tier) {
+          player.energy -= 1000;
         }
         enemy.die(player.x, player.y);
       }

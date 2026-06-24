@@ -7,8 +7,10 @@ class T3 extends Enemy {
     scene.enemyGroup.add(this);
     
     this.tier = 3;
-    this.value = Random.between(28, 50);
-    this.damage = 500;
+    this.health = 250
+    this.healthMax = 250
+    this.value = Random.between(10, 18);
+    this.damage = 120;
     
     // Movement properties
     this.speed = 50;

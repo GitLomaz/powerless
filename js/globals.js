@@ -7,7 +7,7 @@ let muteAll = localStorage.getItem('muteAll') === 'true' || false;
 let music = false;
 
 const gameStateTemplate  = {
-  credits: 1000000,
+  credits: 0,
   upgrades: {
     weapons: {
       minigun: {
@@ -21,11 +21,11 @@ const gameStateTemplate  = {
         double: false,
         damage: 100,
         fireRate: 3500,
-        splash: 200,
+        splash: 50,
         speed: 200,
       },
       cannon: {
-        damage: 25,
+        damage: 30,
         fireRate: 1000,
         range: 2000,
         speed: 400,
@@ -33,7 +33,7 @@ const gameStateTemplate  = {
     },
     spawns: {
       tier1: {
-        units: 10,
+        units: 20,
         promotion: 0,
         doubleDrop: 0
       },

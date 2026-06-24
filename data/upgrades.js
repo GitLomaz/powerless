@@ -22,6 +22,8 @@ const UPGRADES = [
       { cost: 5, effect: 500 },
       { cost: 15, effect: 600 },
       { cost: 40, effect: 700 },
+      { cost: 80, effect: 800 },
+      { cost: 150, effect: 900 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.speed =
@@ -43,9 +45,11 @@ const UPGRADES = [
     description: "Increase the damage of the main cannon.",
     prerequisite: 1,
     levels: [
-      { cost: 5, effect: 35 },
-      { cost: 15, effect: 50 },
-      { cost: 40, effect: 75 },
+      { cost: 30, effect: 35 },
+      { cost: 80, effect: 50 },
+      { cost: 200, effect: 75 },
+      { cost: 400, effect: 100 },
+      { cost: 700, effect: 130 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.damage =
@@ -90,9 +94,11 @@ const UPGRADES = [
     seconds: true,
     prerequisite: 2,
     levels: [
-      { cost: 5, effect: 900},
-      { cost: 15, effect: 800 },
-      { cost: 40, effect: 650 },
+      { cost: 100, effect: 900},
+      { cost: 250, effect: 800 },
+      { cost: 500, effect: 650 },
+      { cost: 900, effect: 550 },
+      { cost: 1500, effect: 450 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.fireRate =
@@ -113,7 +119,7 @@ const UPGRADES = [
     name: "Minigun",
     description: "Unlock the minigun weapon.",
     prerequisite: 1,
-    levels: [{ cost: 10, effect: true }],
+    levels: [{ cost: 25, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.minigun.enabled =
         UPGRADES[5].levels[level - 1].effect;
@@ -134,9 +140,12 @@ const UPGRADES = [
     description: "Increase the damage of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 7 },
-      { cost: 15, effect: 10 },
-      { cost: 40, effect: 15 },
+      { cost: 30, effect: 7 },
+      { cost: 80, effect: 10 },
+      { cost: 200, effect: 15 },
+      { cost: 400, effect: 20 },
+      { cost: 700, effect: 28 },
+      { cost: 1200, effect: 35 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.minigun.damage =
@@ -159,9 +168,11 @@ const UPGRADES = [
     seconds: true,
     prerequisite: 6,
     levels: [
-      { cost: 5, effect: 350 },
-      { cost: 15, effect: 300 },
-      { cost: 40, effect: 250 },
+      { cost: 100, effect: 350 },
+      { cost: 250, effect: 300 },
+      { cost: 500, effect: 250 },
+      { cost: 900, effect: 200 },
+      { cost: 1500, effect: 150 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.minigun.fireRate =
@@ -183,9 +194,11 @@ const UPGRADES = [
     description: "Increase the targeting range of the minigun.",
     prerequisite: 5,
     levels: [
-      { cost: 5, effect: 400 },
-      { cost: 15, effect: 550 },
-      { cost: 40, effect: 700 },
+      { cost: 30, effect: 400 },
+      { cost: 80, effect: 550 },
+      { cost: 200, effect: 700 },
+      { cost: 400, effect: 850 },
+      { cost: 700, effect: 1000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.minigun.range =
@@ -206,7 +219,7 @@ const UPGRADES = [
     name: "Rocket Launcher",
     description: "Unlock the rocket launcher weapon.",
     prerequisite: 1,
-    levels: [{ cost: 20, effect: true }],
+    levels: [{ cost: 50, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.enabled =
         UPGRADES[9].levels[level - 1].effect;
@@ -227,9 +240,11 @@ const UPGRADES = [
     description: "Increase the damage of rockets.",
     prerequisite: 9,
     levels: [
-      { cost: 5, effect: 150 },
-      { cost: 15, effect: 250 },
-      { cost: 40, effect: 400 },
+      { cost: 40, effect: 100 },
+      { cost: 100, effect: 150 },
+      { cost: 250, effect: 200 },
+      { cost: 500, effect: 400 },
+      { cost: 900, effect: 650 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.damage =
@@ -252,9 +267,11 @@ const UPGRADES = [
     seconds: true,
     prerequisite: 10,
     levels: [
-      { cost: 5, effect: 3000 },
-      { cost: 15, effect: 2500 },
-      { cost: 40, effect: 2000 },
+      { cost: 120, effect: 3000 },
+      { cost: 300, effect: 2500 },
+      { cost: 600, effect: 2000 },
+      { cost: 1100, effect: 1600 },
+      { cost: 1800, effect: 1200 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.fireRate =
@@ -272,13 +289,15 @@ const UPGRADES = [
   },
   {
     id: 12,
-    name: "Rocket Launcher:\r\nSplash Damage",
+    name: "Rocket Launcher:\r\nSplash Range",
     description: "Increases splash AOE for rockets.",
     prerequisite: 10,
     levels: [
-      { cost: 10, effect: 250 },
-      { cost: 30, effect: 300 },
-      { cost: 80, effect: 350 },
+      { cost: 120, effect: 50 },
+      { cost: 300, effect: 75 },
+      { cost: 600, effect: 150 },
+      { cost: 1100, effect: 200 },
+      { cost: 1800, effect: 250 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.splash =
@@ -300,9 +319,11 @@ const UPGRADES = [
     description: "Increase the battery capacity of your vehicle.",
     prerequisite: 0,
     levels: [
-      { cost: 5, effect: 25000 },
-      { cost: 15, effect: 50000 },
-      { cost: 40, effect: 90000 },
+      { cost: 10, effect: 25000 },
+      { cost: 30, effect: 50000 },
+      { cost: 80, effect: 90000 },
+      { cost: 180, effect: 140000 },
+      { cost: 350, effect: 200000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energy = UPGRADES[13].levels[level - 1].effect;
@@ -323,9 +344,11 @@ const UPGRADES = [
     description: "Increase the movement speed of your vehicle.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 175 },
-      { cost: 15, effect: 225 },
-      { cost: 40, effect: 300 },
+      { cost: 30, effect: 175 },
+      { cost: 80, effect: 225 },
+      { cost: 200, effect: 300 },
+      { cost: 400, effect: 400 },
+      { cost: 700, effect: 525 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.speed = UPGRADES[14].levels[level - 1].effect;
@@ -347,9 +370,12 @@ const UPGRADES = [
     prerequisite: 14,
     percent: true,
     levels: [
-      { cost: 5, effect: .95 },
-      { cost: 15, effect: .9 },
-      { cost: 40, effect: .85 },
+      { cost: 100, effect: .95 },
+      { cost: 250, effect: .9 },
+      { cost: 500, effect: .85 },
+      { cost: 900, effect: .8 },
+      { cost: 1500, effect: .75 },
+      { cost: 2500, effect: .7 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLoss =
@@ -371,9 +397,11 @@ const UPGRADES = [
     description: "Increase the range at which you can pick up credits.",
     prerequisite: 13,
     levels: [
-      { cost: 5, effect: 300 },
-      { cost: 15, effect: 400 },
-      { cost: 40, effect: 500 },
+      { cost: 30, effect: 300 },
+      { cost: 80, effect: 400 },
+      { cost: 200, effect: 500 },
+      { cost: 400, effect: 600 },
+      { cost: 700, effect: 750 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.magnet = UPGRADES[16].levels[level - 1].effect;
@@ -395,7 +423,7 @@ const UPGRADES = [
       "10% chance to gain some energy back when destroying an enemy",
     prerequisite: 13,
     levels: [
-      { cost: 10, effect: 1 },
+      { cost: 40, effect: 1 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.enabled = true
@@ -416,11 +444,13 @@ const UPGRADES = [
     percent: true,
     prerequisite: 17,
     levels: [
-      { cost: 5, effect: .2 },
-      { cost: 5, effect: .3 },
-      { cost: 5, effect: .4 },
-      { cost: 5, effect: .5 },
-      { cost: 5, effect: .6 },
+      { cost: 100, effect: .2 },
+      { cost: 250, effect: .3 },
+      { cost: 500, effect: .4 },
+      { cost: 900, effect: .5 },
+      { cost: 1500, effect: .6 },
+      { cost: 2500, effect: .7 },
+      { cost: 4000, effect: .8 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.chance = UPGRADES[18].levels[level - 1].effect;
@@ -441,11 +471,13 @@ const UPGRADES = [
     description: "Increases the amount of energy leeched",
     prerequisite: 17,
     levels: [
-      { cost: 5, effect: 1200 },
-      { cost: 5, effect: 1400 },
-      { cost: 5, effect: 1600 },
-      { cost: 5, effect: 1800 },
-      { cost: 5, effect: 2000 },
+      { cost: 100, effect: 1200 },
+      { cost: 250, effect: 1400 },
+      { cost: 500, effect: 1600 },
+      { cost: 900, effect: 1800 },
+      { cost: 1500, effect: 2000 },
+      { cost: 2500, effect: 2500 },
+      { cost: 4000, effect: 3000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.amount = UPGRADES[19].levels[level - 1].effect;
@@ -466,7 +498,7 @@ const UPGRADES = [
     description:
       "Unlock the stomp ability, allowing you to crush Tier I enemies without taking damage.",
     prerequisite: 0,
-    levels: [{ cost: 20, effect: true }],
+    levels: [{ cost: 100, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.stomp = 1;
     },
@@ -485,7 +517,7 @@ const UPGRADES = [
     description: "Allows Stomp to crush Tier II enemies.",
     prerequisite: 20,
     levels: [
-      { cost: 30, effect: 1.2 },
+      { cost: 400, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.stomp = 2;
@@ -505,7 +537,7 @@ const UPGRADES = [
     description: "Allows Stomp to crush Tier III enemies.",
     prerequisite: 21,
     levels: [
-      { cost: 30, effect: 1.2 },
+      { cost: 1200, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.stomp = 3;
@@ -525,7 +557,7 @@ const UPGRADES = [
     description: "Allows Stomp to crush Tier IV enemies.",
     prerequisite: 22,
     levels: [
-      { cost: 30, effect: 1.2 },
+      { cost: 2000, effect: 1.2 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.stomp = 4;
@@ -546,11 +578,13 @@ const UPGRADES = [
     seconds: true,
     prerequisite: 22,
     levels: [
-      { cost: 30, effect: -1000 },
-      { cost: 30, effect: -2000 },
-      { cost: 30, effect: -3000 },
-      { cost: 30, effect: -4000 },
-      { cost: 80, effect: -5000 },
+      { cost: 600, effect: -1000 },
+      { cost: 1300, effect: -2000 },
+      { cost: 2200, effect: -3000 },
+      { cost: 3500, effect: -4000 },
+      { cost: 5000, effect: -5000 },
+      { cost: 7000, effect: -6000 },
+      { cost: 10000, effect: -7000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.cooldownReduction = UPGRADES[24].levels[level - 1].effect;
@@ -570,7 +604,7 @@ const UPGRADES = [
     name: "Orbital Strike",
     description: "Unlock orbital strike, calling in a powerful strike from above.",
     prerequisite: 23,
-    levels: [{ cost: 50, effect: true }],
+    levels: [{ cost: 3000, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.orbitalStrike.enabled = true
     },
@@ -588,10 +622,12 @@ const UPGRADES = [
     description: "Increase the number of orbital strikes per call.",
     prerequisite: 25,
     levels: [
-      { cost: 30, effect: 10 },
-      { cost: 80, effect: 12 },
-      { cost: 80, effect: 14 },
-      { cost: 80, effect: 16 },
+      { cost: 10000, effect: 10 },
+      { cost: 18000, effect: 12 },
+      { cost: 28000, effect: 14 },
+      { cost: 40000, effect: 16 },
+      { cost: 55000, effect: 18 },
+      { cost: 75000, effect: 20 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.orbitalStrike.projectiles = UPGRADES[26].levels[level - 1].effect;
@@ -613,11 +649,13 @@ const UPGRADES = [
     description: "Increase the damage of orbital strikes.",
     prerequisite: 25,
     levels: [
-      { cost: 30, effect: 400 },
-      { cost: 80, effect: 500 },
-      { cost: 80, effect: 600 },
-      { cost: 80, effect: 700 },
-      { cost: 80, effect: 800 },
+      { cost: 10000, effect: 400 },
+      { cost: 18000, effect: 500 },
+      { cost: 28000, effect: 600 },
+      { cost: 40000, effect: 700 },
+      { cost: 55000, effect: 800 },
+      { cost: 75000, effect: 900 },
+      { cost: 100000, effect: 1000 },
     ],  
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.orbitalStrike.damage =
@@ -638,7 +676,7 @@ const UPGRADES = [
     name: "Power Resupply",
     description: "Unlock the power resupply ability, allowing request an energy resupply package from orbit.",
     prerequisite: 22,
-    levels: [{ cost: 50, effect: true }],
+    levels: [{ cost: 3000, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.resupply.enabled = true
     },
@@ -657,11 +695,12 @@ const UPGRADES = [
     seconds: true,
     prerequisite: 28,
     levels: [
-      { cost: 30, effect: 28000 },
-      { cost: 80, effect: 26000 },
-      { cost: 80, effect: 24000 },
-      { cost: 80, effect: 22000 },
-      { cost: 80, effect: 20000 },
+      { cost: 10000, effect: 28000 },
+      { cost: 18000, effect: 26000 },
+      { cost: 28000, effect: 24000 },
+      { cost: 40000, effect: 22000 },
+      { cost: 55000, effect: 20000 },
+      { cost: 75000, effect: 18000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.resupply.cooldown =
@@ -684,8 +723,9 @@ const UPGRADES = [
     description: "Increase the number of packs received.",
     prerequisite: 28,
     levels: [
-      { cost: 30, effect: 2 },
-      { cost: 30, effect: 3 }
+      { cost: 10000, effect: 2 },
+      { cost: 18000, effect: 3 },
+      { cost: 28000, effect: 4 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.resupply.packs =
@@ -708,7 +748,7 @@ const UPGRADES = [
     name: "Energy Burst",
     description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",
     prerequisite: 23,
-    levels: [{ cost: 50, effect: true }],
+    levels: [{ cost: 3000, effect: true }],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.energyBurst.enabled = true
     },
@@ -725,8 +765,10 @@ const UPGRADES = [
     description: "Increase the damage of the energy burst ability.",
     prerequisite: 31,
     levels: [
-      { cost: 30, effect: 300 },
-      { cost: 80, effect: 500 },
+      { cost: 10000, effect: 300 },
+      { cost: 18000, effect: 500 },
+      { cost: 28000, effect: 750 },
+      { cost: 40000, effect: 1000 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.energyBurst.damage =
@@ -749,8 +791,10 @@ const UPGRADES = [
     description: "Increase the area of effect of the energy burst ability.",
     prerequisite: 31,
     levels: [
-      { cost: 30, effect: 250 },
-      { cost: 80, effect: 400 },
+      { cost: 10000, effect: 250 },
+      { cost: 18000, effect: 400 },
+      { cost: 28000, effect: 600 },
+      { cost: 40000, effect: 850 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.abilities.energyBurst.range =
@@ -772,11 +816,11 @@ const UPGRADES = [
     description: "Increase the number of Tier I enemies.",
     prerequisite: 0,
     levels: [
-      { cost: 10, effect: 15 },
-      { cost: 25, effect: 20 },
-      { cost: 50, effect: 30 },
-      { cost: 100, effect: 40 },
-      { cost: 200, effect: 50 }
+      { cost: 20, effect: 15 },
+      { cost: 60, effect: 20 },
+      { cost: 150, effect: 30 },
+      { cost: 300, effect: 40 },
+      { cost: 600, effect: 50 }
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier1.units =
@@ -799,10 +843,12 @@ const UPGRADES = [
     percent: true,
     prerequisite: 34,
     levels: [
-      { cost: 30, effect: 1.2 },
-      { cost: 80, effect: 1.5 },
-      { cost: 80, effect: 2 },
-      { cost: 80, effect: 3 },
+      { cost: 50, effect: 1.2 },
+      { cost: 150, effect: 1.5 },
+      { cost: 350, effect: 2 },
+      { cost: 700, effect: 3 },
+      { cost: 1200, effect: 4 },
+      { cost: 2000, effect: 5 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.dropRate =
@@ -825,10 +871,12 @@ const UPGRADES = [
     percent: true,
     prerequisite: 35,
     levels: [
-      { cost: 30, effect: .1 },
-      { cost: 80, effect: .2 },
-      { cost: 80, effect: .35 },
-      { cost: 80, effect: .5 },
+      { cost: 150, effect: .1 },
+      { cost: 350, effect: .2 },
+      { cost: 700, effect: .35 },
+      { cost: 1200, effect: .5 },
+      { cost: 2000, effect: .65 },
+      { cost: 3000, effect: .8 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier1.doubleDrop =
@@ -851,8 +899,10 @@ const UPGRADES = [
     percent: true,
     prerequisite: 34,
     levels: [
-      { cost: 30, effect: .05 },
-      { cost: 80, effect: .15 },
+      { cost: 50, effect: .05 },
+      { cost: 150, effect: .15 },
+      { cost: 350, effect: .25 },
+      { cost: 700, effect: .35 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier1.promotion =
@@ -874,11 +924,11 @@ const UPGRADES = [
     description: "Increase the number of Tier II enemies.",
     prerequisite: 34,
     levels: [
-      { cost: 10, effect: 5 },
-      { cost: 25, effect: 10 },
-      { cost: 50, effect: 20 },
-      { cost: 100, effect: 40 },
-      { cost: 100, effect: 50 },
+      { cost: 80, effect: 5 },
+      { cost: 200, effect: 10 },
+      { cost: 400, effect: 20 },
+      { cost: 700, effect: 40 },
+      { cost: 1200, effect: 50 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier2.units =
@@ -901,10 +951,11 @@ const UPGRADES = [
     percent: true,
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: .1 },
-      { cost: 80, effect: .2 },
-      { cost: 80, effect: .35 },
-      { cost: 80, effect: .5 },
+      { cost: 200, effect: .1 },
+      { cost: 450, effect: .2 },
+      { cost: 850, effect: .35 },
+      { cost: 1500, effect: .5 },
+      { cost: 2500, effect: .65 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier2.doubleDrop =
@@ -927,8 +978,10 @@ const UPGRADES = [
     percent: true,
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: .05 },
-      { cost: 80, effect: .15 },
+      { cost: 200, effect: .05 },
+      { cost: 450, effect: .15 },
+      { cost: 850, effect: .25 },
+      { cost: 1500, effect: .35 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier2.promotion =
@@ -950,8 +1003,10 @@ const UPGRADES = [
     description: "When destroyed, Tier II enemies explode, damaging nearby enemies in radius.",
     prerequisite: 38,
     levels: [
-      { cost: 30, effect: 50 },
-      { cost: 80, effect: 75 },
+      { cost: 200, effect: 50 },
+      { cost: 450, effect: 75 },
+      { cost: 850, effect: 100 },
+      { cost: 1500, effect: 125 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier2.explosion =
@@ -973,11 +1028,11 @@ const UPGRADES = [
     description: "Increase the number of Tier III enemies.",
     prerequisite: 38,
     levels: [
-      { cost: 10, effect: 5 },
-      { cost: 25, effect: 10 },
-      { cost: 50, effect: 20 },
-      { cost: 100, effect: 30 },
-      { cost: 100, effect: 40 },
+      { cost: 250, effect: 5 },
+      { cost: 600, effect: 10 },
+      { cost: 1200, effect: 20 },
+      { cost: 2200, effect: 30 },
+      { cost: 3500, effect: 40 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier3.units =
@@ -1000,10 +1055,11 @@ const UPGRADES = [
     percent: true,
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: .1 },
-      { cost: 80, effect: .2 },
-      { cost: 80, effect: .35 },
-      { cost: 80, effect: .5 },
+      { cost: 800, effect: .1 },
+      { cost: 1700, effect: .2 },
+      { cost: 3000, effect: .35 },
+      { cost: 5000, effect: .5 },
+      { cost: 7500, effect: .65 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier3.doubleDrop =
@@ -1026,8 +1082,10 @@ const UPGRADES = [
     percent: true,
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: .05 },
-      { cost: 80, effect: .15 },
+      { cost: 800, effect: .05 },
+      { cost: 1700, effect: .15 },
+      { cost: 3000, effect: .25 },
+      { cost: 5000, effect: .35 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier3.promotion =
@@ -1049,8 +1107,10 @@ const UPGRADES = [
     description: "When destroyed, Tier III enemies explode, damaging nearby enemies in radius.",
     prerequisite: 42,
     levels: [
-      { cost: 30, effect: 50 },
-      { cost: 80, effect: 75 },
+      { cost: 800, effect: 50 },
+      { cost: 1700, effect: 75 },
+      { cost: 3000, effect: 100 },
+      { cost: 5000, effect: 125 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier3.explosion =
@@ -1072,10 +1132,10 @@ const UPGRADES = [
     description: "Increase the number of Tier IV enemies.",
     prerequisite: 42,
     levels: [
-      { cost: 10, effect: 3 },
-      { cost: 25, effect: 8 },
-      { cost: 50, effect: 15 },
-      { cost: 100, effect: 25 }
+      { cost: 600, effect: 3 },
+      { cost: 1300, effect: 8 },
+      { cost: 2500, effect: 15 },
+      { cost: 4500, effect: 25 }
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier4.units =
@@ -1098,10 +1158,11 @@ const UPGRADES = [
     percent: true,
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: .1 },
-      { cost: 80, effect: .2 },
-      { cost: 80, effect: .35 },
-      { cost: 80, effect: .5 },
+      { cost: 3000, effect: .1 },
+      { cost: 6000, effect: .2 },
+      { cost: 10000, effect: .35 },
+      { cost: 16000, effect: .5 },
+      { cost: 25000, effect: .65 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier4.doubleDrop =
@@ -1124,8 +1185,10 @@ const UPGRADES = [
     percent: true,
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: .05 },
-      { cost: 80, effect: .15 },
+      { cost: 3000, effect: .05 },
+      { cost: 6000, effect: .15 },
+      { cost: 10000, effect: .25 },
+      { cost: 16000, effect: .35 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier4.promotion =
@@ -1147,8 +1210,10 @@ const UPGRADES = [
     description: "When destroyed, Tier IV enemies explode, damaging nearby enemies in radius.",
     prerequisite: 46,
     levels: [
-      { cost: 30, effect: 50 },
-      { cost: 80, effect: 75 },
+      { cost: 3000, effect: 50 },
+      { cost: 6000, effect: 75 },
+      { cost: 10000, effect: 100 },
+      { cost: 16000, effect: 125 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier4.explosion =
@@ -1170,7 +1235,7 @@ const UPGRADES = [
     description: "The final big baddie, do you have what it takes to take him down?!",
     prerequisite: 46,
     levels: [
-      { cost: 10, effect: 1 }
+      { cost: 100000, effect: 1 }
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.boss = true
@@ -1188,7 +1253,7 @@ const UPGRADES = [
     description: "Fires two rockets at once instead of one.",
     prerequisite: 11,
     levels: [
-      { cost: 5, effect: true },
+      { cost: 2500, effect: true },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.rocket.double =
@@ -1207,7 +1272,9 @@ const UPGRADES = [
 ]
 
 function applyUpgrades() {
+  const savedCredits = gameState.credits;
   gameState = JSON.parse(JSON.stringify(gameStateTemplate));
+  gameState.credits = savedCredits;
   LEVELS.forEach((level, id) => {
     if (level > 0 && UPGRADES[id] && UPGRADES[id].applyUpgrade) {
       UPGRADES[id].applyUpgrade(level);
@@ -1228,4 +1295,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-maxAllUpgrades()
+// maxAllUpgrades()

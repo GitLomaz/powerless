@@ -48,8 +48,8 @@ class Boss extends Phaser.GameObjects.Container {
     // Boss speed
     this.speed = 50;
 
-    this.health = 1000;
-    this.maxHealth = 1000;
+    this.health = 2500;
+    this.maxHealth = 2500;
     this.powerbar = new BossPowerbar(20);
     this.active = true;
   }

@@ -8,7 +8,9 @@ class T4 extends Enemy {
     this.body.setCircle(24, -24, -24);
     this.tier = 4
     this.damage = 0
-    this.value = Random.between(2,5)
+    this.health = 60
+    this.healthMax = 60
+    this.value = Random.between(2,4)
     this.checkPromotion();
 
     this.waypoint = new Phaser.Math.Vector2(
@@ -27,7 +29,7 @@ class T4 extends Enemy {
   }
 
   die() {
-    this.explode(200, 1000);
+    this.explode(200, 400);
     super.die(scene.player.x, scene.player.y);
   }
 

@@ -80,14 +80,23 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       if (this.state < 2) return;
       console.log(scene)
       scene.sound.play('click');
-      if (LEVELS[this.index] !== this.upgrade.levels.length)
-      LEVELS[this.index]++;
-      UPGRADEBOXES.forEach((box) => {
-        box.update();
-      });
-      applyUpgrades();
-      new Tooltip(this.upgrade, this.currentTint);
-      applyUpgrades();
+      if (LEVELS[this.index] !== this.upgrade.levels.length) {
+        const cost = this.upgrade.levels[LEVELS[this.index]].cost;
+        if (gameState.credits >= cost) {
+          gameState.credits -= cost;
+          LEVELS[this.index]++;
+          UPGRADEBOXES.forEach((box) => {
+            box.update();
+          });
+          applyUpgrades();
+          new Tooltip(this.upgrade, this.currentTint);
+          applyUpgrades();
+          // Update credits display
+          if (scene.creditsText) {
+            scene.creditsText.setText(`Credits: ${gameState.credits}`);
+          }
+        }
+      }
     }).on("pointerover", () => {
       if (this.state < 2) return;
       new Tooltip(this.upgrade, this.currentTint);
