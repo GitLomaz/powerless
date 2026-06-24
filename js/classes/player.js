@@ -7,6 +7,7 @@ class Player extends Phaser.GameObjects.Container {
     this.cannonCanShoot = true;
     this.rocketCanShoot = true;
     this.pointer=scene.input;
+    this.activatingAbility=false;
 
     scene.physics.add.existing(this);
     this.body.setCircle(48, -48, -48);
@@ -334,6 +335,7 @@ class Player extends Phaser.GameObjects.Container {
   //fire cannon
 
   fireMainCannon() {
+    if(this.activatingAbility){return};
     if (this.cannonCanShoot) {
       if (this.cannonCanShoot) {
         this.barrel.play("mech-barrel-anim", true);

@@ -38,10 +38,17 @@ class AbilityButton extends Phaser.GameObjects.Container {
         this.image = scene.add.image(0, 0, "ability-energyBurst");
         break;
     }
+    
+    
     this.add(this.image);
     this.setDepth(1000);
     this.setScrollFactor(0);
     this.setInteractive()
+    
+    
+   .on('pointerover', () => { scene.player.activatingAbility = true; })
+   .on('pointerout', () => { scene.player.activatingAbility = false; });
+
     this.on("pointerdown", (pointer) => {
       if (!this.ready) {
         return;
