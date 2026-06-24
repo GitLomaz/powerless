@@ -78,6 +78,7 @@ class Player extends Phaser.GameObjects.Container {
           )[0];
           if (this.energy > 0) {
             if (nearestEnemy) {
+              scene.sound.play('smallgun')
               new Bullet(this, nearestEnemy, true);
             }
           }

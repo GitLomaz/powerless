@@ -10,6 +10,7 @@ let orbitScene = new Phaser.Class({
     this.load.image("shimmer", "images/upgrades/questionBG.png");
     this.load.audio("click", "audio/click.ogg");
     this.load.audio("cannon","audio/cannon.ogg")
+    this.load.audio("smallgun","audio/small-gun.ogg")
 
     const icons = []
     UPGRADES.forEach((upgrade) => {
