@@ -5,9 +5,8 @@ class T4 extends Enemy {
     this.sprite.setScale(0.7);
     this.add(this.sprite);
     this.speed = Random.between(50, 70);
-    this.mode = "wander";
     this.body.setCircle(24, -24, -24);
-    this.tier = 1
+    this.tier = 4
     this.damage = 0
     this.value = Random.between(2,5)
     this.checkPromotion();
