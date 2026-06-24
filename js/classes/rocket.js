@@ -97,6 +97,7 @@ class Rocket extends Phaser.GameObjects.Container {
   }
 
   explode(duration = 350) {
+    scene.sounds["explosion"].play();
     const explosion = scene.add.circle(
       this.x,
       this.y,

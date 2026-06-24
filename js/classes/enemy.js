@@ -87,7 +87,11 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   explode(radius, damage) {
-    if (!radius || radius <= 0) return;
+    if (!radius || radius <= 0) {
+      scene.sounds["crash"].play();
+      return;
+    };
+    scene.sounds["explosion"].play();
     const duration = 350
     // Capture coordinates before destroying
     const explosionX = this.x;

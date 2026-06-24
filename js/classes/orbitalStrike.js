@@ -28,6 +28,7 @@ class OrbitalStrike {
     });
   }
   explode(x, y) {
+    scene.sounds["explosion"].play();
     const damage = gameState.upgrades.abilities.orbitalStrike.damage;
     const duration = 350
     const explosion = scene.add.circle(
