@@ -27,6 +27,7 @@ class Enemy extends Phaser.GameObjects.Container {
     super(scene, x, y);
     scene.add.existing(this);
     scene.enemyGroup.add(this);
+    this.setDepth(1);
     this.healthMax = 100;
     this.health = 100;
     this.healthBar = scene.add.graphics();
