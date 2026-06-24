@@ -15,6 +15,7 @@ class OrbitalStrike {
     this.projectile.setDepth(500);
     this.projectile.setScale(2);
     this.projectile.setRotation(Math.atan2(y - this.projectile.y, x - this.projectile.x));
+    scene.sounds["incoming"].play();
     this.projectileTween = scene.tweens.add({
       targets: this.projectile,
       x: x,

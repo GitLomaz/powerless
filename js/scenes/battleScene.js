@@ -15,9 +15,10 @@ let battleScene = new Phaser.Class({
     this.load.audio("crash", "audio/crash.ogg");
     this.load.audio("explosion", "audio/explosion.ogg");
     this.load.audio("minigun","audio/minigun.ogg")
-
-
-
+    this.load.audio("credit","audio/credit.ogg")
+    this.load.audio("discharge","audio/discharge.ogg")
+    this.load.audio("incoming","audio/incoming.ogg")
+    this.load.audio("recharge","audio/recharge.ogg")
 
     this.load.image("sheet2", "images/sheet2.png");
     this.load.image("mech-foot", "images/mech/foot.png");
@@ -55,10 +56,14 @@ let battleScene = new Phaser.Class({
   create: function () {
     this.sounds = [];
     this.sounds["click"] = this.sound.add("click");
-    this.sounds["cannon"] = this.sound.add("cannon");
-    this.sounds["crash"] = this.sound.add("crash");
+    this.sounds["cannon"] = this.sound.add("cannon").setVolume(.7);
+    this.sounds["crash"] = this.sound.add("crash").setVolume(0.4);
     this.sounds["explosion"] = this.sound.add("explosion").setVolume(0.4);
     this.sounds["minigun"] = this.sound.add("minigun").setVolume(0.3);
+    this.sounds["credit"] = this.sound.add("credit").setVolume(0.3);
+    this.sounds["discharge"] = this.sound.add("discharge").setVolume(0.3);
+    this.sounds["incoming"] = this.sound.add("incoming").setVolume(0.3);
+    this.sounds["recharge"] = this.sound.add("recharge").setVolume(0.3);
     game.sound.mute = muteAll;
 
     applyUpgrades();
@@ -162,6 +167,7 @@ let battleScene = new Phaser.Class({
       if (player.energy > gameState.upgrades.player.energy) {
         player.energy = gameState.upgrades.player.energy;
       }
+      scene.sounds["recharge"].play();
       resupply.destroy();
     });
 

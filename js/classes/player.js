@@ -130,6 +130,7 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   gainCredits(amount) {
+    scene.sounds["credit"].play();
     gameState.credits += amount;
     this.creditsGained += amount;
     this.creditsGainedText.setText(`Credits: ${this.creditsGained}`);
@@ -233,6 +234,7 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   burst(duration = 350) {
+    scene.sounds["discharge"].play();
     this.energy -= 1500;
     const explosion = scene.add.circle(this.x, this.y, 1, 0x000099, 0.4);
 

@@ -70,7 +70,7 @@ class Enemy extends Phaser.GameObjects.Container {
     scene.tweens.add({
       targets: healthDisplay,
       value: this.health,
-      duration: 300,
+      duration: 100,
       ease: 'Quad.Out',
       onUpdate: () => {
         this.healthBar.clear();
