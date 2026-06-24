@@ -44,6 +44,7 @@ class Enemy extends Phaser.GameObjects.Container {
       this.damage = this.damage * 2
       this.health = this.health * 2
       this.healthMax = this.healthMax * 2
+      this.value = this.value * 4
       this.aura = scene.add.image(0, 0, "aura");
       scene.tweens.add({
         targets: this.aura,

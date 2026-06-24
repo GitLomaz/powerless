@@ -496,7 +496,7 @@ const UPGRADES = [
     id: 20,
     name: "Stomp",
     description:
-      "Unlock the stomp ability, allowing you to crush Tier I enemies without taking damage.",
+      "Unlock the stomp ability, allowing you to crush Tier I enemies while taking greatly reduced damage.",
     prerequisite: 0,
     levels: [{ cost: 100, effect: true }],
     applyUpgrade: (level) => {
@@ -514,7 +514,7 @@ const UPGRADES = [
   {
     id: 21,
     name: "Stomp II",
-    description: "Allows Stomp to crush Tier II enemies.",
+    description: "Allows Stomp to crush Tier II enemies while taking greatly reduced damage.",
     prerequisite: 20,
     levels: [
       { cost: 400, effect: 1.2 },
@@ -534,7 +534,7 @@ const UPGRADES = [
   {
     id: 22,
     name: "Stomp III",
-    description: "Allows Stomp to crush Tier III enemies.",
+    description: "Allows Stomp to crush Tier III enemies while taking greatly reduced damage.",
     prerequisite: 21,
     levels: [
       { cost: 1200, effect: 1.2 },
@@ -554,7 +554,7 @@ const UPGRADES = [
   {
     id: 23,
     name: "Stomp IV",
-    description: "Allows Stomp to crush Tier IV enemies.",
+    description: "Allows Stomp to crush Tier IV enemies while taking greatly reduced damage.",
     prerequisite: 22,
     levels: [
       { cost: 2000, effect: 1.2 },
@@ -816,11 +816,11 @@ const UPGRADES = [
     description: "Increase the number of Tier I enemies.",
     prerequisite: 0,
     levels: [
-      { cost: 20, effect: 15 },
-      { cost: 60, effect: 20 },
-      { cost: 150, effect: 30 },
-      { cost: 300, effect: 40 },
-      { cost: 600, effect: 50 }
+      { cost: 20, effect: 25 },
+      { cost: 60, effect: 30 },
+      { cost: 150, effect: 40 },
+      { cost: 300, effect: 50 },
+      { cost: 600, effect: 60 }
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.spawns.tier1.units =
