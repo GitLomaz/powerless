@@ -96,4 +96,8 @@ const gameStateTemplate  = {
   },
 }
 
+function formatNumber(num) {
+    return num.toLocaleString();
+}
+
 let gameState = JSON.parse(JSON.stringify(gameStateTemplate));

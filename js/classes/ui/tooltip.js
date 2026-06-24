@@ -36,11 +36,22 @@ class Tooltip extends Phaser.GameObjects.Container {
     }
 
     if (LEVELS[upgrade.id] !== upgrade.levels.length && upgrade.levels.length > 1) {
-      const increaseString = upgrade.getCurrentValue() + " -> " + upgrade.levels[LEVELS[upgrade.id]].effect
+      let increaseString = formatNumber(upgrade.getCurrentValue()) + " -> " + formatNumber(upgrade.levels[LEVELS[upgrade.id]].effect);
+      if (upgrade.percent) {
+        increaseString = (upgrade.getCurrentValue() * 100) + "% -> " + (upgrade.levels[LEVELS[upgrade.id]].effect * 100) + "%";
+      } else if (upgrade.seconds) {
+        increaseString = (upgrade.getCurrentValue() / 1000) + "s -> " + (upgrade.levels[LEVELS[upgrade.id]].effect / 1000) + "s";
+      }
+      //const increaseString = formatNumber(upgrade.getCurrentValue()) + " -> " + formatNumber(upgrade.levels[LEVELS[upgrade.id]].effect);
       const inscrease = scene.add.text(0, 30, increaseString, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5, 0);
       this.add(inscrease);
     } else if (upgrade.levels.length > 1) {
-      const increaseString = upgrade.getCurrentValue()
+      let increaseString = formatNumber(upgrade.getCurrentValue());
+      if (upgrade.percent) {
+        increaseString = (upgrade.getCurrentValue() * 100) + "%";
+      } else if (upgrade.seconds) {
+        increaseString = (upgrade.getCurrentValue() / 1000) + "s";
+      }
       const inscrease = scene.add.text(0, 30, increaseString, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5, 0);
       this.add(inscrease);
     }
@@ -48,7 +59,7 @@ class Tooltip extends Phaser.GameObjects.Container {
     const level = scene.add.text(-100, 90, 'Level ' + (LEVELS[upgrade.id]) + '/' + upgrade.levels.length, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff" }).setOrigin(0, 1);
     this.add(level);
     this.title = scene.add.text(0, -70, upgrade.name, { align: 'center', fontFamily: 'Consolas', fontSize: "18px", fill: "#fff", wordWrap: { width: 200 }}).setOrigin(0.5);
-    this.description = scene.add.text(0, -20, upgrade.description, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5);
+    this.description = scene.add.text(0, -10, upgrade.description, { fontFamily: 'Consolas', fontSize: "16px", fill: "#fff", wordWrap: { width: 200 } }).setOrigin(0.5);
     this.add(this.title);
     this.add(this.description);
 

@@ -41,7 +41,8 @@ class Player extends Phaser.GameObjects.Container {
     this.platform = scene.add.image(0, 0, "mech-body").setOrigin(0.5, 0.5);
     this.add(this.platform);
 
-    this.barrel = scene.add.image(0, 0, "mech-barrel").setOrigin(0.5, 0.5).setDepth(4);
+    //this.barrel = scene.add.image(0, 0, "mech-barrel").setOrigin(0.5, 0.5).setDepth(4);
+    this.barrel = scene.add.sprite(0, 0, "mech-barrel-anim").setOrigin(0.5, 0.5).setDepth(4);
     this.add(this.barrel);
     this.setDepth(4);
 
@@ -199,9 +200,6 @@ class Player extends Phaser.GameObjects.Container {
 
     const decay = this.collectiveTime > 30000 ? Math.sqrt(this.collectiveTime / 100) : 0;
 
-    console.log(delta * gameState.upgrades.player.energyLoss + decay)
-    console.log(delta * gameState.upgrades.player.energyLoss)
-
     this.energy -= delta * gameState.upgrades.player.energyLoss + decay;
     if (this.energy < 0) {
       this.returnToOrbit();
@@ -297,6 +295,7 @@ class Player extends Phaser.GameObjects.Container {
     if (scene.input.activePointer.isDown && canFireCannon) {
       if(this.cannonCanShoot){
       if (!this.lastShot || Date.now() - this.lastShot > gameState.upgrades.weapons.cannon.fireRate) {
+        this.barrel.play("mech-barrel-anim", true);
         new Shell();
         this.cannonCanShoot=false;
         scene.time.delayedCall(gameState.upgrades.weapons.cannon.fireRate, () => {

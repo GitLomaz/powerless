@@ -87,6 +87,7 @@ const UPGRADES = [
     id: 4,
     name: "Main Cannon:\r\nReload Time",
     description: "Decrease the reload time of the main cannon.",
+    seconds: true,
     prerequisite: 2,
     levels: [
       { cost: 5, effect: 900},
@@ -155,6 +156,7 @@ const UPGRADES = [
     id: 7,
     name: "Minigun:\r\nReload Time",
     description: "Decrease the reload time of the minigun.",
+    seconds: true,
     prerequisite: 6,
     levels: [
       { cost: 5, effect: 350 },
@@ -247,6 +249,7 @@ const UPGRADES = [
     id: 11,
     name: "Rocket Launcher:\r\nReload Time",
     description: "Decrease the reload time of rockets.",
+    seconds: true,
     prerequisite: 10,
     levels: [
       { cost: 5, effect: 3000 },
@@ -342,6 +345,7 @@ const UPGRADES = [
     name: "Battery Degradation",
     description: "Decrease the energy loss of the vehicle.",
     prerequisite: 14,
+    percent: true,
     levels: [
       { cost: 5, effect: .95 },
       { cost: 15, effect: .9 },
@@ -409,6 +413,7 @@ const UPGRADES = [
     id: 18,
     name: "Leech Chance",
     description: "Increases the chance Energy Leech will trigger",
+    percent: true,
     prerequisite: 17,
     levels: [
       { cost: 5, effect: .2 },
@@ -538,6 +543,7 @@ const UPGRADES = [
     id: 24,
     name: "Ability Cooldown",
     description: "Reduce the cooldown of all abilities.",
+    seconds: true,
     prerequisite: 22,
     levels: [
       { cost: 30, effect: -1000 },
@@ -588,10 +594,10 @@ const UPGRADES = [
       { cost: 80, effect: 16 },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.abilities.orbitalStrike.quantity = UPGRADES[26].levels[level - 1].effect;
+      gameState.upgrades.abilities.orbitalStrike.projectiles = UPGRADES[26].levels[level - 1].effect;
     },
     getCurrentValue: () => {
-      return gameState.upgrades.abilities.orbitalStrike.quantity;
+      return gameState.upgrades.abilities.orbitalStrike.projectiles;
     },
     grid: {
       x: -6,
@@ -648,6 +654,7 @@ const UPGRADES = [
     id: 29,
     name: "Power Resupply Efficiency",
     description: "Reduce the cooldown of the power resupply ability.",
+    seconds: true,
     prerequisite: 28,
     levels: [
       { cost: 30, effect: 28000 },
@@ -789,6 +796,7 @@ const UPGRADES = [
     id: 35,
     name: "Credits Drop Increase",
     description: "Increase the rate at which enemies drop credits.",
+    percent: true,
     prerequisite: 34,
     levels: [
       { cost: 30, effect: 1.2 },
@@ -814,6 +822,7 @@ const UPGRADES = [
     id: 36,
     name: "Tier I: Double Drop",
     description: "Increase the chance for Tier I enemies to drop double credits.",
+    percent: true,
     prerequisite: 35,
     levels: [
       { cost: 30, effect: .1 },
@@ -839,6 +848,7 @@ const UPGRADES = [
     id: 37,
     name: "Tier I: Promotion Rate",
     description: "Increase the chance for Tier I enemies to be promoted.",
+    percent: true,
     prerequisite: 34,
     levels: [
       { cost: 30, effect: .05 },
@@ -888,6 +898,7 @@ const UPGRADES = [
     id: 39,
     name: "Tier II: Double Drop",
     description: "Increase the chance for Tier II enemies to drop double credits.",
+    percent: true,
     prerequisite: 38,
     levels: [
       { cost: 30, effect: .1 },
@@ -913,6 +924,7 @@ const UPGRADES = [
     id: 40,
     name: "Tier II: Promotion Rate",
     description: "Increase the chance for Tier II enemies to be promoted.",
+    percent: true,
     prerequisite: 38,
     levels: [
       { cost: 30, effect: .05 },
@@ -985,6 +997,7 @@ const UPGRADES = [
     id: 43,
     name: "Tier III: Double Drop",
     description: "Increase the chance for Tier III enemies to drop double credits.",
+    percent: true,
     prerequisite: 42,
     levels: [
       { cost: 30, effect: .1 },
@@ -1010,6 +1023,7 @@ const UPGRADES = [
     id: 44,
     name: "Tier III: Promotion Rate",
     description: "Increase the chance for Tier III enemies to be promoted.",
+    percent: true,
     prerequisite: 42,
     levels: [
       { cost: 30, effect: .05 },
@@ -1081,6 +1095,7 @@ const UPGRADES = [
     id: 47,
     name: "Tier IV: Double Drop",
     description: "Increase the chance for Tier IV enemies to drop double credits.",
+    percent: true,
     prerequisite: 46,
     levels: [
       { cost: 30, effect: .1 },
@@ -1106,6 +1121,7 @@ const UPGRADES = [
     id: 48,
     name: "Tier IV: Promotion Rate",
     description: "Increase the chance for Tier IV enemies to be promoted.",
+    percent: true,
     prerequisite: 46,
     levels: [
       { cost: 30, effect: .05 },

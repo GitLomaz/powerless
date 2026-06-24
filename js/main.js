@@ -3,13 +3,12 @@ let config = {
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   parent: "wrapper",
-  // scene: [battleScene, orbitScene],
   scene: [orbitScene, battleScene, soundManager],
   roundPixels: true,
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
+      // debug: true,
     },
   },
 };
