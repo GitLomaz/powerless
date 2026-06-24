@@ -12,6 +12,8 @@
 - Statistic collection
 + Make sure all values display correctly 
 + Format numbers where needed
+- Stomp 4 needs to go
+- Tier 4 explosion needs to go
 
 ## Battle Scene
 

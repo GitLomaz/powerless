@@ -26,13 +26,21 @@ class T4 extends Enemy {
     this.distanceTrveled = 0;
   }
 
+  die() {
+    this.explode(200, 1000);
+    super.die(scene.player.x, scene.player.y);
+  }
+
   tick(delta) {
-    const playerInRange = Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 500;
+    const playerRange = Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y);
+    const playerInRange = playerRange < 500;
     let target = this.waypoint
-    if (playerInRange) {
+    if (playerRange < 80) {
+      this.die(scene.player.x, scene.player.y);
+    } else if (playerRange < 500) {
       target = new Phaser.Math.Vector2(scene.player.x, scene.player.y);
     }
-
+    
     const dt = delta / 1000;
     if (!target) {
       this.waypoint = new Phaser.Math.Vector2(

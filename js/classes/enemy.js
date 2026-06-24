@@ -127,6 +127,18 @@ class Enemy extends Phaser.GameObjects.Container {
             hitEnemies.add(enemy);
           }
         }
+
+        // Check if player is hit
+        if (scene.player && scene.player.active) {
+          const dx = scene.player.x - explosionX;
+          const dy = scene.player.y - explosionY;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq <= radiusSq) {
+            // Reduce player energy (acts as health)
+            scene.player.energy -= damage / 4;
+          }
+        }
       },
 
       onComplete: () => {
