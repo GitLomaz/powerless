@@ -23,6 +23,7 @@ class T1 extends Enemy {
     );
 
     this.distanceTrveled = 0;
+    this.setScale(.8);
   }
 
   tick(delta) {

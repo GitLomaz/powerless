@@ -23,6 +23,7 @@ class T4 extends Enemy {
     );
 
     this.distanceTrveled = 0;
+    this.setScale(.8);
   }
 
   die() {

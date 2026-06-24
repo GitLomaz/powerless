@@ -166,13 +166,13 @@ let battleScene = new Phaser.Class({
       this.enemies.push(new T1());
     }
     for (let i = 0; i < gameState.upgrades.spawns.tier2.units; i++) {
-      this.enemies.push(new T2());
+      this.enemies.push(new T2(false));
     }
     for (let i = 0; i < gameState.upgrades.spawns.tier3.units; i++) {
-      this.enemies.push(new T3());
+      this.enemies.push(new T3(false));
     }
     for (let i = 0; i < gameState.upgrades.spawns.tier4.units; i++) {
-      this.enemies.push(new T4());
+      this.enemies.push(new T4(false));
     }
 
     if (gameState.upgrades.spawns.boss) {
