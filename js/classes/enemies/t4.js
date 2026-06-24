@@ -1,59 +1,95 @@
 class T4 extends Enemy {
   constructor() {
     super();
-    this.circle = scene.add.circle(0, 0, 12, 0x00FFff);
-    this.add(this.circle);
-    this.speed = 80;
+    this.sprite = scene.add.sprite(0, 0, "enemy-truck");
+    this.sprite.setScale(0.7);
+    this.add(this.sprite);
+    this.speed = Random.between(50, 70);
     this.mode = "wander";
-    this.body.setCircle(12, -12, -12);
-    this.fireCooldown = Random.between(0, 10000);
-    this.tier = 4
-    this.value = Random.between(80,200)
-    this.damage = 2000
+    this.body.setCircle(24, -24, -24);
+    this.tier = 1
+    this.damage = 0
+    this.value = Random.between(2,5)
     this.checkPromotion();
+
+    this.waypoint = new Phaser.Math.Vector2(
+      Random.between(0, scene.map.widthInPixels),
+      Random.between(0, scene.map.heightInPixels)
+    );
+    this.sprite.rotation = Phaser.Math.Angle.Between(
+      this.x,
+      this.y,
+      this.waypoint.x,
+      this.waypoint.y
+    );
+
+    this.distanceTrveled = 0;
   }
 
   tick(delta) {
-    const dt = delta / 1000;
-    if (this.mode === "wander") {
-      if (!this.target) {
-        this.target = new Phaser.Math.Vector2(Random.between(0, scene.map.widthInPixels), Random.between(0, scene.map.heightInPixels));
-      }
-      const dx = this.target.x - this.x;
-      const dy = this.target.y - this.y;
-      const len = Math.hypot(dx, dy);
-      if (len < 4) {
-        this.target = null;
-      } else {
-        this.x += (dx / len) * this.speed * dt;
-        this.y += (dy / len) * this.speed * dt;
-      }
-    } else if (this.mode === "chase") {
-      const dx = scene.player.x - this.x;
-      const dy = scene.player.y - this.y;
-      const len = Math.hypot(dx, dy);
-      if (len > 4) {
-        this.x += (dx / len) * this.speed * dt;
-        this.y += (dy / len) * this.speed * dt;
-      }
-    } else if (this.mode === "fire") {
-      this.fireCooldown -= delta;
-      if (this.fireCooldown <= 0) {
-        new Rocket(this, scene.player, false);
-        this.fireCooldown = 10000;
-      }
+    const playerInRange = Phaser.Math.Distance.Between(this.x, this.y, scene.player.x, scene.player.y) < 500;
+    let target = this.waypoint
+    if (playerInRange) {
+      target = new Phaser.Math.Vector2(scene.player.x, scene.player.y);
     }
-    // Calculate distance once using squared distance (avoids expensive sqrt)
-    const dx = scene.player.x - this.x;
-    const dy = scene.player.y - this.y;
-    const distSq = dx * dx + dy * dy;
-    
-    if (distSq < 800 * 800) {
-      this.mode = "fire";
-    } else if (distSq < 1300 * 1300) {
-      this.mode = "chase";
-    } else {
-      this.mode = "wander";
+
+    const dt = delta / 1000;
+    if (!target) {
+      this.waypoint = new Phaser.Math.Vector2(
+        Random.between(0, scene.map.widthInPixels),
+        Random.between(0, scene.map.heightInPixels)
+      );
+      target = this.waypoint
+    }
+
+    const dx = target.x - this.x;
+    const dy = target.y - this.y;
+    const len = Math.hypot(dx, dy);
+
+    if (len < 4) {
+      this.waypoint = null;
+      return;
+    }
+
+    // Desired heading
+    const targetAngle = Phaser.Math.Angle.Between(
+      this.x,
+      this.y,
+      target.x,
+      target.y
+    );
+
+    // Turn speed (radians per second)
+    const turnSpeed = playerInRange ? 1 : 0.3;
+
+    // Smoothly rotate toward target
+    this.sprite.rotation = Phaser.Math.Angle.RotateTo(
+      this.sprite.rotation,
+      targetAngle,
+      turnSpeed * dt
+    );
+
+    this.distanceTrveled += (playerInRange ? 100 : this.speed) * dt;
+
+    // Move forward in current facing direction
+    this.x += Math.cos(this.sprite.rotation) * (playerInRange ? 100 : this.speed) * dt;
+    this.y += Math.sin(this.sprite.rotation) * (playerInRange ? 100 : this.speed) * dt;
+    if (this.distanceTrveled > 10) { 
+      const footprint = scene.add.image(
+        this.x,
+        this.y,
+        "enemy-jeep-tread"
+      )
+      footprint.setDepth(0)
+      footprint.setRotation(this.sprite.rotation);
+      footprint.setAlpha(.3);
+      scene.tweens.add({
+        targets: footprint,
+        alpha: 0,
+        duration: 2000,
+        onComplete: () => footprint.destroy()
+      });
+      this.distanceTrveled = 0;
     }
   }
 }

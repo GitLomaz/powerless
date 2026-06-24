@@ -6,7 +6,7 @@ class T2 extends Enemy {
     this.speed = 80;
     this.mode = "wander";
     this.body.setCircle(12, -12, -12);
-    this.canShoot = false;
+    this.canShoot = true;
     this.tier = 2
     this.value = Random.between(8,18)
     this.damage = 100
