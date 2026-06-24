@@ -342,6 +342,7 @@ class Player extends Phaser.GameObjects.Container {
         scene.sounds["cannon"].play();
         new Shell();
         this.cannonCanShoot = false;
+        scene.sound.play('cannon');
         scene.time.delayedCall(
           gameState.upgrades.weapons.cannon.fireRate,
           () => {

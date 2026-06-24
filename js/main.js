@@ -5,9 +5,9 @@ let config = {
   parent: "wrapper",
   scene: [orbitScene, battleScene],
   roundPixels: true,
-   
+
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
       debug: true,
     },
