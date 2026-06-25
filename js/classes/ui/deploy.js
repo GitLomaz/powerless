@@ -1,8 +1,8 @@
 class Deploy extends Phaser.GameObjects.Container {
   constructor() {
-    super(scene, GAME_WIDTH - 200, GAME_HEIGHT - 100);
-    this.width = 200;
-    this.height = 80;
+    super(scene, GAME_WIDTH / 2, GAME_HEIGHT - 40);
+    this.width = 400;
+    this.height = 50;
 
     this.currentTint = [0xd2e269, 0x56a135];
     this.r3 = scene.add.rectangle(
@@ -22,7 +22,7 @@ class Deploy extends Phaser.GameObjects.Container {
     this.add(this.r1);
     this.setDepth(5);
 
-    this.title = scene.add.text(0, 0, 'DEPLOY TO PLANET', { align: 'center', fontFamily: 'Consolas', fontSize: "32px", fill: "#fff", wordWrap: { width: 200 }}).setOrigin(0.5);
+    this.title = scene.add.text(0, 0, 'DEPLOY TO PLANET', { align: 'center', fontFamily: 'Consolas', fontSize: "32px", fill: "#fff"}).setOrigin(0.5);
     this.add(this.title);
 
     this.setScrollFactor(0);

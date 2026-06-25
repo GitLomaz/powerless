@@ -345,10 +345,10 @@ const UPGRADES = [
     prerequisite: 13,
     levels: [
       { cost: 30, effect: 175 },
-      { cost: 80, effect: 225 },
-      { cost: 200, effect: 300 },
-      { cost: 400, effect: 400 },
-      { cost: 700, effect: 525 },
+      { cost: 150, effect: 225 },
+      { cost: 700, effect: 300 },
+      { cost: 1500, effect: 400 },
+      { cost: 6000, effect: 525 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.speed = UPGRADES[14].levels[level - 1].effect;

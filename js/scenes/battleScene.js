@@ -84,7 +84,7 @@ let battleScene = new Phaser.Class({
       frameRate: 16,
       repeat: -1,
     });
-    // this.scene.start("orbitScene");
+
     this.map = this.make.tilemap({ key: "map2", tileWidth: 128, tileHeight: 128 });
     this.tileset = this.map.addTilesetImage("sheet2", "sheet2");
     this.layer = this.map.createLayer(0, this.tileset, 0, 0);
@@ -108,12 +108,12 @@ let battleScene = new Phaser.Class({
     this.player = new Player();
     
     // FPS counter and debug info
-    this.fpsText = this.add.text(GAME_WIDTH - 20, 20, "FPS: 60", { 
+    this.fpsText = this.add.text(GAME_WIDTH * 20, 20, "FPS: 60", { 
       font: "16px Arial", 
       fill: "#00ff00" 
     }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
     
-    this.debugText = this.add.text(GAME_WIDTH - 20, 45, "", { 
+    this.debugText = this.add.text(GAME_WIDTH * 20, 45, "", { 
       font: "14px Arial", 
       fill: "#ffff00" 
     }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
@@ -137,9 +137,9 @@ let battleScene = new Phaser.Class({
         player.energy = -100000;
       } else {
         if (gameState.upgrades.abilities.stomp < enemy.tier) {
-          player.energy -= enemy.healthMax * 10;
+          player.energy -= enemy.healthMax * 20;
         } else {
-          player.energy -= enemy.healthMax * 2;
+          player.energy -= enemy.healthMax * 5;
         }
         enemy.die(player.x, player.y);
       }

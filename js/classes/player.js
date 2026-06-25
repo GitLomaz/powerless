@@ -477,7 +477,6 @@ class Player extends Phaser.GameObjects.Container {
         );
 
         if (dist > STEP_DISTANCE) {
-          console.log("spawning foot!");
           const footprint = scene.add.image(foot.x, foot.y, "mech-footprint");
           footprint.setDepth(1);
           footprint.setRotation(foot.rotation);
@@ -555,7 +554,7 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   returnToOrbit() {
-    gameState.credits += this.creditsGained;
+    // gameState.credits += this.creditsGained;
     this.scene.scene.start("orbitScene", { creditsGained: this.creditsGained });
   }
 }
