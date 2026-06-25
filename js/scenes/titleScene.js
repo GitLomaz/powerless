@@ -182,6 +182,7 @@ let titleScene = new Phaser.Class({
     const overlay = this.add.graphics();
     overlay.fillStyle(0x000000, 0.8);
     overlay.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    overlay.setDepth(2000);
 
     // Credits panel
     const panel = this.add.graphics();
@@ -189,6 +190,7 @@ let titleScene = new Phaser.Class({
     panel.fillRect(GAME_WIDTH / 2 - 300, GAME_HEIGHT / 2 - 200, 600, 400);
     panel.lineStyle(3, 0xd2e269);
     panel.strokeRect(GAME_WIDTH / 2 - 300, GAME_HEIGHT / 2 - 200, 600, 400);
+    panel.setDepth(2001);
 
     // Credits text
     const creditsText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 50, 
@@ -209,6 +211,7 @@ let titleScene = new Phaser.Class({
         lineSpacing: 8
       }
     ).setOrigin(0.5);
+    creditsText.setDepth(2002);
 
     // Close button
     const closeBtn = this.createButton(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 150, 'CLOSE', () => {
@@ -218,6 +221,7 @@ let titleScene = new Phaser.Class({
       creditsText.destroy();
       closeBtn.destroy();
     }, true);
+    closeBtn.setDepth(2002);
   },
 
   showStats: function() {
