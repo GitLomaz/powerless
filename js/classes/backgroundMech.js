@@ -6,7 +6,7 @@ class BackgroundMech extends Phaser.GameObjects.Container {
     super(scene, startX, startY);
 
     this.scene = scene;
-    this.speed = 150;
+    this.speed = 200;
     
     // Waypoint system
     this.currentWaypoint = null;
