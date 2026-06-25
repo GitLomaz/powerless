@@ -50,6 +50,10 @@ const UPGRADES = [
       { cost: 200, effect: 75 },
       { cost: 400, effect: 100 },
       { cost: 700, effect: 130 },
+      { cost: 2000, effect: 190 },
+      { cost: 5400, effect: 250 },
+      { cost: 8000, effect: 320 },
+      { cost: 11000, effect: 400 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.damage =
@@ -1297,4 +1301,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-maxAllUpgrades()
+// maxAllUpgrades()

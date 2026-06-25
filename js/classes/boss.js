@@ -249,8 +249,6 @@ class Boss extends Phaser.GameObjects.Container {
   }
 
   takeDamage(amount) {
-    // Handle damage logic here
-    console.log(`Boss takes ${amount} damage!`);
     this.health -= amount;
     if (this.health <= 0) {
       this.health = 0;
