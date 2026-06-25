@@ -40,7 +40,7 @@ class Tooltip extends Phaser.GameObjects.Container {
     if (LEVELS[upgrade.id] !== upgrade.levels.length && upgrade.levels.length > 1) {
       let increaseString = formatNumber(upgrade.getCurrentValue()) + " -> " + formatNumber(upgrade.levels[LEVELS[upgrade.id]].effect);
       if (upgrade.percent) {
-        increaseString = (upgrade.getCurrentValue() * 100) + "% -> " + (upgrade.levels[LEVELS[upgrade.id]].effect * 100) + "%";
+        increaseString = (Math.floor(upgrade.getCurrentValue() * 100)) + "% -> " + (Math.floor(upgrade.levels[LEVELS[upgrade.id]].effect * 100)) + "%";
       } else if (upgrade.seconds) {
         increaseString = (upgrade.getCurrentValue() / 1000) + "s -> " + (upgrade.levels[LEVELS[upgrade.id]].effect / 1000) + "s";
       }
@@ -50,7 +50,7 @@ class Tooltip extends Phaser.GameObjects.Container {
     } else if (upgrade.levels.length > 1) {
       let increaseString = formatNumber(upgrade.getCurrentValue());
       if (upgrade.percent) {
-        increaseString = (upgrade.getCurrentValue() * 100) + "%";
+        increaseString = (Math.floor(upgrade.getCurrentValue() * 100)) + "%";
       } else if (upgrade.seconds) {
         increaseString = (upgrade.getCurrentValue() / 1000) + "s";
       }

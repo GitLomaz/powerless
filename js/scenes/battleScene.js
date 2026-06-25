@@ -150,8 +150,11 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
+      if (bullet.metaType === "rocket") {
+        bullet.explode();
+      }
       bullet.destroy();
-      player.energy -= 500;
+      player.energy -= 1500;
     });
 
     this.physics.add.overlap(this.bulletGroup, this.enemyBulletGroup, function (bullet, enemyBullet) {
