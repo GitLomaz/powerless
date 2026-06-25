@@ -281,8 +281,7 @@ class Player extends Phaser.GameObjects.Container {
     const dt = delta / 1000;
 
     this.collectiveTime += delta;
-
-    const decayModifier = Math.floor(this.collectiveTime / 30000) * 5;
+    const decayModifier = Math.floor(this.collectiveTime / 30000) * 5 + 1;
 
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
