@@ -46,7 +46,7 @@ class Rocket extends Phaser.GameObjects.Container {
       Math.sin(angle) * this.speed
     );
 
-    scene.time.delayedCall(1000, () => {
+    scene.time.delayedCall(10000, () => {
       if (this.active) {
         this.destroy();
       }
