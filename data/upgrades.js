@@ -86,7 +86,7 @@ const UPGRADES = [
     grid: {
       x: 3,
       y: 0,
-      icon: "rocketDouble",
+      icon: "cannonAutofire",
       size: "medium",
     },
   },
