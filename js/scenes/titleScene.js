@@ -10,6 +10,14 @@ let titleScene = new Phaser.Class({
     // Load essential assets
     this.load.audio("click", "audio/click.ogg");
     this.load.audio("music", "audio/music.ogg");
+    
+    // Load mech assets for background animation
+    this.load.image("sheet2", "images/sheet2.png");
+    this.load.image("mech-foot", "images/mech/foot.png");
+    this.load.image("mech-body", "images/mech/body.png");
+    this.load.image("mech-leg", "images/mech/leg.png");
+    this.load.image("mech-barrel", "images/mech/barrel.png");
+    this.load.image("mech-footprint", "images/mech/footprint.png");
 
     // Create loading bar
     const progressBar = this.add.graphics();
@@ -47,10 +55,13 @@ let titleScene = new Phaser.Class({
       music.play();
     }
 
-    // Background
-    const bg = this.add.graphics();
-    bg.fillStyle(0x0f0f1e, 1);
-    bg.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    // Tiled background
+    this.bg = this.add.tileSprite(0, 0, GAME_WIDTH, GAME_HEIGHT, "sheet2");
+    this.bg.setOrigin(0, 0);
+    this.bg.setAlpha(0.3); // Slightly transparent to not overwhelm
+
+    // Create wandering mech
+    this.backgroundMech = new BackgroundMech(this);
 
     // Title
     const title = this.add.text(GAME_WIDTH / 2, 150, 'MECHANATOR 5000', {
@@ -102,6 +113,13 @@ let titleScene = new Phaser.Class({
       fontSize: '16px',
       fill: '#555555'
     }).setOrigin(1);
+  },
+
+  update: function(time, delta) {
+    // Update background mech
+    if (this.backgroundMech) {
+      this.backgroundMech.update(time, delta);
+    }
   },
 
   createButton: function(x, y, text, callback, enabled) {
