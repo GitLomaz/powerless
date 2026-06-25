@@ -1204,7 +1204,7 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  {
+  { // REMOVED!
     id: 49,
     name: "Tier IV: Explosion",
     description: "When destroyed, Tier IV enemies explode, damaging nearby enemies in radius.",

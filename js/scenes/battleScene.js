@@ -137,9 +137,9 @@ let battleScene = new Phaser.Class({
         player.energy = -100000;
       } else {
         if (gameState.upgrades.abilities.stomp < enemy.tier) {
-          player.energy -= enemy.maxHealth * 10;
+          player.energy -= enemy.healthMax * 10;
         } else {
-          player.energy -= enemy.maxHealth * 2;
+          player.energy -= enemy.healthMax * 2;
         }
         enemy.die(player.x, player.y);
       }

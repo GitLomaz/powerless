@@ -22,11 +22,13 @@ class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.creditsGained = 0;
-    this.creditsGainedText = scene.add
-      .text(20, 20, `Credits: ${gameState.credits}`, { font: "16px Arial", fill: "#2412c8" })
-      .setOrigin(0)
-      .setDepth(4)
-      .setScrollFactor(0);
+    this.creditsGainedText = scene.add.text(20, 20, `Credits: ${gameState.credits}`, {
+      fontFamily: 'Consolas',
+      fontSize: '24px',
+      fill: '#FFD700',
+      stroke: '#000000',
+      strokeThickness: 2
+    }).setOrigin(0, 0).setScrollFactor(0).setDepth(100);
 
     this.lastShot = 0;
 
