@@ -22,6 +22,9 @@ class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.creditsGained = 0;
+    this.kills = 0;
+    this.gameOverPanelShown = false;
+    this.isDead = false;
     this.creditsGainedText = scene.add.text(20, 20, `Credits: ${formatNumber(gameState.credits)}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
@@ -132,10 +135,14 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   gainCredits(amount) {
-    scene.sounds["credit"].play();
+    scene.sounds["credit-" + Random.between(1,3)].play();
     gameState.credits += amount;
     this.creditsGained += amount;
     this.creditsGainedText.setText(`Credits: ${formatNumber(gameState.credits)}`);
+  }
+
+  addKill() {
+    this.kills++;
   }
 
   createFoot(offsetX, offsetY) {
@@ -285,7 +292,16 @@ class Player extends Phaser.GameObjects.Container {
 
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
-      this.returnToOrbit();
+      // Show game over panel instead of immediately returning to orbit
+      if (!this.gameOverPanelShown) {
+        this.gameOverPanelShown = true;
+        new GameOverPanel({
+          kills: this.kills,
+          credits: this.creditsGained,
+          time: this.collectiveTime
+        });
+      }
+      return; // Stop updating the game
     }
     this.powerbar.setPower(this.energy / gameState.upgrades.player.energy);
 
@@ -332,67 +348,70 @@ class Player extends Phaser.GameObjects.Container {
       leg.displayWidth = distance;
     });
 
-    const cursors = scene.cursors;
-    const wasd = scene.wasd;
+    // Skip movement and combat if player is dead
+    if (!this.isDead) {
+      const cursors = scene.cursors;
+      const wasd = scene.wasd;
 
-    let dx = 0;
-    let dy = 0;
+      let dx = 0;
+      let dy = 0;
 
-    if (cursors.left.isDown || wasd.left.isDown) dx--;
-    if (cursors.right.isDown || wasd.right.isDown) dx++;
-    if (cursors.up.isDown || wasd.up.isDown) dy--;
-    if (cursors.down.isDown || wasd.down.isDown) dy++;
+      if (cursors.left.isDown || wasd.left.isDown) dx--;
+      if (cursors.right.isDown || wasd.right.isDown) dx++;
+      if (cursors.up.isDown || wasd.up.isDown) dy--;
+      if (cursors.down.isDown || wasd.down.isDown) dy++;
 
-    const len = Math.hypot(dx, dy);
+      const len = Math.hypot(dx, dy);
 
-    if (len > 0) {
-      dx /= len;
-      dy /= len;
+      if (len > 0) {
+        dx /= len;
+        dy /= len;
 
-      this.dirX = dx;
-      this.dirY = dy;
+        this.dirX = dx;
+        this.dirY = dy;
 
-      this.x += dx * gameState.upgrades.player.speed * dt;
-      this.y += dy * gameState.upgrades.player.speed * dt;
+        this.x += dx * gameState.upgrades.player.speed * dt;
+        this.y += dy * gameState.upgrades.player.speed * dt;
 
-      this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
-      this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
-    }
+        this.x = Phaser.Math.Clamp(this.x, 40, scene.map.widthInPixels - 40);
+        this.y = Phaser.Math.Clamp(this.y, 40, scene.map.heightInPixels - 40);
+      }
 
-    this.updateFeet(delta);
+      this.updateFeet(delta);
 
-    const pointer = scene.input.activePointer;
+      const pointer = scene.input.activePointer;
 
-    const worldPoint = scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+      const worldPoint = scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
-    this.barrel.rotation = Math.atan2(
-      worldPoint.y - this.y,
-      worldPoint.x - this.x,
-    );
+      this.barrel.rotation = Math.atan2(
+        worldPoint.y - this.y,
+        worldPoint.x - this.x,
+      );
 
-    if (gameState.upgrades.weapons.cannon.autoFire) {
-      this.fireMainCannon();
-    }
+      if (gameState.upgrades.weapons.cannon.autoFire) {
+        this.fireMainCannon();
+      }
 
-    if (gameState.upgrades.weapons.rocket.enabled) {
-      if (this.rocketCanShoot) {
-        const enemies = this.findEnemies(1500);
-        const nearestEnemy = enemies[0];
-        if (nearestEnemy) {
-          new Rocket(this, nearestEnemy, true);
-          if (gameState.upgrades.weapons.rocket.double) {
-            const secondNearestEnemy = enemies[1];
-            if (secondNearestEnemy) {
-              new Rocket(this, secondNearestEnemy, true);
+      if (gameState.upgrades.weapons.rocket.enabled) {
+        if (this.rocketCanShoot) {
+          const enemies = this.findEnemies(1500);
+          const nearestEnemy = enemies[0];
+          if (nearestEnemy) {
+            new Rocket(this, nearestEnemy, true);
+            if (gameState.upgrades.weapons.rocket.double) {
+              const secondNearestEnemy = enemies[1];
+              if (secondNearestEnemy) {
+                new Rocket(this, secondNearestEnemy, true);
+              }
             }
+            this.rocketCanShoot = false;
+            scene.time.delayedCall(
+              gameState.upgrades.weapons.rocket.fireRate,
+              () => {
+                this.rocketCanShoot = true;
+              },
+            );
           }
-          this.rocketCanShoot = false;
-          scene.time.delayedCall(
-            gameState.upgrades.weapons.rocket.fireRate,
-            () => {
-              this.rocketCanShoot = true;
-            },
-          );
         }
       }
     }
@@ -401,7 +420,7 @@ class Player extends Phaser.GameObjects.Container {
   //fire cannon
 
   fireMainCannon() {
-    if(this.activatingAbility){return};
+    if(this.isDead || this.activatingAbility){return};
     if (this.cannonCanShoot) {
       if (this.cannonCanShoot) {
         this.barrel.play("mech-barrel-anim", true);

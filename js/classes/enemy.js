@@ -152,6 +152,7 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   die(impactX, impactY) {
+    scene.player.addKill();
     if (gameState.upgrades.player.energyLeech.enabled) {
       const energyGained = gameState.upgrades.player.energyLeech.amount;
       if (Random.xInY(gameState.upgrades.player.energyLeech.chance * 10, 10)) {

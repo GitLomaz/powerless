@@ -15,7 +15,9 @@ let battleScene = new Phaser.Class({
     this.load.audio("crash", "audio/crash.ogg");
     this.load.audio("explosion", "audio/explosion.ogg");
     this.load.audio("minigun","audio/minigun.ogg")
-    this.load.audio("credit","audio/credit.ogg")
+    this.load.audio("credit-1","audio/credit-1.ogg")
+    this.load.audio("credit-2","audio/credit-2.ogg")
+    this.load.audio("credit-3","audio/credit-3.ogg")
     this.load.audio("discharge","audio/discharge.ogg")
     this.load.audio("incoming","audio/incoming.ogg")
     this.load.audio("recharge","audio/recharge.ogg")
@@ -60,7 +62,9 @@ let battleScene = new Phaser.Class({
     this.sounds["crash"] = this.sound.add("crash").setVolume(0.4);
     this.sounds["explosion"] = this.sound.add("explosion").setVolume(0.4);
     this.sounds["minigun"] = this.sound.add("minigun").setVolume(0.3);
-    this.sounds["credit"] = this.sound.add("credit").setVolume(0.3);
+    this.sounds["credit-1"] = this.sound.add("credit-1").setVolume(0.3);
+    this.sounds["credit-2"] = this.sound.add("credit-2").setVolume(0.3);
+    this.sounds["credit-3"] = this.sound.add("credit-3").setVolume(0.3);
     this.sounds["discharge"] = this.sound.add("discharge").setVolume(0.3);
     this.sounds["incoming"] = this.sound.add("incoming").setVolume(0.3);
     this.sounds["recharge"] = this.sound.add("recharge").setVolume(0.3);
