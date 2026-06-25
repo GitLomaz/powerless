@@ -292,7 +292,7 @@ class Player extends Phaser.GameObjects.Container {
     if (elapsed <= 180) {
       decayModifier = elapsed <= 30 ? 1 : 1 + (elapsed - 30) / 30;
     } else {
-      decayModifier = 6 * Math.pow(1.5, (elapsed - 180) / 60);
+      decayModifier = 6 * Math.pow(1.5, (elapsed - 120) / 60);
     }
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {

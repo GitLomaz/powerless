@@ -204,7 +204,7 @@ let titleScene = new Phaser.Class({
       '@igglepud\n' +
       'Art & Assets:\n' +
       'Warlock349\n' +
-      'SFX:\n' +
+      'Music & SFX:\n' +
       '@logan_matuska\n\n' +
       'Made with Phaser 3 (4?!)\n' +
       'Thanks for playing!',
