@@ -40,7 +40,7 @@ class GameOverPanel extends Phaser.GameObjects.Container {
       fontFamily: 'Consolas',
       fontSize: '36px',
       fill: '#fff'
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setAlpha(0);
 
     // Format time (convert milliseconds to minutes:seconds)
     const totalSeconds = Math.floor(stats.time / 1000);
@@ -56,30 +56,55 @@ class GameOverPanel extends Phaser.GameObjects.Container {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#fff'
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setAlpha(0);
 
     this.creditsText = scene.add.text(panelX, panelY + statsY + statsSpacing, `Credits Gained: ${formatNumber(stats.credits)}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#FFD700'
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setAlpha(0);
 
     this.timeText = scene.add.text(panelX, panelY + statsY + statsSpacing * 2, `Time Survived: ${timeString}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#fff'
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(1001).setAlpha(0);
 
-    // Buttons
-    this.createButton('RETURN TO ORBIT', panelX, panelY + 100, () => {
+    // Store button data for delayed creation
+    this.button1Data = { text: 'RETURN TO ORBIT', x: panelX, y: panelY + 100, callback: () => {
       scene.sounds['click'].play();
       saveGame(); // Save before returning to orbit
       scene.scene.start('orbitScene', { creditsGained: stats.credits });
-    });
+    }};
 
-    this.createButton('BATTLE AGAIN', panelX, panelY + 160, () => {
+    this.button2Data = { text: 'BATTLE AGAIN', x: panelX, y: panelY + 160, callback: () => {
       scene.sounds['click'].play();
       scene.scene.restart();
+    }};
+
+    // Animate items appearing one at a time
+    scene.time.delayedCall(200, () => {
+      scene.tweens.add({ targets: this.title, alpha: 1, duration: 200 });
+    });
+
+    scene.time.delayedCall(400, () => {
+      scene.tweens.add({ targets: this.killsText, alpha: 1, duration: 200 });
+    });
+
+    scene.time.delayedCall(600, () => {
+      scene.tweens.add({ targets: this.creditsText, alpha: 1, duration: 200 });
+    });
+
+    scene.time.delayedCall(800, () => {
+      scene.tweens.add({ targets: this.timeText, alpha: 1, duration: 200 });
+    });
+
+    scene.time.delayedCall(1000, () => {
+      this.button1 = this.createButton(this.button1Data.text, this.button1Data.x, this.button1Data.y, this.button1Data.callback);
+    });
+
+    scene.time.delayedCall(1200, () => {
+      this.button2 = this.createButton(this.button2Data.text, this.button2Data.x, this.button2Data.y, this.button2Data.callback);
     });
   }
 
@@ -89,11 +114,11 @@ class GameOverPanel extends Phaser.GameObjects.Container {
     const buttonTint = [0xd2e269, 0x56a135]; // Green tint
 
     const br3 = scene.add.rectangle(x, y, buttonWidth - 4, buttonHeight - 4, 0x1a1a1a)
-      .setScrollFactor(0).setDepth(1001);
+      .setScrollFactor(0).setDepth(1001).setAlpha(0);
     const br2 = scene.add.rectangle(x, y, buttonWidth - 4, buttonHeight - 4)
-      .setScrollFactor(0).setDepth(1001);
+      .setScrollFactor(0).setDepth(1001).setAlpha(0);
     const br1 = scene.add.rectangle(x, y, buttonWidth - 4, buttonHeight - 4)
-      .setScrollFactor(0).setDepth(1001);
+      .setScrollFactor(0).setDepth(1001).setAlpha(0);
     br1.setStrokeStyle(1, buttonTint[0]);
     br2.setStrokeStyle(3, buttonTint[1]);
     br3.setStrokeStyle(5, buttonTint[1], 0.35);
@@ -103,7 +128,10 @@ class GameOverPanel extends Phaser.GameObjects.Container {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#fff'
-    }).setOrigin(0.5).setScrollFactor(0).setDepth(1002);
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(1002).setAlpha(0);
+
+    // Fade in button elements
+    scene.tweens.add({ targets: [br3, br2, br1, buttonText], alpha: 1, duration: 200 });
 
     // Make the button interactive
     br1.setInteractive()
