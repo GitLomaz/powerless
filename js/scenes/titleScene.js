@@ -98,8 +98,14 @@ let titleScene = new Phaser.Class({
       this.scene.start('orbitScene');
     }, hasSave);
 
+    // Stats Button
+    this.createButton(GAME_WIDTH / 2, 480, 'STATS', () => {
+      this.sound.play('click');
+      this.showStats();
+    }, true);
+
     // Credits Button
-    this.createButton(GAME_WIDTH / 2, 480, 'CREDITS', () => {
+    this.createButton(GAME_WIDTH / 2, 560, 'CREDITS', () => {
       this.sound.play('click');
       this.showCredits();
     }, true);
@@ -212,5 +218,63 @@ let titleScene = new Phaser.Class({
       creditsText.destroy();
       closeBtn.destroy();
     }, true);
+  },
+
+  showStats: function() {
+    // Load stats
+    const stats = loadGlobalStats();
+
+    // Dim background
+    const overlay = this.add.graphics();
+    overlay.fillStyle(0x000000, 0.8);
+    overlay.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    overlay.setDepth(2000);
+
+    // Stats panel
+    const panel = this.add.graphics();
+    panel.fillStyle(0x1a1a2e, 1);
+    panel.fillRect(GAME_WIDTH / 2 - 350, GAME_HEIGHT / 2 - 250, 700, 500);
+    panel.lineStyle(3, 0xd2e269);
+    panel.strokeRect(GAME_WIDTH / 2 - 350, GAME_HEIGHT / 2 - 250, 700, 500);
+    panel.setDepth(2001);
+
+    // Title
+    const title = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 200, 'GLOBAL STATISTICS', {
+      fontFamily: 'Consolas',
+      fontSize: '32px',
+      fill: '#d2e269',
+      stroke: '#000000',
+      strokeThickness: 3
+    }).setOrigin(0.5);
+    title.setDepth(2002);
+
+    // Stats text
+    const statsText = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2,
+      `Total Battles: ${formatNumber(stats.totalRuns)}\n` +
+      `Total Kills: ${formatNumber(stats.totalKills)}\n` +
+      `Total Time on Planet: ${formatTime(stats.totalTimeOnPlanet)}\n` +
+      `Total Credits Earned: ${formatNumber(stats.totalCreditsEarned)}\n` +
+      `Best Survival Time: ${formatTime(stats.bestSurvivalTime)}\n` +
+      `Highest Kills (Single Run): ${formatNumber(stats.highestKills)}`,
+      {
+        fontFamily: 'Consolas',
+        fontSize: '20px',
+        fill: '#ffffff',
+        align: 'center',
+        lineSpacing: 8
+      }
+    ).setOrigin(0.5);
+    statsText.setDepth(2002);
+
+    // Close button
+    const closeBtn = this.createButton(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 200, 'CLOSE', () => {
+      this.sound.play('click');
+      overlay.destroy();
+      panel.destroy();
+      title.destroy();
+      statsText.destroy();
+      closeBtn.destroy();
+    }, true);
+    closeBtn.setDepth(2002);
   }
 });

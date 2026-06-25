@@ -2,6 +2,9 @@ class GameOverPanel extends Phaser.GameObjects.Container {
   constructor(stats) {
     super(scene, 0, 0);
     
+    // Update global stats
+    updateGlobalStats(stats);
+    
     // Mark player as dead to prevent actions
     scene.player.isDead = true;
     
