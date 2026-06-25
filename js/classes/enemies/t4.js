@@ -10,7 +10,7 @@ class T4 extends Enemy {
     this.damage = 0
     this.health = 60
     this.healthMax = 60
-    this.value = Random.between(2,4)
+    this.value = Random.between(25,55)
     this.checkPromotion();
 
     this.waypoint = new Phaser.Math.Vector2(

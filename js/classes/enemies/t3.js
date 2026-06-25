@@ -9,7 +9,7 @@ class T3 extends Enemy {
     this.tier = 3;
     this.health = 250
     this.healthMax = 250
-    this.value = Random.between(10, 18);
+    this.value = Random.between(18, 31);
     this.damage = 120;
     
     // Movement properties
