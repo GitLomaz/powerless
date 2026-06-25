@@ -58,7 +58,7 @@ let titleScene = new Phaser.Class({
     // Tiled background
     this.bg = this.add.tileSprite(0, 0, GAME_WIDTH, GAME_HEIGHT, "sheet2");
     this.bg.setOrigin(0, 0);
-    this.bg.setAlpha(0.3); // Slightly transparent to not overwhelm
+    this.bg.setAlpha(0.8); // Slightly transparent to not overwhelm
 
     // Create wandering mech
     this.backgroundMech = new BackgroundMech(this);
@@ -147,6 +147,7 @@ let titleScene = new Phaser.Class({
       fill: enabled ? '#ffffff' : '#666666'
     }).setOrigin(0.5);
     container.add(buttonText);
+    container.setDepth(1000);
 
     if (enabled) {
       container.setInteractive(

@@ -39,8 +39,8 @@ class BackgroundMech extends Phaser.GameObjects.Container {
     // Barrel
     this.barrel = scene.add.image(0, 0, "mech-barrel").setOrigin(0.5, 0.5).setDepth(1).setAlpha(0.8);
     this.add(this.barrel);
-    this.setDepth(0);
-    this.setAlpha(0.8);
+    this.setDepth(2);
+    // this.setAlpha(0.8);
 
     scene.add.existing(this);
   }
@@ -149,7 +149,7 @@ class BackgroundMech extends Phaser.GameObjects.Container {
         if (dist > STEP_DISTANCE) {
           // Create faint footprint
           const footprint = this.scene.add.image(foot.x, foot.y, "mech-footprint");
-          footprint.setDepth(0);
+          footprint.setDepth(1);
           footprint.setRotation(foot.rotation);
           footprint.setAlpha(0.3);
           this.scene.tweens.add({
