@@ -22,17 +22,17 @@ class Rocket extends Phaser.GameObjects.Container {
       this.damage = gameState.upgrades.weapons.rocket.damage;
     } else {
       scene.enemyBulletGroup.add(this);
-      this.speed = 50;
-      this.maxSpeed = 120;
-      this.acceleration = 20;
-      this.turnRate = 2; // radians/sec
+      this.speed = 200;
+      this.maxSpeed = 400;
+      this.acceleration = 100;
+      this.turnRate = .5; // radians/sec
       this.damage = damage;
     }
     scene.bullets.push(this);
 
     this.body.setCircle(4, -4, -4);
     this.cooldown = 500;
-    const launchAngle = scene.player.barrel.rotation;
+    const launchAngle = source.barrel.rotation;
     this.rotation = launchAngle;
 
     const spread = Phaser.Math.DegToRad(
@@ -45,6 +45,12 @@ class Rocket extends Phaser.GameObjects.Container {
       Math.cos(angle) * this.speed,
       Math.sin(angle) * this.speed
     );
+
+    scene.time.delayedCall(1000, () => {
+      if (this.active) {
+        this.destroy();
+      }
+    });
   }
 
   tick(delta) {

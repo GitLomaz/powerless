@@ -21,7 +21,7 @@ class T3 extends Enemy {
     this.facingAngle = 0; // Track body orientation
     
     // Fire properties
-    this.fireCooldown = Random.between(0, 10000);
+    this.fireCooldown = Random.between(0, 2000);
     
     // Create 2 feet - simple left/right positioning
     this.feet = [
@@ -65,7 +65,7 @@ class T3 extends Enemy {
 
   tick(delta) {
     const dt = delta / 1000;
-    
+    this.fireCooldown -= delta;
     // State machine behavior
     if (this.mode === "wander") {
       if (!this.target) {
@@ -103,12 +103,10 @@ class T3 extends Enemy {
     } else if (this.mode === "fire") {
       // Don't move when firing
       this.dirX = 0;
-      this.dirY = 0;
-      
-      this.fireCooldown -= delta;
+      this.dirY = 0;      
       if (this.fireCooldown <= 0) {
         new Rocket(this, scene.player, false, this.damage);
-        this.fireCooldown = 10000;
+        this.fireCooldown = 4000;
       }
     }
     

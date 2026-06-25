@@ -29,11 +29,12 @@ const gameStateTemplate  = {
         fireRate: 1000,
         range: 2000,
         speed: 400,
+        autoFire: false,
       }
     },
     spawns: {
       tier1: {
-        units: 20,
+        units: 0,
         promotion: 0,
         doubleDrop: 0
       },
@@ -44,7 +45,7 @@ const gameStateTemplate  = {
         explosion: 0
       },
       tier3: {
-        units: 0,
+        units: 1,
         promotion: 0,
         doubleDrop: 0,
         explosion: 0

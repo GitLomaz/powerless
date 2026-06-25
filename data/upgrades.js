@@ -50,6 +50,10 @@ const UPGRADES = [
       { cost: 200, effect: 75 },
       { cost: 400, effect: 100 },
       { cost: 700, effect: 130 },
+      { cost: 2000, effect: 190 },
+      { cost: 5400, effect: 250 },
+      { cost: 8000, effect: 320 },
+      { cost: 11000, effect: 400 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.damage =
@@ -65,25 +69,24 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // REMOVED
+  {
     id: 3,
-    name: "Rocket Launcher:\r\nDouble Rockets",
-    description: "Fires two rockets at once instead of one.",
-    // prerequisite: 11,
+    name: "Main Cannon:\r\nAuto-Fire",
+    description: "Enables Auto-Fire for the main cannon.",
+    prerequisite: 2,
     levels: [
-      { cost: 5, effect: true },
+      { cost: 100, effect: true },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.rocket.double =
-        UPGRADES[3].levels[level - 1].effect;
+      gameState.upgrades.weapons.cannon.autoFire = true
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.rocket.double;
+      return gameState.upgrades.weapons.cannon.autoFire;
     },
     grid: {
-      x: 3000,
-      y: -2,
-      icon: "rocketDouble",
+      x: 3,
+      y: 0,
+      icon: "cannonAutofire",
       size: "medium",
     },
   },
@@ -444,13 +447,16 @@ const UPGRADES = [
     percent: true,
     prerequisite: 17,
     levels: [
-      { cost: 100, effect: .2 },
-      { cost: 250, effect: .3 },
-      { cost: 500, effect: .4 },
-      { cost: 900, effect: .5 },
-      { cost: 1500, effect: .6 },
-      { cost: 2500, effect: .7 },
-      { cost: 4000, effect: .8 },
+      { cost: 100, effect: .11 },
+      { cost: 250, effect: .12 },
+      { cost: 500, effect: .13 },
+      { cost: 900, effect: .14 },
+      { cost: 1500, effect: .15 },
+      { cost: 2500, effect: .16 },
+      { cost: 4000, effect: .17 },
+      { cost: 8000, effect: .18 },
+      { cost: 16000, effect: .19 },
+      { cost: 32000, effect: .20 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.chance = UPGRADES[18].levels[level - 1].effect;

@@ -94,7 +94,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
           applyUpgrades();
           // Update credits display
           if (scene.creditsText) {
-            scene.creditsText.setText(`Credits: ${gameState.credits}`);
+            scene.creditsText.setText(`Credits: ${formatNumber(gameState.credits)}`);
           }
         }
       }
