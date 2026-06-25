@@ -9,6 +9,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       [0xa7c4e2, 0x4d60c6], // PURPLE, UNLOCKED
       [0x75dceb, 0x3387ba], // BLUE, UPGRADED
       [0xd2e269, 0x56a135], // GREEN, DONE
+      [0xfffab0, 0xffa13d], // RED, CANNOT AFFORD
     ];    
     // this.tints = [
     //   [0xe279b4, 0xa13567],
@@ -121,12 +122,19 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       this.state = 3;
     } else if (LEVELS[this.prereq.index] > 0) {
       this.state = 2;
-    } else if (this.prereq.state === 2) {
+    } else if (this.prereq.state === 2 || this.prereq.state === 5) {
       this.state = 1;
       this.icon.setTexture("question");
       this.iconBg.setAlpha(1)
     } else {
       this.state = 0;
+    }
+
+    if ((this.state === 2 || this.state === 3) && LEVELS[this.index] < this.upgrade.levels.length) {
+      const cost = this.upgrade.levels[LEVELS[this.index]].cost;
+      if (gameState.credits < cost) {
+        this.state = 5;
+      }
     }
 
     if (this.state === 0) {

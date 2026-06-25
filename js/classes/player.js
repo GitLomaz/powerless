@@ -23,7 +23,7 @@ class Player extends Phaser.GameObjects.Container {
 
     this.creditsGained = 0;
     this.creditsGainedText = scene.add
-      .text(20, 20, "Credits: 0", { font: "16px Arial", fill: "#2412c8" })
+      .text(20, 20, `Credits: ${gameState.credits}`, { font: "16px Arial", fill: "#2412c8" })
       .setOrigin(0)
       .setDepth(4)
       .setScrollFactor(0);
@@ -133,7 +133,7 @@ class Player extends Phaser.GameObjects.Container {
     scene.sounds["credit"].play();
     gameState.credits += amount;
     this.creditsGained += amount;
-    this.creditsGainedText.setText(`Credits: ${this.creditsGained}`);
+    this.creditsGainedText.setText(`Credits: ${gameState.credits}`);
   }
 
   createFoot(offsetX, offsetY) {

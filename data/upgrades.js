@@ -1208,7 +1208,7 @@ const UPGRADES = [
     id: 49,
     name: "Tier IV: Explosion",
     description: "When destroyed, Tier IV enemies explode, damaging nearby enemies in radius.",
-    prerequisite: 46,
+    // prerequisite: 46,
     levels: [
       { cost: 3000, effect: 50 },
       { cost: 6000, effect: 75 },
@@ -1223,7 +1223,7 @@ const UPGRADES = [
       return gameState.upgrades.spawns.tier4.explosion;
     },
     grid: {
-      x: -3,
+      x: -300,
       y: -5,
       icon: "tierIVExplosion",
       size: "medium",
