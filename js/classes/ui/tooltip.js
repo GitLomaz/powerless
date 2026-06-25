@@ -33,7 +33,7 @@ class Tooltip extends Phaser.GameObjects.Container {
       const cost = upgrade.levels[LEVELS[upgrade.id]].cost;
       const canAfford = gameState.credits >= cost;
       const costColor = canAfford ? "#FFD700" : "#FF4444";
-      this.cost = scene.add.text(100, 90, cost + 'c', { fontFamily: 'Consolas', fontSize: "16px", fill: costColor }).setOrigin(1);
+      this.cost = scene.add.text(100, 90, formatNumber(cost) + 'c', { fontFamily: 'Consolas', fontSize: "16px", fill: costColor }).setOrigin(1);
       this.add(this.cost);
     }
 
