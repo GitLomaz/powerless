@@ -286,10 +286,9 @@ class Player extends Phaser.GameObjects.Container {
   tick(time, delta) {
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
-
     this.collectiveTime += delta;
-    const decayModifier = Math.floor(this.collectiveTime / 30000) * 5 + 1;
-
+    const elapsed = this.collectiveTime / 1000;
+    const decayModifier = elapsed <= 30 ? 1 : 1 + (elapsed - 30) / 30;
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
       // Show game over panel instead of immediately returning to orbit

@@ -2,14 +2,14 @@
 
 ## Orbit Scene
 
-- Credits Display
++ Credits Display
 - Balance upgrades
 - Background Image
-- General Cleanup
++ General Cleanup
 + Music/Sound button
-- Stats button
-- Restart button
-- Statistic collection
++ Stats button
++ Restart button
++ Statistic collection
 + Make sure all values display correctly 
 + Format numbers where needed
 + Tier 4 explosion needs to go
@@ -21,7 +21,7 @@
 + Ability cooldowns
 + Ability Cooldown upgrade
 + Final boss
-- End of round stats screen
++ End of round stats screen
 + Energy decay over time
 + Do not fire when using an ability (click action)
 + Enemies can spawn anywhere on game load, but should only RESPAWN outside player view

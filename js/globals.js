@@ -107,7 +107,11 @@ let gameState = JSON.parse(JSON.stringify(gameStateTemplate));
 // Save/Load Functions
 function saveGame() {
   try {
-    localStorage.setItem('powerlessSave', JSON.stringify(gameState));
+    const saveData = {
+      gameState: gameState,
+      levels: LEVELS
+    };
+    localStorage.setItem('powerlessSave', JSON.stringify(saveData));
     console.log('Game saved successfully');
   } catch (e) {
     console.error('Failed to save game:', e);
@@ -118,7 +122,22 @@ function loadGame() {
   try {
     const savedData = localStorage.getItem('powerlessSave');
     if (savedData) {
-      gameState = JSON.parse(savedData);
+      const parsedData = JSON.parse(savedData);
+      
+      // Handle old save format (just gameState) or new format (object with gameState and levels)
+      if (parsedData.gameState) {
+        gameState = parsedData.gameState;
+        // Restore LEVELS array
+        if (parsedData.levels) {
+          for (let i = 0; i < parsedData.levels.length; i++) {
+            LEVELS[i] = parsedData.levels[i];
+          }
+        }
+      } else {
+        // Old save format - just gameState directly
+        gameState = parsedData;
+      }
+      
       console.log('Game loaded successfully');
       return true;
     }
