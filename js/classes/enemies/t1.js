@@ -24,6 +24,8 @@ class T1 extends Enemy {
       this.target.y
     );
 
+    this.sprite.setDepth(10);
+
     this.distanceTrveled = 0;
     this.setScale(.8);
   }

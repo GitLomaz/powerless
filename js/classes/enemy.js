@@ -52,6 +52,7 @@ class Enemy extends Phaser.GameObjects.Container {
         duration: 1000,
         repeat: -1
       });
+      this.aura.setDepth(0);
       this.add(this.aura);
     }
   }

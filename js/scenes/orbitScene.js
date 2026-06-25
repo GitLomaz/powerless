@@ -66,7 +66,7 @@ let orbitScene = new Phaser.Class({
     new SoundToggle(12, 12,this);
     
     // Credits display
-    this.creditsText = this.add.text(20, 20, `Credits: ${gameState.credits}`, {
+    this.creditsText = this.add.text(20, 20, `Credits: ${formatNumber(gameState.credits)}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#FFD700',

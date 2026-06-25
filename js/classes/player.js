@@ -22,7 +22,7 @@ class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.creditsGained = 0;
-    this.creditsGainedText = scene.add.text(20, 20, `Credits: ${gameState.credits}`, {
+    this.creditsGainedText = scene.add.text(20, 20, `Credits: ${formatNumber(gameState.credits)}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#FFD700',
@@ -135,7 +135,7 @@ class Player extends Phaser.GameObjects.Container {
     scene.sounds["credit"].play();
     gameState.credits += amount;
     this.creditsGained += amount;
-    this.creditsGainedText.setText(`Credits: ${gameState.credits}`);
+    this.creditsGainedText.setText(`Credits: ${formatNumber(gameState.credits)}`);
   }
 
   createFoot(offsetX, offsetY) {
@@ -282,10 +282,9 @@ class Player extends Phaser.GameObjects.Container {
 
     this.collectiveTime += delta;
 
-    const decay =
-      this.collectiveTime > 30000 ? Math.sqrt(this.collectiveTime / 100) : 0;
+    const decayModifier = Math.floor(this.collectiveTime / 30000) * 5;
 
-    this.energy -= delta * gameState.upgrades.player.energyLoss + decay;
+    this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
       this.returnToOrbit();
     }

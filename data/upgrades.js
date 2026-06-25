@@ -71,7 +71,7 @@ const UPGRADES = [
     description: "Enables Auto-Fire for the main cannon.",
     prerequisite: 2,
     levels: [
-      { cost: 5, effect: true },
+      { cost: 100, effect: true },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.weapons.cannon.autoFire = true
@@ -443,13 +443,16 @@ const UPGRADES = [
     percent: true,
     prerequisite: 17,
     levels: [
-      { cost: 100, effect: .2 },
-      { cost: 250, effect: .3 },
-      { cost: 500, effect: .4 },
-      { cost: 900, effect: .5 },
-      { cost: 1500, effect: .6 },
-      { cost: 2500, effect: .7 },
-      { cost: 4000, effect: .8 },
+      { cost: 100, effect: .11 },
+      { cost: 250, effect: .12 },
+      { cost: 500, effect: .13 },
+      { cost: 900, effect: .14 },
+      { cost: 1500, effect: .15 },
+      { cost: 2500, effect: .16 },
+      { cost: 4000, effect: .17 },
+      { cost: 8000, effect: .18 },
+      { cost: 16000, effect: .19 },
+      { cost: 32000, effect: .20 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.chance = UPGRADES[18].levels[level - 1].effect;
