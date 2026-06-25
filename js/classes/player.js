@@ -465,10 +465,10 @@ class Player extends Phaser.GameObjects.Container {
   }
 
   tweenBarrel() {
-    const enemies = this.findEnemies(1500, 300);
+    const enemies = this.findEnemies(1500, 0);
     console.log('tweening barel')
     if (enemies.length === 0) {
-     scene.time.delayedCall(100, ()=>{
+     scene.time.delayedCall(550, ()=>{
       console.log('no enemies, retweening')
       this.tweenBarrel(); return;})
       return}
@@ -488,7 +488,7 @@ class Player extends Phaser.GameObjects.Container {
       rotation: targetAngle,
       duration: 500,
             onComplete: () => {
-              console.log('autofire shell')
+              console.log('autofire')
         this.fireMainCannon();
         // Chain back for continuous autofire
         if (this.autofire) {
