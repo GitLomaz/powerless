@@ -6,19 +6,17 @@ let battleScene = new Phaser.Class({
     });
   },
 
-  
-
   preload: function () {
     scene = this;
     this.load.audio("click", "audio/click.ogg");
     this.load.audio("cannon", "audio/cannon.ogg");
     this.load.audio("crash", "audio/crash.ogg");
     this.load.audio("explosion", "audio/explosion.ogg");
-    this.load.audio("minigun","audio/minigun.ogg")
-    this.load.audio("credit","audio/credit.ogg")
-    this.load.audio("discharge","audio/discharge.ogg")
-    this.load.audio("incoming","audio/incoming.ogg")
-    this.load.audio("recharge","audio/recharge.ogg")
+    this.load.audio("minigun", "audio/minigun.ogg");
+    this.load.audio("credit", "audio/credit.ogg");
+    this.load.audio("discharge", "audio/discharge.ogg");
+    this.load.audio("incoming", "audio/incoming.ogg");
+    this.load.audio("recharge", "audio/recharge.ogg");
 
     this.load.image("sheet2", "images/sheet2.png");
     this.load.image("mech-foot", "images/mech/foot.png");
@@ -45,18 +43,36 @@ let battleScene = new Phaser.Class({
     this.load.image("enemy-tank-body", "images/enemies/tankBody.png");
     this.load.image("enemy-tank-barrel", "images/enemies/tankBarrel.png");
     this.load.image("enemy-tank-tread", "images/enemies/tankTracks.png");
-    this.load.spritesheet("resupply", "images/resupply.png", { frameWidth: 32, frameHeight: 64 });
-    this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
-    this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });
-    this.load.spritesheet("mech-barrel-anim", "images/mech/barrel2.png", { frameWidth: 96, frameHeight: 96 });
+    this.load.spritesheet("resupply", "images/resupply.png", {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
+    this.load.spritesheet("powerbar", "images/powerBar.png", {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet("rocket", "images/mech/rocket.png", {
+      frameWidth: 24,
+      frameHeight: 12,
+    });
+    this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", {
+      frameWidth: 24,
+      frameHeight: 12,
+    });
+    this.load.spritesheet("mech-barrel-anim", "images/mech/barrel2.png", {
+      frameWidth: 96,
+      frameHeight: 96,
+    });
     this.load.tilemapTiledJSON("map2", "json/map2.json");
   },
 
   create: function () {
+    this.enemies = [];
+    this.bullets = [];
+    this.credits = [];
     this.sounds = [];
     this.sounds["click"] = this.sound.add("click");
-    this.sounds["cannon"] = this.sound.add("cannon").setVolume(.7);
+    this.sounds["cannon"] = this.sound.add("cannon").setVolume(0.7);
     this.sounds["crash"] = this.sound.add("crash").setVolume(0.4);
     this.sounds["explosion"] = this.sound.add("explosion").setVolume(0.4);
     this.sounds["minigun"] = this.sound.add("minigun").setVolume(0.3);
@@ -75,17 +91,27 @@ let battleScene = new Phaser.Class({
     });
     this.anims.create({
       key: "mech-barrel-anim",
-      frames: this.anims.generateFrameNumbers("mech-barrel-anim", { start: 0, end: 5 }),
+      frames: this.anims.generateFrameNumbers("mech-barrel-anim", {
+        start: 0,
+        end: 5,
+      }),
       frameRate: 16,
     });
     this.anims.create({
       key: "enemyRocket",
-      frames: this.anims.generateFrameNumbers("enemyRocket", { start: 0, end: 5 }),
+      frames: this.anims.generateFrameNumbers("enemyRocket", {
+        start: 0,
+        end: 5,
+      }),
       frameRate: 16,
       repeat: -1,
     });
 
-    this.map = this.make.tilemap({ key: "map2", tileWidth: 128, tileHeight: 128 });
+    this.map = this.make.tilemap({
+      key: "map2",
+      tileWidth: 128,
+      tileHeight: 128,
+    });
     this.tileset = this.map.addTilesetImage("sheet2", "sheet2");
     this.layer = this.map.createLayer(0, this.tileset, 0, 0);
     this.map.createLayer(1, this.tileset, 0, 0);
@@ -96,7 +122,7 @@ let battleScene = new Phaser.Class({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D
+      right: Phaser.Input.Keyboard.KeyCodes.D,
     });
 
     this.bulletGroup = this.physics.add.group();
@@ -106,76 +132,104 @@ let battleScene = new Phaser.Class({
     this.resupplyGroup = this.physics.add.group();
 
     this.player = new Player();
-    
+
     // FPS counter and debug info
-    this.fpsText = this.add.text(GAME_WIDTH * 20, 20, "FPS: 60", { 
-      font: "16px Arial", 
-      fill: "#00ff00" 
-    }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
-    
-    this.debugText = this.add.text(GAME_WIDTH * 20, 45, "", { 
-      font: "14px Arial", 
-      fill: "#ffff00" 
-    }).setOrigin(1, 0).setDepth(10).setScrollFactor(0);
-    
-    this.physics.add.overlap(this.bulletGroup, this.enemyGroup, function (bullet, enemy) {
-      const damage = bullet.damage;
-      if (!bullet.damage) {
-        damage = 25;
-        console.log('something doesnt have damage')
-      }
-      enemy.takeDamage(damage, bullet.x, bullet.y);
-      if (bullet.metaType === "rocket") {
-        bullet.explode();
-        return
-      } 
-      bullet.destroy();
-    });
+    this.fpsText = this.add
+      .text(GAME_WIDTH * 20, 20, "FPS: 60", {
+        font: "16px Arial",
+        fill: "#00ff00",
+      })
+      .setOrigin(1, 0)
+      .setDepth(10)
+      .setScrollFactor(0);
 
-    this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
-      if (enemy.tier === 5) {
-        player.energy = -100000;
-      } else {
-        if (gameState.upgrades.abilities.stomp < enemy.tier) {
-          player.energy -= enemy.healthMax * 20;
-        } else {
-          player.energy -= enemy.healthMax * 5;
+    this.debugText = this.add
+      .text(GAME_WIDTH * 20, 45, "", {
+        font: "14px Arial",
+        fill: "#ffff00",
+      })
+      .setOrigin(1, 0)
+      .setDepth(10)
+      .setScrollFactor(0);
+
+    this.physics.add.overlap(
+      this.bulletGroup,
+      this.enemyGroup,
+      function (bullet, enemy) {
+        const damage = bullet.damage;
+        if (!bullet.damage) {
+          damage = 25;
+          console.log("something doesnt have damage");
         }
-        enemy.die(player.x, player.y);
-      }
-    });
-
-    this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
-      bullet.destroy();
-      player.energy -= 500;
-    });
-
-    this.physics.add.overlap(this.bulletGroup, this.enemyBulletGroup, function (bullet, enemyBullet) {
-      if (enemyBullet.metaType === "rocket") {
+        enemy.takeDamage(damage, bullet.x, bullet.y);
+        if (bullet.metaType === "rocket") {
+          bullet.explode();
+          return;
+        }
         bullet.destroy();
-        enemyBullet.explode();
-        enemyBullet.destroy();
-      }
-    });
+      },
+    );
 
-    this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
-      credit.collect();
-    });
+    this.physics.add.overlap(
+      this.player,
+      this.enemyGroup,
+      function (player, enemy) {
+        if (enemy.tier === 5) {
+          player.energy = -100000;
+        } else {
+          if (gameState.upgrades.abilities.stomp < enemy.tier) {
+            player.energy -= enemy.healthMax * 20;
+          } else {
+            player.energy -= enemy.healthMax * 5;
+          }
+          enemy.die(player.x, player.y);
+        }
+      },
+    );
 
+    this.physics.add.overlap(
+      this.player,
+      this.enemyBulletGroup,
+      function (player, bullet) {
+        bullet.destroy();
+        player.energy -= 500;
+      },
+    );
 
-    this.physics.add.overlap(this.player, this.resupplyGroup, function (player, resupply) {
-      if (resupply.falling) return;
-      player.energy += resupply.value;
-      if (player.energy > gameState.upgrades.player.energy) {
-        player.energy = gameState.upgrades.player.energy;
-      }
-      scene.sounds["recharge"].play();
-      resupply.destroy();
-    });
+    this.physics.add.overlap(
+      this.bulletGroup,
+      this.enemyBulletGroup,
+      function (bullet, enemyBullet) {
+        if (enemyBullet.metaType === "rocket") {
+          bullet.destroy();
+          enemyBullet.explode();
+          enemyBullet.destroy();
+        }
+      },
+    );
 
-    this.enemies = [];    
-    this.bullets = [];    
-    this.credits = [];
+    this.physics.add.overlap(
+      this.player,
+      this.creditGroup,
+      function (player, credit) {
+        credit.collect();
+      },
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.resupplyGroup,
+      function (player, resupply) {
+        if (resupply.falling) return;
+        player.energy += resupply.value;
+        if (player.energy > gameState.upgrades.player.energy) {
+          player.energy = gameState.upgrades.player.energy;
+        }
+        scene.sounds["recharge"].play();
+        resupply.destroy();
+      },
+    );
+
     for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
       this.enemies.push(new T1());
     }
@@ -198,17 +252,17 @@ let battleScene = new Phaser.Class({
     // Update FPS counter
     const fps = Math.round(1000 / delta);
     this.fpsText.setText(`FPS: ${fps}`);
-    
+
     // Update debug info
     const tweenCount = this.tweens.getTweens().length;
     const objectCount = this.children.list.length;
     this.debugText.setText(
       `Tweens: ${tweenCount}\n` +
-      `Objects: ${objectCount}\n` +
-      `Bullets: ${this.bullets.length}\n` +
-      `Enemies: ${this.enemies.length}`
+        `Objects: ${objectCount}\n` +
+        `Bullets: ${this.bullets.length}\n` +
+        `Enemies: ${this.enemies.length}`,
     );
-    
+
     this.player.tick(time, delta);
     for (const enemy of this.enemies) {
       enemy.tick(delta);

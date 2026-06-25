@@ -3,11 +3,11 @@ class Player extends Phaser.GameObjects.Container {
     super(scene, GAME_WIDTH * 1.5, GAME_HEIGHT * 1.5);
 
     this.energy = gameState.upgrades.player.energy;
-
+    this.autofire = true;
     this.cannonCanShoot = true;
     this.rocketCanShoot = true;
-    this.pointer=scene.input;
-    this.activatingAbility=false;
+    this.pointer = scene.input;
+    this.activatingAbility = false;
 
     scene.physics.add.existing(this);
     this.body.setCircle(48, -48, -48);
@@ -22,15 +22,17 @@ class Player extends Phaser.GameObjects.Container {
     scene.add.existing(this);
 
     this.creditsGained = 0;
-    this.creditsGainedText = scene.add.text(20, 20, `Credits: ${gameState.credits}`, {
-      fontFamily: 'Consolas',
-      fontSize: '24px',
-      fill: '#FFD700',
-      stroke: '#000000',
-      strokeThickness: 2
-    }).setOrigin(0, 0).setScrollFactor(0).setDepth(100);
-
-    this.lastShot = 0;
+    this.creditsGainedText = scene.add
+      .text(20, 20, `Credits: ${gameState.credits}`, {
+        fontFamily: "Consolas",
+        fontSize: "24px",
+        fill: "#FFD700",
+        stroke: "#000000",
+        strokeThickness: 2,
+      })
+      .setOrigin(0, 0)
+      .setScrollFactor(0)
+      .setDepth(100);
 
     this.collectiveTime = 0;
 
@@ -82,7 +84,11 @@ class Player extends Phaser.GameObjects.Container {
             if (nearestEnemy) {
               scene.sounds["minigun"].play();
               // Instant damage
-              nearestEnemy.takeDamage(gameState.upgrades.weapons.minigun.damage, this.x, this.y);
+              nearestEnemy.takeDamage(
+                gameState.upgrades.weapons.minigun.damage,
+                this.x,
+                this.y,
+              );
               // Quick visual line effect
               this.createMinigunLine(nearestEnemy);
             }
@@ -96,7 +102,6 @@ class Player extends Phaser.GameObjects.Container {
     this.supplyCooldown = 0;
     this.strikeCooldown = 0;
     this.burstCooldown = 0;
-
 
     if (gameState.upgrades.abilities.resupply.enabled) {
       this.resupply = new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
@@ -117,18 +122,29 @@ class Player extends Phaser.GameObjects.Container {
     }
 
     // Setup hotkeys for abilities
-    scene.input.keyboard.on('keydown-ONE', () => {
-      if (this.resupply) this.resupply.emit('pointerdown');
+    scene.input.keyboard.on("keydown-ONE", () => {
+      if (this.resupply) this.resupply.emit("pointerdown");
     });
-    scene.input.keyboard.on('keydown-TWO', () => {
-      if (this.orbitalStrike) this.orbitalStrike.emit('pointerdown');
+    scene.input.keyboard.on("keydown-TWO", () => {
+      if (this.orbitalStrike) this.orbitalStrike.emit("pointerdown");
     });
-    scene.input.keyboard.on('keydown-THREE', () => {
-      if (this.energyBurst) this.energyBurst.emit('pointerdown');
+    scene.input.keyboard.on("keydown-THREE", () => {
+      if (this.energyBurst) this.energyBurst.emit("pointerdown");
     });
 
-    this.pointer.on('pointerdown',()=>this.fireMainCannon())
+    this.pointer.on("pointerdown", () => {
+      if (this.autofire) {
+        // autofire is handled by the time event below
+        return;
+      } else {
+        this.fireMainCannon();
+      }
+    });
 
+    // Start autofire cycle
+    if (this.autofire) {
+      this.tweenBarrel();
+    }
   }
 
   gainCredits(amount) {
@@ -198,7 +214,7 @@ class Player extends Phaser.GameObjects.Container {
     const dy = target.y - this.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
     const lineLength = 30; // Short line segment
-    
+
     const lineData = {
       progress: 0,
       alpha: 0.8,
@@ -209,9 +225,12 @@ class Player extends Phaser.GameObjects.Container {
       graphics.lineStyle(3, 0xffff00, lineData.alpha);
 
       // Calculate the moving line segment position
-      const startProgress = Math.max(0, lineData.progress - lineLength / distance);
+      const startProgress = Math.max(
+        0,
+        lineData.progress - lineLength / distance,
+      );
       const endProgress = lineData.progress;
-      
+
       const startX = this.x + dx * startProgress;
       const startY = this.y + dy * startProgress;
       const endX = this.x + dx * endProgress;
@@ -252,7 +271,7 @@ class Player extends Phaser.GameObjects.Container {
         const radius = explosion.radius;
         const radiusSq = radius * radius;
 
-        for (const enemy of scene.enemies) {
+        for (const enemy of scene.enemies || []) {
           if (!enemy.active || hitEnemies.has(enemy)) continue;
 
           const dx = enemy.x - this.x;
@@ -363,14 +382,16 @@ class Player extends Phaser.GameObjects.Container {
 
     this.updateFeet(delta);
 
-    const pointer = scene.input.activePointer;
+    if (!this.autofire) {
+      const pointer = scene.input.activePointer;
 
-    const worldPoint = scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+      const worldPoint = scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
-    this.barrel.rotation = Math.atan2(
-      worldPoint.y - this.y,
-      worldPoint.x - this.x,
-    );
+      this.barrel.rotation = Math.atan2(
+        worldPoint.y - this.y,
+        worldPoint.x - this.x,
+      );
+    }
 
     if (gameState.upgrades.weapons.rocket.enabled) {
       if (this.rocketCanShoot) {
@@ -399,27 +420,22 @@ class Player extends Phaser.GameObjects.Container {
   //fire cannon
 
   fireMainCannon() {
-    if(this.activatingAbility){return};
-    if (this.cannonCanShoot) {
-      if (this.cannonCanShoot) {
-        this.barrel.play("mech-barrel-anim", true);
-        scene.sounds["cannon"].play();
-        new Shell();
-        this.cannonCanShoot = false;
-        scene.sound.play('cannon');
-        scene.time.delayedCall(
-          gameState.upgrades.weapons.cannon.fireRate,
-          () => {
-            this.cannonCanShoot = true;
-          },
-        );
-      }
-    }
+    if (this.activatingAbility || !this.cannonCanShoot) return;
+
+    this.barrel.play("mech-barrel-anim");
+    scene.sounds["cannon"]?.play();
+    new Shell();
+    this.cannonCanShoot = false;
+    scene.time.delayedCall(
+      gameState.upgrades.weapons.cannon.fireRate,
+      () => { this.cannonCanShoot = true; },
+    );
   }
+
   findNearestEnemy(maxRange = 1500, minRange = 300) {
+    const enemies = scene.enemies || [];
     let nearestEnemy = null;
-    let nearestDist = Infinity;
-    for (const enemy of scene.enemies) {
+    for (const enemy of enemies) {
       if (!enemy.active) continue;
       const dist = Phaser.Math.Distance.Between(
         this.x,
@@ -427,16 +443,17 @@ class Player extends Phaser.GameObjects.Container {
         enemy.x,
         enemy.y,
       );
-      if (dist < nearestDist && dist < maxRange && dist > minRange) {
-        nearestDist = dist;
+      if (dist < maxRange && dist > minRange) {
         nearestEnemy = enemy;
+        break;
       }
     }
     return nearestEnemy;
   }
 
   findEnemies(maxRange = 1500, minRange = 300) {
-    return scene.enemies
+    const enemies = scene.enemies || [];
+    return enemies
       .filter((enemy) => enemy.active)
       .map((enemy) => ({
         enemy,
@@ -445,6 +462,42 @@ class Player extends Phaser.GameObjects.Container {
       .filter(({ dist }) => dist < maxRange && dist > minRange)
       .sort((a, b) => a.dist - b.dist)
       .map(({ enemy }) => enemy);
+  }
+
+  tweenBarrel() {
+    const enemies = this.findEnemies(1500, 300);
+    console.log('tweening barel')
+    if (enemies.length === 0) {
+     scene.time.delayedCall(100, ()=>{
+      console.log('no enemies, retweening')
+      this.tweenBarrel(); return;})
+      return}
+    
+    const target = enemies[0];
+
+    const barrelLength = 32;
+    const spawnX = this.x + Math.cos(this.barrel.rotation) * barrelLength;
+    const spawnY = this.y + Math.sin(this.barrel.rotation) * barrelLength;
+    const targetAngle = Math.atan2(target.y - spawnY, target.x - spawnX);
+
+    // Kill any existing tween on the barrel so we don't chain stale tweens
+    scene.tweens.killTweensOf(this.barrel);
+
+    scene.tweens.add({
+      targets: this.barrel,
+      rotation: targetAngle,
+      duration: 500,
+            onComplete: () => {
+              console.log('autofire shell')
+        this.fireMainCannon();
+        // Chain back for continuous autofire
+        if (this.autofire) {
+          scene.time.delayedCall(gameState.upgrades.weapons.cannon.fireRate, () => {
+            this.tweenBarrel();
+          });
+        }
+      },
+    });
   }
 
   updateFeet(delta) {

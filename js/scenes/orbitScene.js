@@ -22,7 +22,7 @@ let orbitScene = new Phaser.Class({
   },
 
   create: function () {
-
+    gameState.credits=10000000
     game.sound.mute = muteAll;
 
     const bg = this.add.graphics();

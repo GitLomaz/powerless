@@ -14,14 +14,11 @@ class Shell extends Phaser.GameObjects.Container {
     scene.bulletGroup.add(this);
     this.body.setCircle(6, -6, -6);
 
-    const pointer = scene.input.activePointer;
-    const worldPoint = scene.cameras.main.getWorldPoint(
-        pointer.x,
-        pointer.y
-    );
-
-    this.velocity = new Phaser.Math.Vector2(worldPoint.x - this.x, worldPoint.y - this.y).normalize().scale(this.speed);
-    this.body.setVelocity(this.velocity.x, this.velocity.y);
+    // Travel along the barrel's angle (not toward the mouse)
+    const velAngle = barrel.rotation;
+    const vx = Math.cos(velAngle) * this.speed;
+    const vy = Math.sin(velAngle) * this.speed;
+    this.body.setVelocity(vx, vy);
 
     scene.time.delayedCall(gameState.upgrades.weapons.cannon.range, () => {
       this.destroy();
