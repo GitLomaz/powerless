@@ -1,24 +1,64 @@
-class SoundToggle {
-  constructor(x, y, scene) {
-    const green = 0x56a135;
-    const red = 0xaa4444;
-   
-    this.rect = scene.add.rectangle(x + 60, y + 15, 130, 44, muteAll ? red : green).setRounded();
-    this.text = scene.add
-      .text(x + 60, y + 15, muteAll ? "SOUND: OFF" : "SOUND: ON", {
-        fontFamily: "Consolas",
-        fontSize: "16px",
-        fill: "#fff",
-      })
-      .setOrigin(0.5);
+class SoundToggle extends Phaser.GameObjects.Container {
+  constructor(scene) {
+    super(scene, GAME_WIDTH - 90, 40);
+    this.scene = scene;
+    this.width = 160;
+    this.height = 50;
 
-    this.rect.setInteractive().on("pointerdown", () => {
+    // Color schemes
+    this.onTint = [0xd2e269, 0x56a135];   // Green (matching Deploy button)
+    this.offTint = [0xf58989, 0xaa4444];  // Red
+
+    this.currentTint = muteAll ? this.offTint : this.onTint;
+
+    // Layered rectangles for border effect (matching Deploy button style)
+    this.r3 = scene.add.rectangle(
+      0,
+      0,
+      this.width - 4,
+      this.height - 4,
+      0x1a1a1a,
+    );
+    this.r2 = scene.add.rectangle(0, 0, this.width - 4, this.height - 4);
+    this.r1 = scene.add.rectangle(0, 0, this.width - 4, this.height - 4);
+    this.r1.setStrokeStyle(1, this.currentTint[0]);
+    this.r2.setStrokeStyle(3, this.currentTint[1]);
+    this.r3.setStrokeStyle(5, this.currentTint[1], 0.35);
+    
+    this.add(this.r3);
+    this.add(this.r2);
+    this.add(this.r1);
+    this.setDepth(5);
+
+    this.text = scene.add.text(0, 0, muteAll ? "SOUND: OFF" : "SOUND: ON", {
+      align: 'center',
+      fontFamily: "Consolas",
+      fontSize: "18px",
+      fill: "#fff",
+    }).setOrigin(0.5);
+    this.add(this.text);
+
+    // Fixed to screen (not affected by camera scroll)
+    this.setScrollFactor(0);
+    
+    this.setInteractive();
+    this.on("pointerdown", (pointer) => {
+      // Prevent click from propagating to camera drag
+      pointer.event.stopPropagation();
+      
       muteAll = !muteAll;
       game.sound.mute = muteAll;
-      this.rect.setFillStyle(muteAll ? red : green);
+      
+      // Update tint
+      this.currentTint = muteAll ? this.offTint : this.onTint;
+      this.r1.setStrokeStyle(1, this.currentTint[0]);
+      this.r2.setStrokeStyle(3, this.currentTint[1]);
+      this.r3.setStrokeStyle(5, this.currentTint[1], 0.35);
+      
       this.text.setText(muteAll ? "SOUND: OFF" : "SOUND: ON");
       localStorage.setItem('muteAll', muteAll);
-      scene.sounds["click"].play();
+      scene.sound.play('click');
     });
+    scene.add.existing(this);
   }
 }
