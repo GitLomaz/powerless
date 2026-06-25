@@ -21,7 +21,7 @@ const gameStateTemplate  = {
         double: false,
         damage: 50,
         fireRate: 3500,
-        splash: 50,
+        splash: 30,
         speed: 200,
       },
       cannon: {
@@ -67,7 +67,7 @@ const gameStateTemplate  = {
       dropRate: 1,
       energyLeech: {
         enabled: false,
-        chance: .1,
+        chance: .05,
         amount: 1000
       }
     },

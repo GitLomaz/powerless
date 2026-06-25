@@ -288,7 +288,12 @@ class Player extends Phaser.GameObjects.Container {
     const dt = delta / 1000;
     this.collectiveTime += delta;
     const elapsed = this.collectiveTime / 1000;
-    const decayModifier = elapsed <= 30 ? 1 : 1 + (elapsed - 30) / 30;
+    let decayModifier
+    if (elapsed <= 180) {
+      decayModifier = elapsed <= 30 ? 1 : 1 + (elapsed - 30) / 30;
+    } else {
+      decayModifier = 6 * Math.pow(1.5, (elapsed - 180) / 60);
+    }
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
       // Show game over panel instead of immediately returning to orbit

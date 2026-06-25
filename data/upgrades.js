@@ -447,16 +447,11 @@ const UPGRADES = [
     percent: true,
     prerequisite: 17,
     levels: [
-      { cost: 100, effect: .11 },
-      { cost: 250, effect: .12 },
-      { cost: 500, effect: .13 },
-      { cost: 900, effect: .14 },
-      { cost: 1500, effect: .15 },
-      { cost: 2500, effect: .16 },
-      { cost: 4000, effect: .17 },
-      { cost: 8000, effect: .18 },
-      { cost: 16000, effect: .19 },
-      { cost: 32000, effect: .20 },
+      { cost: 100, effect: .06 },
+      { cost: 250, effect: .07 },
+      { cost: 500, effect: .08 },
+      { cost: 900, effect: .09 },
+      { cost: 1500, effect: .1 },
     ],
     applyUpgrade: (level) => {
       gameState.upgrades.player.energyLeech.chance = UPGRADES[18].levels[level - 1].effect;
