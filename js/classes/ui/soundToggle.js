@@ -1,6 +1,9 @@
 class SoundToggle extends Phaser.GameObjects.Container {
-  constructor(scene) {
-    super(scene, GAME_WIDTH - 90, 40);
+  constructor(scene, x, y) {
+    // Use provided x, y or default to top-right corner
+    const posX = x !== undefined ? x : GAME_WIDTH - 90;
+    const posY = y !== undefined ? y : 40;
+    super(scene, posX, posY);
     this.scene = scene;
     this.width = 160;
     this.height = 50;

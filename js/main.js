@@ -3,7 +3,7 @@ let config = {
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   parent: "wrapper",
-  scene: [orbitScene, battleScene],
+  scene: [titleScene, orbitScene, battleScene],
   roundPixels: true,
   physics: {
     default: "arcade",

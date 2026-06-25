@@ -70,6 +70,7 @@ class GameOverPanel extends Phaser.GameObjects.Container {
     // Buttons
     this.createButton('RETURN TO ORBIT', panelX, panelY + 100, () => {
       scene.sounds['click'].play();
+      saveGame(); // Save before returning to orbit
       scene.scene.start('orbitScene', { creditsGained: stats.credits });
     });
 

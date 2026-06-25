@@ -31,6 +31,7 @@ class Deploy extends Phaser.GameObjects.Container {
       // Consume the click event to prevent it from firing cannon on scene start
       pointer.event.stopPropagation();
       scene.sound.play('click');
+      saveGame(); // Save before deploying
       scene.scene.start('battleScene');
     });
     scene.add.existing(this);

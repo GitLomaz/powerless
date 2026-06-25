@@ -103,3 +103,32 @@ function formatNumber(num) {
 }
 
 let gameState = JSON.parse(JSON.stringify(gameStateTemplate));
+
+// Save/Load Functions
+function saveGame() {
+  try {
+    localStorage.setItem('powerlessSave', JSON.stringify(gameState));
+    console.log('Game saved successfully');
+  } catch (e) {
+    console.error('Failed to save game:', e);
+  }
+}
+
+function loadGame() {
+  try {
+    const savedData = localStorage.getItem('powerlessSave');
+    if (savedData) {
+      gameState = JSON.parse(savedData);
+      console.log('Game loaded successfully');
+      return true;
+    }
+  } catch (e) {
+    console.error('Failed to load game:', e);
+  }
+  return false;
+}
+
+function deleteSave() {
+  localStorage.removeItem('powerlessSave');
+  console.log('Save deleted');
+}

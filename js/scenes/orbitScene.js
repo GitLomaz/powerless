@@ -81,5 +81,56 @@ let orbitScene = new Phaser.Class({
       stroke: '#000000',
       strokeThickness: 2
     }).setOrigin(0, 0).setScrollFactor(0).setDepth(100);
+
+    // Menu button
+    this.createMenuButton();
   },
+
+  createMenuButton: function() {
+    const container = this.add.container(GAME_WIDTH - 90, 100);
+    const width = 160;
+    const height = 50;
+    const tint = [0xd2e269, 0x56a135];
+    
+    const r3 = this.add.rectangle(0, 0, width - 4, height - 4, 0x1a1a1a);
+    const r2 = this.add.rectangle(0, 0, width - 4, height - 4);
+    const r1 = this.add.rectangle(0, 0, width - 4, height - 4);
+    r1.setStrokeStyle(1, tint[0]);
+    r2.setStrokeStyle(3, tint[1]);
+    r3.setStrokeStyle(5, tint[1], 0.35);
+    
+    container.add(r3);
+    container.add(r2);
+    container.add(r1);
+
+    const buttonText = this.add.text(0, 0, 'MENU', {
+      fontFamily: 'Consolas',
+      fontSize: '18px',
+      fill: '#ffffff'
+    }).setOrigin(0.5);
+    container.add(buttonText);
+
+    container.setScrollFactor(0).setDepth(100);
+    container.setInteractive(
+      new Phaser.Geom.Rectangle(-width/2, -height/2, width, height),
+      Phaser.Geom.Rectangle.Contains
+    );
+    
+    container.on('pointerover', () => {
+      r1.setStrokeStyle(1, 0xffffff);
+      r2.setStrokeStyle(3, tint[0]);
+    });
+
+    container.on('pointerout', () => {
+      r1.setStrokeStyle(1, tint[0]);
+      r2.setStrokeStyle(3, tint[1]);
+    });
+
+    container.on('pointerdown', (pointer) => {
+      pointer.event.stopPropagation();
+      this.sound.play('click');
+      saveGame(); // Save before returning to menu
+      this.scene.start('titleScene');
+    });
+  }
 });
