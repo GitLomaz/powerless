@@ -372,6 +372,10 @@ class Player extends Phaser.GameObjects.Container {
       worldPoint.x - this.x,
     );
 
+    if (gameState.upgrades.weapons.cannon.autoFire) {
+      this.fireMainCannon();
+    }
+
     if (gameState.upgrades.weapons.rocket.enabled) {
       if (this.rocketCanShoot) {
         const enemies = this.findEnemies(1500);

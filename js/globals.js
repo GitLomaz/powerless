@@ -29,6 +29,7 @@ const gameStateTemplate  = {
         fireRate: 1000,
         range: 2000,
         speed: 400,
+        autoFire: false,
       }
     },
     spawns: {

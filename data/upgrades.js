@@ -65,24 +65,23 @@ const UPGRADES = [
       size: "medium",
     },
   },
-  { // REMOVED
+  {
     id: 3,
-    name: "Rocket Launcher:\r\nDouble Rockets",
-    description: "Fires two rockets at once instead of one.",
-    // prerequisite: 11,
+    name: "Main Cannon:\r\nAuto-Fire",
+    description: "Enables Auto-Fire for the main cannon.",
+    prerequisite: 2,
     levels: [
       { cost: 5, effect: true },
     ],
     applyUpgrade: (level) => {
-      gameState.upgrades.weapons.rocket.double =
-        UPGRADES[3].levels[level - 1].effect;
+      gameState.upgrades.weapons.cannon.autoFire = true
     },
     getCurrentValue: () => {
-      return gameState.upgrades.weapons.rocket.double;
+      return gameState.upgrades.weapons.cannon.autoFire;
     },
     grid: {
-      x: 3000,
-      y: -2,
+      x: 3,
+      y: 0,
       icon: "rocketDouble",
       size: "medium",
     },
@@ -1295,4 +1294,4 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-// maxAllUpgrades()
+maxAllUpgrades()
