@@ -246,8 +246,8 @@ let battleScene = new Phaser.Class({
     if (gameState.upgrades.spawns.boss) {
       this.enemies.push(new Boss(1200, 1000));
     }
-
-
+  
+  },
   update: function (time, delta) {
     // Update FPS counter
     const fps = Math.round(1000 / delta);
