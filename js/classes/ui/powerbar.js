@@ -3,11 +3,11 @@ class Powerbar extends Phaser.GameObjects.Container {
     const FRAMEWIDTH = 32;
     super(scene, GAME_WIDTH / 2, 680); // Middle should be 640
 
-    this.bg = scene.add.rectangle(-FRAMEWIDTH / 2 + 8, -FRAMEWIDTH / 2, frames * FRAMEWIDTH + FRAMEWIDTH * 2 - 8, FRAMEWIDTH, 0x000000);
+    this.bg = scene.add.rectangle(-FRAMEWIDTH / 2 + 8, -FRAMEWIDTH / 2, frames * FRAMEWIDTH + FRAMEWIDTH * 2 - 16, FRAMEWIDTH, 0x000000);
     this.bg.setOrigin(0).setAlpha(0.5);
     this.add(this.bg);
 
-    this.rectangle = scene.add.rectangle(-FRAMEWIDTH / 2 + 8, -FRAMEWIDTH / 2, frames * FRAMEWIDTH + FRAMEWIDTH * 2 - 8, FRAMEWIDTH, 0x0000DD);
+    this.rectangle = scene.add.rectangle(-FRAMEWIDTH / 2 + 8, -FRAMEWIDTH / 2, frames * FRAMEWIDTH + FRAMEWIDTH * 2 - 16, FRAMEWIDTH, 0x45b9ea);
     this.rectangle.setOrigin(0);
     this.add(this.rectangle);
 
