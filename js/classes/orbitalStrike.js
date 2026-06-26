@@ -30,6 +30,17 @@ class OrbitalStrike {
   }
   explode(x, y) {
     scene.sounds["explosion"].play();
+    const crater = scene.add.image(x, y, "crater");
+    crater.setDepth(300);
+    crater.setAlpha(0.5);
+    scene.tweens.add({
+      targets: crater,
+      alpha: 0,
+      duration: 10000,
+      onComplete: () => {
+        crater.destroy();
+      }
+    });
     const damage = gameState.upgrades.abilities.orbitalStrike.damage;
     const duration = 350
     const explosion = scene.add.circle(

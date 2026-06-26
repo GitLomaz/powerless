@@ -52,7 +52,7 @@ class BossStrike {
     scene.tweens.add({
       targets: crater,
       alpha: 0,
-      duration: 5000,
+      duration: 15000,
       onComplete: () => {
         crater.destroy();
       }
