@@ -31,8 +31,15 @@ let battleScene = new Phaser.Class({
     this.load.image("boss-foot", "images/boss/foot.png");
     this.load.image("boss-body", "images/boss/body.png");
     this.load.image("boss-leg", "images/boss/leg.png");
-    this.load.image("boss-barrel", "images/boss/barrel.png");
+    this.load.image("boss-shell", "images/boss/bullet.png");
+    this.load.image("boss-bigboy", "images/boss/BigBoy.png");
     this.load.image("boss-footprint", "images/boss/footprint.png");
+    this.load.image("mortar-target", "images/boss/mortar-target.png");
+    this.load.image("mortar-crosshairs", "images/boss/mortar-crosshairs.png");
+    this.load.image("mini-foot", "images/mini/foot.png");
+    this.load.image("mini-body", "images/mini/body.png");
+    this.load.image("mini-leg", "images/mini/leg.png");
+    this.load.image("mini-barrel", "images/mini/barrel.png");
     this.load.image("mech-shell", "images/mech/shell.png");
     this.load.image("bullet", "images/mech/bullet.png");
     this.load.image("enemyBullet", "images/mech/enemyBullet.png");
@@ -47,11 +54,14 @@ let battleScene = new Phaser.Class({
     this.load.image("enemy-tank-body", "images/enemies/tankBody.png");
     this.load.image("enemy-tank-barrel", "images/enemies/tankBarrel.png");
     this.load.image("enemy-tank-tread", "images/enemies/tankTracks.png");
-    this.load.spritesheet("resupply", "images/resupply.png", { frameWidth: 32, frameHeight: 64 });
+    this.load.spritesheet("resupply", "images/resupply.png", { frameWidth: 60, frameHeight: 72 });
     this.load.spritesheet("powerbar", "images/powerBar.png", { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet("powerbarBoss", "images/powerBarBoss.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });
+    this.load.spritesheet("bossRocket", "images/boss/rocket.png", { frameWidth: 24, frameHeight: 24 });
     this.load.spritesheet("mech-barrel-anim", "images/mech/barrel2.png", { frameWidth: 96, frameHeight: 96 });
+    this.load.spritesheet("boss-barrel-anim", "images/boss/barrel.png", { frameWidth: 288, frameHeight: 288 });
     this.load.tilemapTiledJSON("map2", "json/map2.json");
   },
 
@@ -80,6 +90,11 @@ let battleScene = new Phaser.Class({
     this.anims.create({
       key: "mech-barrel-anim",
       frames: this.anims.generateFrameNumbers("mech-barrel-anim", { start: 0, end: 5 }),
+      frameRate: 16,
+    });
+    this.anims.create({
+      key: "boss-barrel-anim",
+      frames: this.anims.generateFrameNumbers("boss-barrel-anim", { start: 0, end: 5 }),
       frameRate: 16,
     });
     this.anims.create({
@@ -138,7 +153,7 @@ let battleScene = new Phaser.Class({
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
       if (enemy.tier === 5) {
-        player.energy = -100000;
+        // player.energy = -100000;
       } else {
         if (gameState.upgrades.abilities.stomp < enemy.tier) {
           player.energy -= enemy.healthMax * 20;
@@ -150,15 +165,16 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
-      if (bullet.metaType === "rocket") {
+      if (bullet.metaType === "rocket" || bullet.metaType === "bossRocket") {
         bullet.explode();
       }
+      let damage = bullet.damage || 1500
       bullet.destroy();
-      player.energy -= 1500;
+      player.energy -= damage;
     });
 
     this.physics.add.overlap(this.bulletGroup, this.enemyBulletGroup, function (bullet, enemyBullet) {
-      if (enemyBullet.metaType === "rocket") {
+      if (enemyBullet.metaType === "rocket" || enemyBullet.metaType === "bossRocket") {
         bullet.destroy();
         enemyBullet.explode();
         enemyBullet.destroy();
@@ -177,6 +193,7 @@ let battleScene = new Phaser.Class({
         player.energy = gameState.upgrades.player.energy;
       }
       scene.sounds["recharge"].play();
+      resupply.shadow.destroy();
       resupply.destroy();
     });
 

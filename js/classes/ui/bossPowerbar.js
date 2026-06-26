@@ -16,13 +16,13 @@ class BossPowerbar extends Phaser.GameObjects.Container {
     this.x = xPos;
     this.setScrollFactor(0);
     let tileX = FRAMEWIDTH;
-    this.add(scene.add.sprite(0, 0, "powerbar").setFrame(0));
+    this.add(scene.add.sprite(0, 0, "powerbarBoss").setFrame(0));
     for (let i = 0; i < frames; i++) {
-      this.add(scene.add.sprite(tileX, 0, "powerbar").setFrame(1));
+      this.add(scene.add.sprite(tileX, 0, "powerbarBoss").setFrame(1));
       tileX += FRAMEWIDTH;
     }
-    this.add(scene.add.sprite(tileX, 0, "powerbar").setFrame(2));
-    this.add(scene.add.sprite(tileX / 2, 0, "powerbar").setFrame(3));
+    this.add(scene.add.sprite(tileX, 0, "powerbarBoss").setFrame(2));
+    this.add(scene.add.sprite(tileX / 2, 0, "powerbarBoss").setFrame(3));
 
 
     scene.add.existing(this);

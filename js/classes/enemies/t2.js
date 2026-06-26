@@ -12,7 +12,7 @@ class T2 extends Enemy {
     this.health = 150
     this.healthMax = 150
     this.value = Random.between(9,15)
-    this.damage = 80
+    this.damage = 1500
     this.checkPromotion();
     this.distanceTrveled = 0;
     this.setScale(.8);

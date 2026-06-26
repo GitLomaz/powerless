@@ -38,7 +38,7 @@ class Boss extends Phaser.GameObjects.Container {
     this.platform = scene.add.image(0, 0, "boss-body").setOrigin(0.5, 0.5);
     this.add(this.platform);
 
-    this.barrel = scene.add.image(0, 0, "boss-barrel").setOrigin(0.5, 0.5).setDepth(4);
+    this.barrel = scene.add.sprite(0, 0, "boss-barrel-anim").setOrigin(0.5, 0.5).setDepth(4);
     this.add(this.barrel);
     this.setDepth(4);
 
@@ -52,6 +52,9 @@ class Boss extends Phaser.GameObjects.Container {
     this.maxHealth = 80000;
     this.powerbar = new BossPowerbar(20);
     this.active = true;
+    this.cannonCanShoot = true;
+    this.rocketCanShoot = true;
+    this.mortarCanShoot = true;
   }
 
   createFoot(offsetX, offsetY) {
@@ -72,12 +75,46 @@ class Boss extends Phaser.GameObjects.Container {
     foot.stepping = false;
     foot.t = 0;
 
+    this.mode = 'rocket'
+
     return foot;
+  }
+
+  die() {
+    this.isDead = true;
+    this.active = false;
+    const DENOMS = [1000, 100, 25, 50, 10, 5, 1];
+    this.value = 150000
+    for (const denom of DENOMS) {
+        let spawns = Math.floor(this.value / denom);
+        if (spawns > 0) {
+          for (let i = 0; i < spawns; i++) {
+            new Credit(denom, this.x, this.y, scene.player.x, scene.player.y);
+          }
+        }
+        this.value %= denom;
+    }
+    this.destroy();
+    scene.tweens.add({
+      targets: this.powerbar,
+      alpha: 0,
+      duration: 400,
+      onComplete: () => {
+        this.powerbar.destroy();
+      }
+    });
   }
 
   tick(delta) {
     // Don't do anything if boss is destroyed
     if (!this.active) return;
+    if (this.mode === "shoot") {
+      this.fire()
+    } else if (this.mode === "mortar") {
+      this.mortar()
+    } else if (this.mode === "rocket") {
+      this.fireRocket()
+    }
 
     // Convert delta from milliseconds to seconds
     const dt = delta / 1000;
@@ -252,7 +289,7 @@ class Boss extends Phaser.GameObjects.Container {
     this.health -= amount;
     if (this.health <= 0) {
       this.health = 0;
-      this.destroy();
+      this.die();
     }
     this.powerbar.setPower(this.health / this.maxHealth);
   }
@@ -281,5 +318,61 @@ class Boss extends Phaser.GameObjects.Container {
 
     // Call parent destroy
     super.destroy();
+  }
+
+  fire() {
+    if(this.isDead){return};
+    if (this.cannonCanShoot) {
+      this.barrel.play("boss-barrel-anim", true);
+      scene.sounds["cannon"].play();
+      new BossShell(this, scene.player);
+      this.cannonCanShoot = false;
+      scene.sound.play('cannon');
+      if (Random.oneIn(8)) {
+        this.mode = Random.oneIn(2) ? "rocket" : "mortar";
+      }
+      scene.time.delayedCall(
+        1500,
+        () => {
+          this.cannonCanShoot = true;
+        },
+      );
+    }
+  }
+
+  mortar() {
+    if(this.isDead){return};
+    if (this.mortarCanShoot) {
+      new BossStrike(this);
+      this.mortarCanShoot = false;
+      if (Random.oneIn(4)) {
+        this.mode = Random.oneIn(2) ? "shoot" : "rocket";
+      }
+      scene.time.delayedCall(
+        3000,
+        () => {
+          this.mortarCanShoot = true;
+        },
+      );
+    }
+  }
+
+  fireRocket() {
+    if (this.isDead) return;
+    if (this.rocketCanShoot) {
+      const rightAngle = Math.PI / 6;
+      new BossRocket(this, scene.player, rightAngle);   // +90 degrees
+      new BossRocket(this, scene.player, -rightAngle);  // -90 degrees
+      this.rocketCanShoot = false;
+      if (Random.oneIn(4)) {
+        this.mode = Random.oneIn(2) ? "shoot" : "mortar";
+      }
+      scene.time.delayedCall(
+        3000,
+        () => {
+          this.rocketCanShoot = true;
+        },
+      );
+    }
   }
 }

@@ -1273,6 +1273,7 @@ const UPGRADES = [
 ]
 
 function applyUpgrades() {
+  maxAllUpgrades()
   const savedCredits = gameState.credits;
   gameState = JSON.parse(JSON.stringify(gameStateTemplate));
   gameState.credits = savedCredits;
@@ -1296,4 +1297,3 @@ for (let i = 0; i < UPGRADES.length; i++) {
   LEVELS[i] = 0;
 }
 LEVELS[0] = 1;
-// maxAllUpgrades()

@@ -31,15 +31,15 @@ class T3 extends Enemy {
     
     // Create 2 legs
     this.legs = [
-      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3).setScale(0.4),
-      scene.add.image(0, 0, "boss-leg").setOrigin(0, 0.5).setDepth(3).setScale(0.4)
+      scene.add.image(0, 0, "mini-leg").setOrigin(0, 0.5).setDepth(3),
+      scene.add.image(0, 0, "mini-leg").setOrigin(0, 0.5).setDepth(3)
     ];
     
     // Body and barrel (scaled down)
-    this.platform = scene.add.image(0, 0, "boss-body").setOrigin(0.5, 0.5).setScale(0.25);
+    this.platform = scene.add.image(0, 0, "mini-body").setOrigin(0.5, 0.5);
     this.add(this.platform);
     
-    this.barrel = scene.add.image(0, 0, "boss-barrel").setOrigin(0.5, 0.5).setDepth(4).setScale(0.25);
+    this.barrel = scene.add.image(0, 0, "mini-barrel").setOrigin(0.5, 0.5).setDepth(4);
     this.add(this.barrel);
     this.setDepth(4);
     
@@ -51,10 +51,9 @@ class T3 extends Enemy {
   }
   
   createFoot(side) {
-    const foot = scene.add.image(this.x, this.y, "boss-foot");
+    const foot = scene.add.image(this.x, this.y, "mini-foot");
     
     foot.setDepth(2);
-    foot.setScale(0.4);
     
     foot.side = side; // -1 for left, 1 for right
     foot.stepping = false;

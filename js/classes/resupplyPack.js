@@ -8,6 +8,8 @@ class ResupplyPack extends Phaser.GameObjects.Container {
     this.add(this.sprite);
     scene.add.existing(this);
     scene.physics.add.existing(this);
+    this.shadow = scene.add.ellipse(this.x, this.y + 530, 40, 10, 0x000000);
+    this.shadow.setAlpha(0.1);
     this.body.setSize(
         48,
         48
@@ -29,10 +31,16 @@ class ResupplyPack extends Phaser.GameObjects.Container {
         }
     });
 
+    scene.tweens.add({
+        targets: this.shadow,
+        alpha: .6,
+        duration: 5000
+    });
+
     // Wiggle while falling
     this.wiggle = scene.tweens.add({
-        targets: this.sprite,
-        x: 10,
+        targets: [this.sprite],
+        x: "10",
         yoyo: true,
         repeat: -1,
         duration: 500
