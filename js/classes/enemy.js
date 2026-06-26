@@ -166,6 +166,7 @@ class Enemy extends Phaser.GameObjects.Container {
       }
     }
 
+    this.spawnDebris(impactX, impactY);
     this.payout(impactX, impactY);
     this.destroy();
     switch (this.tier) {
@@ -181,6 +182,49 @@ class Enemy extends Phaser.GameObjects.Container {
       case 4:
         scene.enemies.push(new T4(true));
         break;
+    }
+  }
+
+  spawnDebris(impactX, impactY) {
+    // Calculate impact direction
+    const impactAngle = Phaser.Math.Angle.Between(impactX, impactY, this.x, this.y);
+    
+    // Spawn 8-15 debris pieces
+    const debrisCount = Random.between(8, 15);
+    const debrisColors = [0x333333, 0x555555, 0x777777, 0x8B4513, 0x2F4F4F];
+    
+    for (let i = 0; i < debrisCount; i++) {
+      // Random size for debris
+      const size = Random.between(3, 8);
+      const isRect = Random.xInY(1, 2);
+      
+      // Create debris piece
+      const debris = isRect 
+        ? scene.add.rectangle(this.x, this.y, size, size, Random.pick(debrisColors))
+        : scene.add.circle(this.x, this.y, size / 2, Random.pick(debrisColors));
+      
+      debris.setDepth(5);
+      
+      // Calculate velocity - biased away from impact point
+      const spreadAngle = impactAngle + Random.between(-60, 60) * (Math.PI / 180);
+      const speed = Random.between(100, 300);
+      const velocityX = Math.cos(spreadAngle) * speed;
+      const velocityY = Math.sin(spreadAngle) * speed;
+      
+      // Add rotation for visual effect
+      const rotationSpeed = Random.between(-5, 5);
+      
+      // Animate the debris
+      scene.tweens.add({
+        targets: debris,
+        x: debris.x + velocityX * 0.5,
+        y: debris.y + velocityY * 0.5,
+        alpha: 0,
+        angle: rotationSpeed * 360,
+        duration: Random.between(400, 800),
+        ease: 'Quad.Out',
+        onComplete: () => debris.destroy()
+      });
     }
   }
 

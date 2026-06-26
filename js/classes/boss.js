@@ -83,6 +83,7 @@ class Boss extends Phaser.GameObjects.Container {
   die() {
     this.isDead = true;
     this.active = false;
+    this.spawnDebris();
     const DENOMS = [1000, 100, 25, 50, 10, 5, 1];
     this.value = 150000
     for (const denom of DENOMS) {
@@ -292,6 +293,46 @@ class Boss extends Phaser.GameObjects.Container {
       this.die();
     }
     this.powerbar.setPower(this.health / this.maxHealth);
+  }
+
+  spawnDebris() {
+    // Spawn lots of debris for the boss (massive vehicle)
+    const debrisCount = Random.between(30, 50);
+    const debrisColors = [0x4A5568, 0x2D3748, 0x718096, 0xA0AEC0, 0xE53E3E, 0xDD6B20];
+    
+    for (let i = 0; i < debrisCount; i++) {
+      // Random size for debris - larger pieces for the boss
+      const size = Random.between(6, 16);
+      const isRect = Random.xInY(1, 2);
+      
+      // Create debris piece
+      const debris = isRect 
+        ? scene.add.rectangle(this.x, this.y, size, size, Random.pick(debrisColors))
+        : scene.add.circle(this.x, this.y, size / 2, Random.pick(debrisColors));
+      
+      debris.setDepth(5);
+      
+      // Random direction for debris - more explosive spread
+      const angle = Random.between(0, 360) * (Math.PI / 180);
+      const speed = Random.between(200, 500);
+      const velocityX = Math.cos(angle) * speed;
+      const velocityY = Math.sin(angle) * speed;
+      
+      // Add rotation for visual effect
+      const rotationSpeed = Random.between(-10, 10);
+      
+      // Animate the debris with longer duration for bigger explosion
+      scene.tweens.add({
+        targets: debris,
+        x: debris.x + velocityX * 0.7,
+        y: debris.y + velocityY * 0.7,
+        alpha: 0,
+        angle: rotationSpeed * 360,
+        duration: Random.between(600, 1200),
+        ease: 'Quad.Out',
+        onComplete: () => debris.destroy()
+      });
+    }
   }
 
   destroy() {

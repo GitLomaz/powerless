@@ -33,6 +33,10 @@ class Random {
     });
     return results;
   }
+
+  static pick(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
 }
 
 // function testFunctions(times) {
