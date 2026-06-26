@@ -307,7 +307,7 @@ class Player extends Phaser.GameObjects.Container {
           time: this.collectiveTime
         });
         scene.tweens.add({
-          targets: this.powerbar,
+          targets: [this.powerbar, this.resupply, this.orbitalStrike, this.energyBurst],
           alpha: 0,
           duration: 400,
           onComplete: () => {
