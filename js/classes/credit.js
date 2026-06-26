@@ -2,7 +2,8 @@ class Credit extends Phaser.GameObjects.Container {
   constructor(denom, x, y, impactX, impactY) {
     super(scene, x, y);
     const size = Math.log10(denom) * 2 + 4;
-    this.edge = scene.add.circle(0, 0, size, 0xAA6C39);
+    this.edge = scene.add.circle(0, 0, size, 0x875227);
+    // randomly generate a similar hexcode for the circle color
     this.circle = scene.add.circle(0, 0, size - 2, 0xFFD700);
     this.value = denom;
     this.add(this.edge);

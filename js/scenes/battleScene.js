@@ -23,6 +23,7 @@ let battleScene = new Phaser.Class({
     this.load.audio("recharge","audio/recharge.ogg")
 
     this.load.image("sheet2", "images/sheet2.png");
+    this.load.image("crater", "images/crater.png");
     this.load.image("mech-foot", "images/mech/foot.png");
     this.load.image("mech-body", "images/mech/body.png");
     this.load.image("mech-leg", "images/mech/leg.png");
