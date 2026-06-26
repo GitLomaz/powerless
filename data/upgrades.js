@@ -675,7 +675,7 @@ const UPGRADES = [
   {
     id: 28,
     name: "Power Resupply",
-    description: "Unlock the power resupply ability, allowing request an energy resupply package from orbit.",
+    description: "Unlock Power Resupply, allowing request an energy resupply package from orbit.",
     prerequisite: 22,
     levels: [{ cost: 3000, effect: true }],
     applyUpgrade: (level) => {
@@ -747,7 +747,7 @@ const UPGRADES = [
   {
     id: 31,
     name: "Energy Burst",
-    description: "Unlock the energy burst ability, allowing you to release a burst of energy that damages nearby enemies.",
+    description: "Unlock Energy Burst, Consumes 10% of your energy release a burst of energy damaging nearby enemies.",
     prerequisite: 23,
     levels: [{ cost: 3000, effect: true }],
     applyUpgrade: (level) => {
