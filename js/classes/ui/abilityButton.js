@@ -9,15 +9,14 @@ class AbilityButton extends Phaser.GameObjects.Container {
 
     this.currentTint = this.goodTint;
     this
-    this.r3 = scene.add.rectangle(
+    this.r3 = scene.add.circle(
       0,
       0,
-      this.width - 4,
-      this.height - 4,
+      this.width / 2 + 2,
       0x1a1a1a,
     )
-    this.r2 = scene.add.rectangle(0, 0, this.width - 4, this.height - 4);
-    this.r1 = scene.add.rectangle(0, 0, this.width - 4, this.height - 4);
+    this.r2 = scene.add.circle(0, 0, this.width / 2 + 2);
+    this.r1 = scene.add.circle(0, 0, this.width / 2 + 2);
     this.r1.setStrokeStyle(1, this.currentTint[0]);
     this.r2.setStrokeStyle(3, this.currentTint[1]);
     this.r3.setStrokeStyle(5, this.currentTint[1], 0.35);
@@ -41,6 +40,12 @@ class AbilityButton extends Phaser.GameObjects.Container {
     
     
     this.add(this.image);
+    
+    // Create cooldown overlay graphic
+    this.cooldownOverlay = scene.add.graphics();
+    this.cooldownOverlay.setDepth(1001);
+    this.add(this.cooldownOverlay);
+    
     this.setDepth(1000);
     this.setScrollFactor(0);
     this.setInteractive()
@@ -60,6 +65,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
       switch (ability) {
         case "resupply":
           scene.player.supplyCooldown = gameState.upgrades.abilities.resupply.cooldown - cooldownReduction;
+          scene.player.supplyMaxCooldown = scene.player.supplyCooldown;
           for (let i = 0; i < gameState.upgrades.abilities.resupply.packs; i++) {
             const cam = scene.cameras.main;
 
@@ -82,6 +88,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
           break;
         case "orbitalStrike":
           scene.player.strikeCooldown = gameState.upgrades.abilities.orbitalStrike.cooldown - cooldownReduction;
+          scene.player.strikeMaxCooldown = scene.player.strikeCooldown;
           scene.time.addEvent({
             delay: 150,
             repeat: gameState.upgrades.abilities.orbitalStrike.projectiles - 1,
@@ -97,6 +104,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
           break;
         case "energyBurst":
           scene.player.burstCooldown = gameState.upgrades.abilities.energyBurst.cooldown - cooldownReduction;
+          scene.player.burstMaxCooldown = scene.player.burstCooldown;
           scene.player.burst();
           break;
       }
@@ -111,5 +119,49 @@ class AbilityButton extends Phaser.GameObjects.Container {
     this.r1.setStrokeStyle(1, this.currentTint[0]);
     this.r2.setStrokeStyle(3, this.currentTint[1]);
     this.r3.setStrokeStyle(5, this.currentTint[1], 0.35);
+    
+    // Clear cooldown overlay when ready
+    if (ready) {
+      this.cooldownOverlay.clear();
+    }
+  }
+  
+  updateCooldown(current, max) {
+    if (current <= 0 || max <= 0) {
+      this.cooldownOverlay.clear();
+      return;
+    }
+    
+    // Calculate progress (0 = just started cooldown, 1 = ready)
+    const progress = 1 - (current / max);
+    
+    // Clear previous drawing
+    this.cooldownOverlay.clear();
+    
+    if (progress >= 1) {
+      return;
+    }
+    
+    // Draw a dark semi-transparent overlay using a pie/wedge approach
+    this.cooldownOverlay.fillStyle(0x000000, 0.7);
+    this.cooldownOverlay.beginPath();
+    
+    // Start from top center (12 o'clock = -90 degrees = -PI/2)
+    // Go clockwise by subtracting the angle
+    const startAngle = -Math.PI / 2; // Top
+    const sweepAngle = (1 - progress) * Math.PI * 2; // How much is left to unwind
+    const endAngle = startAngle - sweepAngle; // Subtract to go clockwise
+    
+    // Draw from center
+    this.cooldownOverlay.moveTo(0, 0);
+    
+    // Use the smaller dimension to keep circle within button bounds
+    const radius = Math.min(this.width, this.height) / 2;
+    this.cooldownOverlay.arc(0, 0, radius, startAngle, endAngle, true);
+    
+    // Close back to center
+    this.cooldownOverlay.lineTo(0, 0);
+    this.cooldownOverlay.closePath();
+    this.cooldownOverlay.fillPath();
   }
 }

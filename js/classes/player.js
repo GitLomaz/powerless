@@ -99,6 +99,11 @@ class Player extends Phaser.GameObjects.Container {
     this.supplyCooldown = 0;
     this.strikeCooldown = 0;
     this.burstCooldown = 0;
+    
+    // Track max cooldowns for visual progress
+    this.supplyMaxCooldown = 0;
+    this.strikeMaxCooldown = 0;
+    this.burstMaxCooldown = 0;
 
 
     if (gameState.upgrades.abilities.resupply.enabled) {
@@ -325,6 +330,8 @@ class Player extends Phaser.GameObjects.Container {
       if (this.supplyCooldown <= 0) {
         this.supplyCooldown = 0;
         if (this.resupply) this.resupply.setReady(true);
+      } else if (this.resupply) {
+        this.resupply.updateCooldown(this.supplyCooldown, this.supplyMaxCooldown);
       }
     }
 
@@ -333,6 +340,8 @@ class Player extends Phaser.GameObjects.Container {
       if (this.strikeCooldown <= 0) {
         this.strikeCooldown = 0;
         if (this.orbitalStrike) this.orbitalStrike.setReady(true);
+      } else if (this.orbitalStrike) {
+        this.orbitalStrike.updateCooldown(this.strikeCooldown, this.strikeMaxCooldown);
       }
     }
 
@@ -341,6 +350,8 @@ class Player extends Phaser.GameObjects.Container {
       if (this.burstCooldown <= 0) {
         this.burstCooldown = 0;
         if (this.energyBurst) this.energyBurst.setReady(true);
+      } else if (this.energyBurst) {
+        this.energyBurst.updateCooldown(this.burstCooldown, this.burstMaxCooldown);
       }
     }
 
