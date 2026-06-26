@@ -244,7 +244,7 @@ class Player extends Phaser.GameObjects.Container {
 
   burst(duration = 350) {
     scene.sounds["discharge"].play();
-    this.energy -= 1500;
+    this.energy -= gameState.upgrades.player.energy * .15;
     const explosion = scene.add.circle(this.x, this.y, 1, 0x000099, 0.4);
 
     const hitEnemies = new Set();

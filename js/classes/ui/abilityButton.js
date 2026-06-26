@@ -56,7 +56,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
       // Prevent cannon from firing when clicking UI
       scene.sounds["click"].play();
       scene.player.lastUIClick = scene.time.now;
-      const cooldownReduction = gameState.upgrades.player.cooldownReduction || 0;
+      const cooldownReduction = -gameState.upgrades.player.cooldownReduction || 0;
       switch (ability) {
         case "resupply":
           scene.player.supplyCooldown = gameState.upgrades.abilities.resupply.cooldown - cooldownReduction;
@@ -97,6 +97,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
           break;
         case "energyBurst":
           scene.player.burstCooldown = gameState.upgrades.abilities.energyBurst.cooldown - cooldownReduction;
+          console.log( cooldownReduction)
           scene.player.burst();
           break;
       }
