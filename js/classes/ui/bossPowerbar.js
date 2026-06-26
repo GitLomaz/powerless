@@ -12,7 +12,6 @@ class BossPowerbar extends Phaser.GameObjects.Container {
     this.add(this.rectangle);
 
     let xPos = 640 - (frames * FRAMEWIDTH) / 2 - FRAMEWIDTH / 2;
-    console.log(xPos);
     this.x = xPos;
     this.setScrollFactor(0);
     let tileX = FRAMEWIDTH;
@@ -26,6 +25,7 @@ class BossPowerbar extends Phaser.GameObjects.Container {
 
 
     scene.add.existing(this);
+    this.setDepth(2000)
   }
 
   setPower(power) {

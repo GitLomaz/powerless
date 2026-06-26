@@ -25,6 +25,7 @@ class Powerbar extends Phaser.GameObjects.Container {
 
 
     scene.add.existing(this);
+    this.setDepth(2000)
   }
 
   setPower(power) {

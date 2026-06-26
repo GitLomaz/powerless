@@ -97,7 +97,6 @@ class BossRocket extends Phaser.GameObjects.Container {
   }
 
   explode(duration = 500) {
-    console.log('exploding?!')    
     scene.sounds["explosion"].play();
     
     const explosion = scene.add.circle(

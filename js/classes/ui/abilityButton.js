@@ -97,7 +97,6 @@ class AbilityButton extends Phaser.GameObjects.Container {
           break;
         case "energyBurst":
           scene.player.burstCooldown = gameState.upgrades.abilities.energyBurst.cooldown - cooldownReduction;
-          console.log( cooldownReduction)
           scene.player.burst();
           break;
       }
