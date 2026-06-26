@@ -64,7 +64,8 @@ let titleScene = new Phaser.Class({
     this.backgroundMech = new BackgroundMech(this);
 
     // Title
-    const title = this.add.text(GAME_WIDTH / 2, 150, 'MECHANATOR 5000', {
+    const title = this.add.text(GAME_WIDTH / 2, 150, 'MECHANATOR\r\n5000', {
+      align: 'center',
       fontFamily: 'Consolas',
       fontSize: '72px',
       fill: '#d2e269',
@@ -73,7 +74,7 @@ let titleScene = new Phaser.Class({
     }).setOrigin(0.5);
 
     // Subtitle
-    const subtitle = this.add.text(GAME_WIDTH / 2, 220, 'A Mech Assault Game', {
+    const subtitle = this.add.text(GAME_WIDTH / 2, 240, 'A Mech Assault Game', {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#aaaaaa'

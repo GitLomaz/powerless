@@ -32,7 +32,7 @@ let battleScene = new Phaser.Class({
     this.load.image("boss-body", "images/boss/body.png");
     this.load.image("boss-leg", "images/boss/leg.png");
     this.load.image("boss-shell", "images/boss/bullet.png");
-    this.load.image("boss-bigboy", "images/boss/BigBoy.png");
+    this.load.image("boss-bigboy", "images/boss/bigboy.png");
     this.load.image("boss-footprint", "images/boss/footprint.png");
     this.load.image("mortar-target", "images/boss/mortar-target.png");
     this.load.image("mortar-crosshairs", "images/boss/mortar-crosshairs.png");
