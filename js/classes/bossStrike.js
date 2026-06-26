@@ -47,6 +47,7 @@ class BossStrike {
     scene.sounds["explosion"].play();
     const crater = scene.add.image(x, y, "crater");
     crater.setDepth(300);
+    crater.setScale(2);
     crater.setAlpha(0.5);
     scene.tweens.add({
       targets: crater,
