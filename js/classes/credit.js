@@ -3,8 +3,7 @@ class Credit extends Phaser.GameObjects.Container {
     super(scene, x, y);
     const size = Math.log10(denom) * 2 + 4;
     this.edge = scene.add.circle(0, 0, size, 0x875227);
-    // randomly generate a similar hexcode for the circle color
-    this.circle = scene.add.circle(0, 0, size - 2, 0xFFD700);
+    this.circle = scene.add.circle(0, 0, size - 2, this.similarGold());
     this.value = denom;
     this.add(this.edge);
     this.add(this.circle);
@@ -53,4 +52,19 @@ class Credit extends Phaser.GameObjects.Container {
     this.destroy();
     scene.player.gainCredits(this.value);
   }
+  
+  similarGold(variation = 20) {
+    const base = { r: 255, g: 215, b: 0 };
+
+    const rand = (v) =>
+        Math.max(0, Math.min(255,
+            v + Math.floor((Math.random() * 2 - 1) * variation)
+        ));
+
+    const r = rand(base.r);
+    const g = rand(base.g);
+    const b = rand(base.b);
+
+    return (r << 16) | (g << 8) | b;
+}
 }
