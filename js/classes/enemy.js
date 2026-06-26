@@ -58,6 +58,7 @@ class Enemy extends Phaser.GameObjects.Container {
   }
 
   takeDamage(amount, impactX, impactY) {
+    if (!scene.player.active) return;
     scene.tweens.add({
       targets: this.healthBar,
       alpha: 1, 
