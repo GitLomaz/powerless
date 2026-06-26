@@ -60,7 +60,7 @@ let battleScene = new Phaser.Class({
     this.load.spritesheet("powerbarBoss", "images/powerBarBoss.png", { frameWidth: 32, frameHeight: 32 });
     this.load.spritesheet("rocket", "images/mech/rocket.png", { frameWidth: 24, frameHeight: 12 });
     this.load.spritesheet("enemyRocket", "images/mech/enemyRocket.png", { frameWidth: 24, frameHeight: 12 });
-    this.load.spritesheet("bossRocket", "images/boss/rocket.png", { frameWidth: 24, frameHeight: 24 });
+    this.load.spritesheet("bossRocket", "images/boss/rocket.png", { frameWidth: 48, frameHeight: 48 });
     this.load.spritesheet("mech-barrel-anim", "images/mech/barrel2.png", { frameWidth: 96, frameHeight: 96 });
     this.load.spritesheet("boss-barrel-anim", "images/boss/barrel.png", { frameWidth: 288, frameHeight: 288 });
     this.load.tilemapTiledJSON("map2", "json/map2.json");

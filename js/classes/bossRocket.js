@@ -10,7 +10,6 @@ class BossRocket extends Phaser.GameObjects.Container {
 
     this.metaType = "bossRocket";
     this.damage = 60000;
-    this.setScale(2)
 
     // Visual setup
     this.sprite = scene.add.sprite(0, 0, "bossRocket");
