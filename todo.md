@@ -3,7 +3,7 @@
 ## Orbit Scene
 
 + Credits Display
-- Balance upgrades
++ Balance upgrades
 - Background Image
 + General Cleanup
 + Music/Sound button
