@@ -4,8 +4,8 @@ class AbilityButton extends Phaser.GameObjects.Container {
     this.goodTint = [0xd2e269, 0x56a135];
     this.badTint = [0xfffcc9, 0xe1ad26];
 
-    this.width = 80;
-    this.height = 80;
+    this.width = 56;
+    this.height = 56;
 
     this.currentTint = this.goodTint;
     this
