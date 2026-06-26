@@ -50,7 +50,7 @@ class AbilityButton extends Phaser.GameObjects.Container {
    .on('pointerout', () => { scene.player.activatingAbility = false; });
 
     this.on("pointerdown", (pointer) => {
-      if (!this.ready) {
+      if (!this.ready || !scene.player.active) {
         return;
       }
       // Prevent cannon from firing when clicking UI

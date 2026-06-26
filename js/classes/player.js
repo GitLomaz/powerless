@@ -25,13 +25,13 @@ class Player extends Phaser.GameObjects.Container {
     this.kills = 0;
     this.gameOverPanelShown = false;
     this.isDead = false;
-    this.creditsGainedText = scene.add.text(20, 20, `Credits: ${formatNumber(gameState.credits)}`, {
+    this.creditsGainedText = scene.add.text(GAME_WIDTH / 2, 48, `Credits: ${formatNumber(gameState.credits)}`, {
       fontFamily: 'Consolas',
       fontSize: '24px',
       fill: '#FFD700',
       stroke: '#000000',
       strokeThickness: 2
-    }).setOrigin(0, 0).setScrollFactor(0).setDepth(100);
+    }).setOrigin(.5, 0).setScrollFactor(0).setDepth(100);
 
     this.lastShot = 0;
 
@@ -102,20 +102,20 @@ class Player extends Phaser.GameObjects.Container {
 
 
     if (gameState.upgrades.abilities.resupply.enabled) {
-      this.resupply = new AbilityButton("resupply", 60, GAME_HEIGHT - 60);
+      this.resupply = new AbilityButton("resupply", GAME_WIDTH / 2 - 100, GAME_HEIGHT - 100);
     }
     if (gameState.upgrades.abilities.orbitalStrike.enabled) {
       this.orbitalStrike = new AbilityButton(
         "orbitalStrike",
-        160,
-        GAME_HEIGHT - 60,
+        GAME_WIDTH / 2,
+        GAME_HEIGHT - 100,
       );
     }
     if (gameState.upgrades.abilities.energyBurst.enabled) {
       this.energyBurst = new AbilityButton(
         "energyBurst",
-        260,
-        GAME_HEIGHT - 60,
+        GAME_WIDTH / 2 + 100,
+        GAME_HEIGHT - 100,
       );
     }
 
