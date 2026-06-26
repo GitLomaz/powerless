@@ -152,8 +152,9 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyGroup, function (player, enemy) {
+      if (!player.active) return;
       if (enemy.tier === 5) {
-        // player.energy = -100000;
+        player.energy = -100000;
       } else {
         if (gameState.upgrades.abilities.stomp < enemy.tier) {
           player.energy -= enemy.healthMax * 20;
@@ -165,6 +166,7 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.enemyBulletGroup, function (player, bullet) {
+      if (!player.active) return;
       if (bullet.metaType === "rocket" || bullet.metaType === "bossRocket") {
         bullet.explode();
       }
@@ -182,6 +184,7 @@ let battleScene = new Phaser.Class({
     });
 
     this.physics.add.overlap(this.player, this.creditGroup, function (player, credit) {
+      if (!player.active) return;
       credit.collect();
     });
 

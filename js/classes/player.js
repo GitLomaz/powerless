@@ -296,6 +296,7 @@ class Player extends Phaser.GameObjects.Container {
     }
     this.energy -= delta * gameState.upgrades.player.energyLoss * decayModifier;
     if (this.energy < 0) {
+      this.active = false
       // Show game over panel instead of immediately returning to orbit
       if (!this.gameOverPanelShown) {
         this.gameOverPanelShown = true;
@@ -303,6 +304,14 @@ class Player extends Phaser.GameObjects.Container {
           kills: this.kills,
           credits: this.creditsGained,
           time: this.collectiveTime
+        });
+        scene.tweens.add({
+          targets: this.powerbar,
+          alpha: 0,
+          duration: 400,
+          onComplete: () => {
+            this.powerbar.destroy();
+          }
         });
       }
       return; // Stop updating the game
