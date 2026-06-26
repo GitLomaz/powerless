@@ -103,6 +103,12 @@ let battleScene = new Phaser.Class({
       frameRate: 16,
       repeat: -1,
     });
+    this.anims.create({
+      key: "bossRocket",
+      frames: this.anims.generateFrameNumbers("bossRocket", { start: 0, end: 5 }),
+      frameRate: 16,
+      repeat: -1,
+    });
 
     this.map = this.make.tilemap({ key: "map2", tileWidth: 128, tileHeight: 128 });
     this.tileset = this.map.addTilesetImage("sheet2", "sheet2");

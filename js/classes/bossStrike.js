@@ -5,6 +5,7 @@ class BossStrike {
     this.boss = boss
     this.target = scene.add.image(x, y, "mortar-target");
     this.target.setDepth(400);
+    this.target.setScale(2)
     scene.add.existing(this.target);
     this.tween = scene.tweens.add({
       targets: this.target,
@@ -19,7 +20,7 @@ class BossStrike {
     this.tween2 = scene.tweens.add({
       targets: this.crosshairs,
       rotation: -(2 * Math.PI),
-      scale: 1,  
+      scale: 2,  
       loop: -1,
       duration: 5000,
     });
