@@ -1273,7 +1273,7 @@ const UPGRADES = [
 ]
 
 function applyUpgrades() {
-  maxAllUpgrades()
+  // maxAllUpgrades()
   const savedCredits = gameState.credits;
   gameState = JSON.parse(JSON.stringify(gameStateTemplate));
   gameState.credits = savedCredits;
