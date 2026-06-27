@@ -14,7 +14,7 @@ class BossRocket extends Phaser.GameObjects.Container {
     // Visual setup
     this.sprite = scene.add.sprite(0, 0, "bossRocket");
     this.sprite.play("bossRocket");
-    this.sprite.setScale(1.5);
+    // this.sprite.setScale(1.5);
     this.add(this.sprite);
 
     // Physics setup
