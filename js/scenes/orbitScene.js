@@ -8,6 +8,7 @@ let orbitScene = new Phaser.Class({
     scene = this;
     this.load.image("question", "images/upgrades/question.png");
     this.load.image("shimmer", "images/upgrades/questionBG.png");
+    this.load.image("orbit", "images/orbit.png");
     this.load.audio("click", "audio/click.ogg");
     this.load.audio("music", "audio/music.ogg");
 
@@ -33,9 +34,7 @@ let orbitScene = new Phaser.Class({
       music.play();
     }
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x1a1a2e, 1);
-    bg.fillRect(-2000, -2000, 6000, 6000)
+    const orbit = this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "orbit").setScrollFactor(0).setDepth(-1);
 
     UPGRADES.forEach((upgrade, i) => {
       new UpgradeBox(upgrade, i);

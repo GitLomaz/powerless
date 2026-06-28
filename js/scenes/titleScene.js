@@ -12,6 +12,7 @@ let titleScene = new Phaser.Class({
     this.load.audio("music", "audio/music.ogg");
     
     // Load mech assets for background animation
+    this.load.image("logo", "images/logo.png");
     this.load.image("sheet2", "images/sheet2.png");
     this.load.image("mech-foot", "images/mech/foot.png");
     this.load.image("mech-body", "images/mech/body.png");
@@ -64,14 +65,7 @@ let titleScene = new Phaser.Class({
     this.backgroundMech = new BackgroundMech(this);
 
     // Title
-    const title = this.add.text(GAME_WIDTH / 2, 150, 'MECHANATOR\r\n5000', {
-      align: 'center',
-      fontFamily: 'Consolas',
-      fontSize: '72px',
-      fill: '#d2e269',
-      stroke: '#000000',
-      strokeThickness: 4
-    }).setOrigin(0.5);
+    const title = this.add.image(GAME_WIDTH / 2, 150, "logo").setOrigin(0.5);
 
     // Subtitle
     const subtitle = this.add.text(GAME_WIDTH / 2, 240, 'A Mech Assault Game', {
