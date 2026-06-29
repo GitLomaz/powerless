@@ -30,20 +30,6 @@ class ZoomButtons {
         scene.applyZoom();
       }
     );
-    
-    // Zoom level indicator
-    this.zoomText = scene.add.text(
-      leftMargin + buttonSize + spacing/2, 
-      GAME_HEIGHT - bottomMargin - buttonSize - 15, 
-      '100%', 
-      {
-        fontFamily: 'Consolas',
-        fontSize: '16px',
-        fill: '#FFD700',
-        stroke: '#000000',
-        strokeThickness: 2
-      }
-    ).setOrigin(0, 1).setScrollFactor(0).setDepth(100);
   }
 }
 
