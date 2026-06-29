@@ -89,7 +89,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
             box.update();
           });
           applyUpgrades();
-          new Tooltip(this.upgrade, this.currentTint);
+          new Tooltip(this.upgrade, this.currentTint, this.x, this.y);
           applyUpgrades();
           // Update credits display
           if (scene.creditsText) {
@@ -99,7 +99,7 @@ class UpgradeBox extends Phaser.GameObjects.Container {
       }
     }).on("pointerover", () => {
       if (this.state < 2) return;
-      new Tooltip(this.upgrade, this.currentTint);
+      new Tooltip(this.upgrade, this.currentTint, this.x, this.y);
     }).on("pointerout", () => {
       if (tooltip) {
         tooltip.destroy();

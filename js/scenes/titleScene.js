@@ -77,48 +77,48 @@ let titleScene = new Phaser.Class({
     // Check if save exists
     const hasSave = localStorage.getItem('powerlessSave') !== null;
 
-    // New Game Button
-    this.createButton(GAME_WIDTH / 2, 320, 'NEW GAME', () => {
-      // Reset to fresh game state
-      gameState = JSON.parse(JSON.stringify(gameStateTemplate));
-      // Reset LEVELS array
-      for (let i = 0; i < LEVELS.length; i++) {
-        LEVELS[i] = 0;
-      }
-      LEVELS[0] = 1; // Deploy is unlocked by default
-      saveGame();
-      this.sound.play('click');
-      this.scene.start('orbitScene');
-    }, true);
+    // // New Game Button
+    // this.createButton(GAME_WIDTH / 2, 320, 'NEW GAME', () => {
+    //   // Reset to fresh game state
+    //   gameState = JSON.parse(JSON.stringify(gameStateTemplate));
+    //   // Reset LEVELS array
+    //   for (let i = 0; i < LEVELS.length; i++) {
+    //     LEVELS[i] = 0;
+    //   }
+    //   LEVELS[0] = 1; // Deploy is unlocked by default
+    //   saveGame();
+    //   this.sound.play('click');
+    //   this.scene.start('orbitScene');
+    // }, true);
 
-    // Continue Button
-    this.createButton(GAME_WIDTH / 2, 400, 'CONTINUE', () => {
-      loadGame();
-      this.sound.play('click');
-      this.scene.start('orbitScene');
-    }, hasSave);
+    // // Continue Button
+    // this.createButton(GAME_WIDTH / 2, 400, 'CONTINUE', () => {
+    //   loadGame();
+    //   this.sound.play('click');
+    //   this.scene.start('orbitScene');
+    // }, hasSave);
 
-    // Stats Button
-    this.createButton(GAME_WIDTH / 2, 480, 'STATS', () => {
-      this.sound.play('click');
-      this.showStats();
-    }, true);
+    // // Stats Button
+    // this.createButton(GAME_WIDTH / 2, 480, 'STATS', () => {
+    //   this.sound.play('click');
+    //   this.showStats();
+    // }, true);
 
-    // Credits Button
-    this.createButton(GAME_WIDTH / 2, 560, 'CREDITS', () => {
-      this.sound.play('click');
-      this.showCredits();
-    }, true);
+    // // Credits Button
+    // this.createButton(GAME_WIDTH / 2, 560, 'CREDITS', () => {
+    //   this.sound.play('click');
+    //   this.showCredits();
+    // }, true);
 
-    // Sound Toggle
-    new SoundToggle(this, GAME_WIDTH / 2, 680);
+    // // Sound Toggle
+    // new SoundToggle(this, GAME_WIDTH / 2, 680);
 
-    // Version text
-    this.add.text(GAME_WIDTH - 10, GAME_HEIGHT - 10, 'v1.0', {
-      fontFamily: 'Consolas',
-      fontSize: '16px',
-      fill: '#555555'
-    }).setOrigin(1);
+    // // Version text
+    // this.add.text(GAME_WIDTH - 10, GAME_HEIGHT - 10, 'v1.0', {
+    //   fontFamily: 'Consolas',
+    //   fontSize: '16px',
+    //   fill: '#555555'
+    // }).setOrigin(1);
   },
 
   update: function(time, delta) {

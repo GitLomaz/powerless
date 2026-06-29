@@ -174,9 +174,6 @@ let orbitScene = new Phaser.Class({
       }
     });
     
-    // Update all tooltips to match zoom
-    if (tooltip) {
-      tooltip.setScale(zoom);
-    }
+    // Tooltip stays at normal size (no scaling)
   }
 });

@@ -1,6 +1,9 @@
 class Tooltip extends Phaser.GameObjects.Container {
-  constructor(upgrade, tints) {
-    super(scene, upgrade.grid.x * 130 + 600, upgrade.grid.y * 130 + 525);
+  constructor(upgrade, tints, boxX, boxY) {
+    // Use actual box position if provided, otherwise calculate from grid
+    const posX = boxX !== undefined ? boxX : (upgrade.grid.x * 130 + 600);
+    const posY = boxY !== undefined ? boxY + 125 : (upgrade.grid.y * 130 + 525);
+    super(scene, posX, posY);
     if (tooltip) {
       tooltip.destroy();
     }
