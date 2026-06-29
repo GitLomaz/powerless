@@ -210,6 +210,16 @@ let battleScene = new Phaser.Class({
     this.enemies = [];    
     this.bullets = [];    
     this.credits = [];
+    for (let i = 0; i < 4; i++) {
+      let enemy = new T1();
+      const angle = Math.random() * Math.PI * 2;
+      const pos = {
+        x: scene.player.x + Math.cos(angle) * 400,
+        y: scene.player.y + Math.sin(angle) * 400
+      };
+      enemy.setPosition(pos.x, pos.y);
+      this.enemies.push(enemy);
+    }
     for (let i = 0; i < gameState.upgrades.spawns.tier1.units; i++) {
       this.enemies.push(new T1());
     }

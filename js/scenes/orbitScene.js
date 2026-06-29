@@ -81,6 +81,11 @@ let orbitScene = new Phaser.Class({
       strokeThickness: 2
     }).setOrigin(0, 0).setScrollFactor(0).setDepth(100);
 
+    // Zoom controls
+    this.zoomLevels = [1.0, 0.75, 0.5];
+    this.currentZoomIndex = 0;
+    this.zoomButtons = new ZoomButtons();
+
     // Menu button
     this.createMenuButton();
   },
@@ -131,5 +136,47 @@ let orbitScene = new Phaser.Class({
       saveGame(); // Save before returning to menu
       this.scene.start('titleScene');
     });
+  },
+  
+  applyZoom: function() {
+    const zoom = this.zoomLevels[this.currentZoomIndex];
+    // this.zoomButtons.zoomText.setText(Math.round(zoom * 100) + '%');
+    
+    // Center point for scaling
+    const centerX = GAME_WIDTH / 2;
+    const centerY = GAME_HEIGHT / 2;
+    
+    // Scale both size and position of upgrade boxes relative to center
+    UPGRADEBOXES.forEach((box) => {
+      if (box && box.upgrade) {
+        // Calculate base position
+        const baseX = box.upgrade.grid.x * 130 + 600;
+        const baseY = box.upgrade.grid.y * 130 + 400;
+        
+        // Scale position relative to center
+        const offsetX = baseX - centerX;
+        const offsetY = baseY - centerY;
+        const newX = centerX + (offsetX * zoom);
+        const newY = centerY + (offsetY * zoom);
+        
+        box.setPosition(newX, newY);
+        box.setScale(zoom);
+      }
+    });
+    
+    // Redraw all connection lines to match new positions
+    UPGRADEBOXES.forEach((box) => {
+      if (box && box.prereq) {
+        box.clearLines();
+        if (box.state !== 0) {
+          box.drawLines();
+        }
+      }
+    });
+    
+    // Update all tooltips to match zoom
+    if (tooltip) {
+      tooltip.setScale(zoom);
+    }
   }
 });

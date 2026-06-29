@@ -150,6 +150,12 @@ class UpgradeBox extends Phaser.GameObjects.Container {
 
   drawLines() {
     if (!this.prereq) return;
+    
+    // Clear existing graphics first
+    if (this.graphics) {
+      this.graphics.destroy();
+    }
+    
     this.graphics = scene.add.graphics();
     this.graphics.setDepth(0);
     this.graphics.lineStyle(2, 0xff0000, 1.0);
@@ -162,6 +168,8 @@ class UpgradeBox extends Phaser.GameObjects.Container {
   clearLines() {
     if (this.graphics) {
       this.graphics.clear();
+      this.graphics.destroy();
+      this.graphics = null;
     }
   }
 
